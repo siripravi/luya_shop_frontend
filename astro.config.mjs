@@ -1,4 +1,5 @@
 import { defineConfig } from "astro/config";
+import node from '@astrojs/node';
 
 import vue from "@astrojs/vue";
 
@@ -10,9 +11,11 @@ import tailwind from "@astrojs/tailwind";
 // https://astro.build/config
 export default defineConfig({
   integrations: [vue()],
-  //site: "http://localhost:4321",
- // output: 'hybrid',
- // site: "https://localhost:3030",
+  //site: "http://localhost:3030",
+  output: 'server',
+  adapter: node({
+    mode: 'standalone',
+  }),
   vite: {
     plugins: [
     
