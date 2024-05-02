@@ -31,13 +31,13 @@ const categories = await getAllCategories();
         <template v-for="nodes in data.productCategories">
           <template v-for="category in nodes">
             <div v-if="category.slug !== undefined" :key="category.id">
-              <NuxtLink
+           <!--   <NuxtLink
                 class="text-black cursor-pointer hover:underline"
                 :to="{
                   path: '/category/' + category.slug,
                   query: { id: category.id },
                 }"
-              >
+              >   -->
                 <div
                   class="cursor-pointer ml-4 mt-[5rem] md:mt-[20rem] w-full md:w-64 flex-row"
                 >
@@ -49,7 +49,7 @@ const categories = await getAllCategories();
                     </p>
                   </div>
                 </div>
-              </NuxtLink>
+          <!--    </NuxtLink>    -->
             </div>
           </template>
         </template>
