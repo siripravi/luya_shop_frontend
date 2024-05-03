@@ -25,6 +25,7 @@
     "@nanostores/vue": "^0.7.0",
     "@popperjs/core": "^2.11.8",
     "@types/bootstrap": "^5.2.10",
+    "@vue/apollo-composable": "^4.0.2",
     "astro": "^4.5.9",
     "astro-bootstrap": "^0.6.2",
     "axios": "^1.6.8",

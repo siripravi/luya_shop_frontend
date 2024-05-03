@@ -10,7 +10,7 @@ import tailwind from "@astrojs/tailwind";
 
 // https://astro.build/config
 export default defineConfig({
-  integrations: [vue()],
+  integrations: [vue()]
  
   //site: "http://localhost:3030",
  // output: 'server',
