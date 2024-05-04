@@ -1727,6 +1727,11 @@ astro-bootstrap@^0.6.2:
     nanoid "^4.0.1"
     title-case "^3.0.3"
 
+astro-htmx@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.npmjs.org/astro-htmx/-/astro-htmx-1.0.5.tgz"
+  integrity sha512-lTwGy5sMyvp6+O6UiSQEXrEWimRpPi16mMBbQTWUshWrGklCpYbtho6eaZVonFcB9ue7Y7FjTTPiYfp0hUUEuQ==
+
 astro@^2.0.10, astro@^2.5.0:
   version "2.10.15"
   resolved "https://registry.npmjs.org/astro/-/astro-2.10.15.tgz"
@@ -1791,7 +1796,7 @@ astro@^2.0.10, astro@^2.5.0:
     yargs-parser "^21.1.1"
     zod "^3.20.6"
 
-"astro@^3.0.0 || ^4.0.0", astro@^4.0.0, astro@^4.2.0, astro@^4.5.9:
+"astro@^3.0.0 || ^4.0.0", astro@^4.0.0, astro@^4.2.0, astro@^4.5.9, "astro@>= 3.0.0":
   version "4.5.12"
   resolved "https://registry.npmjs.org/astro/-/astro-4.5.12.tgz"
   integrity sha512-xIJcFI2hbyV8+h5pWjL7SKD1jIP0K01fYVAH+gdAt0mJaXy+u8Mj+goD0cPlK6sEaykR+7zxQLYGKJ44U4qarg==
@@ -3798,6 +3803,11 @@ html-void-elements@^3.0.0:
   version "3.0.0"
   resolved "https://registry.npmjs.org/html-void-elements/-/html-void-elements-3.0.0.tgz"
   integrity sha512-bEqo66MRXsUGxWHV5IP0PUiAWwoEjba4VCzg0LjFJBpchPaTfyfCKTG6bc5F8ucKec3q5y6qOdGyYTSBEvhCrg==
+
+htmx.org@^1.9.12, "htmx.org@>= 1.9.0":
+  version "1.9.12"
+  resolved "https://registry.npmjs.org/htmx.org/-/htmx.org-1.9.12.tgz"
+  integrity sha512-VZAohXyF7xPGS52IM8d1T1283y+X4D+Owf3qY1NZ9RuBypyu9l8cGsxUMAG5fEAb/DhT7rDoJ9Hpu5/HxFD3cw==
 
 http-cache-semantics@^4.1.1:
   version "4.1.1"
