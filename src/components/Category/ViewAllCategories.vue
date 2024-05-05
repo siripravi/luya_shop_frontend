@@ -12,7 +12,7 @@ import { ActiveLink } from 'astro-bootstrap';
               <div v-if="category.slug !== undefined" :key="category.id">               
                   <a
                 class="text-black cursor-pointer hover:underline"
-                :href="`/category/${category.slug}/${category.databaseId}`"
+                :href="`/category/${category.slug}/${category.id}`"
               >
                  
                 <!--   <NuxtLink

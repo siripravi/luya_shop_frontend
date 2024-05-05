@@ -13,7 +13,7 @@ const {
   categorySlug: { type: String, required: false },
 } = Astro.props;*/
 const {categoryId,categorySlug} = Astro.props;
-const productVariables = { "limit": 99 };
+const productVariables = { limit: 99 };
 const { data: allProducts }  = await client.query({
   query: gql`
   {
@@ -48,9 +48,10 @@ const { data: allProducts }  = await client.query({
     }
   }
 }
-` });
+` ,
+variables:productVariables});
 
-const categoryVariables = { "id": 6 };
+const categoryVariables = { id: "dGVybToyMA=="};
 const { data: allCategoryProducts }= await client.query({
   query: gql`
   query ProductsFromCategory($id: ID!) {
@@ -106,13 +107,14 @@ const { data: allCategoryProducts }= await client.query({
       }
     }
   }
-}`, categoryVariables});
+}`, 
+variables:categoryVariables});
 
 ---
 
 <Layout title="Products">
   <main>
     <h1 class="text-3xl text-center font-bold p-6">Products page</h1>
-     <ShowAllProducts allProducts={allProducts} allCategoryProducts={allCategoryProducts} />  
+     <ShowAllProducts allProducts={allProducts}/>  
   </main>
 </Layout>
