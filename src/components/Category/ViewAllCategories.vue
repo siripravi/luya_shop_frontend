@@ -1,7 +1,3 @@
----
-import { ActiveLink } from 'astro-bootstrap';
----
-
 <template>
   <div v-if="catData.productCategories">
     <section class="bg-white p_100">
@@ -43,5 +39,6 @@ import { ActiveLink } from 'astro-bootstrap';
 </template>
 
 <script setup>
+import { ActiveLink } from 'astro-bootstrap';
 defineProps(["catData"]);
 </script>
