@@ -1,5 +1,4 @@
-<template>
-  {{products}}
+<template> 
   <section class="bg-white p_100">
   <div id="product-container" class="container">
     <template v-for="product in products" :key="product.id">
@@ -45,7 +44,6 @@ const productLink = (product) => {
 
 const productImage = (product) =>
   product.image ? product.image.sourceUrl : PUBLIC_PLACEHOLDER_SMALL_IMAGE_URL;
-
 
 const products = computed(() => {
   return (
