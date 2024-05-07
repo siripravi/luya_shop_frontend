@@ -14,7 +14,7 @@ const {
 */
 const {categoryId,categorySlug} = Astro.props;
 const productVariables = { limit: 99 };
-const { data: allProducts }  = await client.query({
+const { data:allProducts }  = await client.query({
   query: gql`
   {
   products(first: 24) {
@@ -50,9 +50,9 @@ const { data: allProducts }  = await client.query({
 }
 ` ,
 variables:productVariables});
-
-const categoryVariables = { "id": "dGVybToyMA=="};
-const { data: allCategoryProducts }= await client.query({
+//console.log(allProducts.products);
+const categoryVariables = { id: "dGVybToyMA=="};
+const { data: allCategoryProducts}= await client.query({
   query: gql`
   query ProductsFromCategory($id: ID!) {
   productCategory(id: $id, idType: ID) {
@@ -109,10 +109,12 @@ const { data: allCategoryProducts }= await client.query({
   }
 }`, 
 variables:categoryVariables});
+
+console.log(allCategoryProducts);
 ---
 <Layout title="Products">
   <main>
      <h1 class="text-3xl text-center font-bold p-6">Products page</h1>
-     <ShowAllProducts allProducts={allProducts} categoryProduct={allCategoryProducts}/>  
+     <ShowAllProducts allProducts={allProducts} allCategoryProducts={allCategoryProducts} client:load/>  
   </main>
 </Layout>

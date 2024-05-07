@@ -29,11 +29,12 @@
 
 <script setup>
 //import { filteredVariantPrice } from "../utils/functions";
-
+import { computed } from 'vue';
 import ProductImage from "./ProductImage.vue";
 import ProductPrice from "./ProductPrice.vue";
-
+defineProps(["allProducts", "allCategoryProducts"]);
 const {PUBLIC_PLACEHOLDER_SMALL_IMAGE_URL} = import.meta.env;
+
 const productLink = (product) => {
   return {
     path: "/product/" + product.slug,
@@ -53,5 +54,5 @@ const products = computed(() => {
     []
   );
 });
-defineProps(["allProducts", "categoryProduct"]);
+
 </script>
