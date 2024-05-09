@@ -42,7 +42,6 @@ const productLink = (product) => {
 
 const productImage = (product) =>
   product.image ? product.image.sourceUrl : PUBLIC_PLACEHOLDER_SMALL_IMAGE_URL;
-
 const products = computed(({allCategoryProducts}) => {
   return (
     allCategoryProducts.value?.productCategory?.products?.nodes ||
