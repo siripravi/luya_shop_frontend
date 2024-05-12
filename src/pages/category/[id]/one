@@ -1,15 +1,20 @@
+
+
 ---
 import Layout from "../../../layouts/Layout.astro";
 import ShowAllProducts from "../../../components/Products/ShowAllProducts.vue";
 
 import ProductImage from "../../../components/Products/ProductImage.vue";
 import ProductPrice from "../../../components/Products/ProductPrice.vue";
-
-//import { getAllProducts } from "../graphql/queries/getAllProducts";
+import { getAllCategories } from "../../../graphql/queries/getAllCategories";
+import { getProductsFromCategory } from "../../../graphql/queries/getProductsFromCategory";
 //const allProducts = await getAllProducts();
 import gql from "graphql-tag";
 import { computed } from "vue";
 import client from "../../../lib/apollo-client";
+import ShowProductsInCategory from "../../../components/Category/ShowProductsInCategory.vue";
+import ViewAllCategories from "../../../components/Category/ViewAllCategories.vue";
+import { RadioGroupDescription } from "@headlessui/vue";
 const { PUBLIC_PLACEHOLDER_SMALL_IMAGE_URL } = import.meta.env;
 /*
 const {
@@ -17,8 +22,27 @@ const {
   categorySlug: { type: String, required: false },
 } = Astro.props;
 */
-const { id, slug } = Astro.props;
+const { id} = Astro.props;
+const groups = await getAllCategories();
+  //'dGVybToyMQ=='
+const catProducts = await getProductsFromCategory('dGVybToyMQ==');
+console.log(Astro.props);
+
+export async function getStaticPaths() {
+    const groups = await getAllCategories();
+    
+  const cobj = {
+    paths: groups.nodes.map(({id,slug}) => ({
+      params: { id,slug }
+    //  props: { id, text },
+    }))   
+  };
+  console.log(cobj.paths);
+  return cobj.paths;
+}
+
 const productVariables = { limit: 99 };
+
 const { data: allProducts } = await client.query({
   query: gql`
     {
@@ -56,8 +80,10 @@ const { data: allProducts } = await client.query({
   `,
   variables: productVariables,
 });
+
 //console.log(allProducts.products);
-const categoryVariables = { id: 'dGVybToxOA==' };
+/***
+ * const categoryVariables = { id: id };
 const { data: allCategoryProducts } = await client.query({
   query: gql`
     query ProductsFromCategory($id: ID!) {
@@ -117,21 +143,27 @@ const { data: allCategoryProducts } = await client.query({
   `,
   variables: categoryVariables,
 });
-
+***/
 //console.log(allCategoryProducts.productCategory);
 
 const products = 
-    allCategoryProducts.productCategory?.products?.nodes ||
+    catProducts.productCategory?.products?.nodes ||
     allProducts.products?.nodes ||
     []
   ;
 console.log(products);
 ---
+<!--
+<Layout title="Categories">
+    <ViewAllCategories catData={groups} client:load />
+</Layout>
+ -->
 
 <Layout title="Products">
-  <main>
-    <h1 class="text-3xl text-center font-bold p-6">Products page</h1>
-    <ShowAllProducts allProducts={products}  client:load/>
-    
-  </main>
-</Layout>
+    <main>
+      <h1 class="text-3xl text-center font-bold p-6">Products page</h1>
+      <ShowProductsInCategory allProducts={allProducts}  client:load/>
+      
+    </main>
+  </Layout>
+ 

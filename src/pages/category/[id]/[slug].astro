@@ -20,21 +20,43 @@ const {
   categorySlug: { type: String, required: false },
 } = Astro.props;
 */
+/*
 const { id } = Astro.props;
-const groups = await getAllCategories();
-const catProducts = await getProductsFromCategory(id);  //'dGVybToyMQ=='
+const arr = [1, 2, 3];
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+const asyncRes = await Promise.all(arr.map(async (i) => {
+	await sleep(10);
+	return i + 1;
+}));
 
-console.log("Cat Id: "+id);
+console.log(asyncRes);
+
+const groups = await getAllCategories();
+const catxProducts = await Promise.all(
+    groups.nodes.map(async ({ id, slug }) => {
+    //  await sleep(10);
+      return await getProductsFromCategory(id);     
+      console.log(catProducts.productCategory?.products?.nodes.length);
+     // paths.push({params:{id,slug},props:{catProducts}});     
+    })
+  );
+*/
+  
 export async function getStaticPaths() {
-    const groups = await getAllCategories();
-  const cobj = {
-    paths: groups.nodes.map(({id,slug}) => ({
-      params: { id,slug }
-    //  props: { id, text },
-    }))   
-  };
-  console.log(cobj.paths);
-  return cobj.paths;
+  const groups = await getAllCategories();
+  const paths = [];
+  const props = [];  
+  groups.nodes.map(async ({ id, slug }) => {
+    const catProducts = await getProductsFromCategory(id);  
+    paths.push({params:{id,slug},props:{catProducts}}); 
+  })
+  //const groups = await getAllCategories();
+  //console.log(cobj.paths);
+  //return cobj.paths;
+  console.log(paths);
+  return paths;
 }
 
 const productVariables = { limit: 99 };
@@ -141,25 +163,24 @@ const { data: allCategoryProducts } = await client.query({
 });
 ***/
 //console.log(allCategoryProducts.productCategory);
+const {catProducts} = Astro.props;
+console.log(catProducts.productCategory?.products?.nodes.length);
 
-const products = 
-    catProducts.productCategory?.products?.nodes ||
-    allProducts.products?.nodes ||
-    []
-  ;
-console.log(products);
+const products =
+  catProducts.productCategory?.products?.nodes ||
+  allProducts.products?.nodes ||
+  [];
+//console.log(catProducts);
 ---
+
 <!--
 <Layout title="Categories">
     <ViewAllCategories catData={groups} client:load />
 </Layout>
  -->
-
 <Layout title="Products">
-    <main>
-      <h1 class="text-3xl text-center font-bold p-6">Products page</h1>
-      <ShowProductsInCategory allProducts={products}  client:load/>
-      
-    </main>
-  </Layout>
- 
+  <main>
+    <h1 class="text-3xl text-center font-bold p-6">Products page</h1>
+    <ShowProductsInCategory allProducts={products} client:load />
+  </main>
+</Layout>

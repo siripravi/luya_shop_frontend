@@ -121,17 +121,17 @@ const { data: allCategoryProducts } = await client.query({
 //console.log(allCategoryProducts.productCategory);
 
 const products = 
-    allCategoryProducts.productCategory?.products?.nodes ||
+  //  allCategoryProducts.productCategory?.products?.nodes ||
     allProducts.products?.nodes ||
     []
   ;
-console.log(products);
+//console.log(products);
 ---
 
 <Layout title="Products">
-  <main>
+  <section class="mt-100"> 
     <h1 class="text-3xl text-center font-bold p-6">Products page</h1>
-    <ShowAllProducts allProducts={products}  client:load/>
-    
-  </main>
+    <ShowAllProducts allProducts={products}  client:load/> 
+    <p>The remark and rehype pipelines only run when your content is rendered, which explains why remarkPluginFrontmatter is only available after you call render() on your content entry. In contrast, getCollection() and getEntry() cannot return these values directly because they do not render your content.</p>
+  </section>
 </Layout>

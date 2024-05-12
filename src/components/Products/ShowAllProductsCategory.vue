@@ -1,114 +1,59 @@
-<!--
-<div class="row product_item_inner">
-  <div class="col-lg-4 col-md-4 col-6">
-    <div class="cake_feature_item">
-  <div class="cake_img">
-    <img src="img/cake-feature/c-feature-1.jpg" alt="">
-  </div>
-  <div class="cake_text">
-    <h4>$29</h4>
-    <h3>Strawberry Cupcakes</h3>
-    <a class="pest_btn" href="#">Add to cart</a>
-  </div>
-</div>
-  </div>
- 
-</div>
--->
 <template>
-  <section class="banner_area">
-    <div class="container">
-      <div class="banner_text">
-        <h3>Shop</h3>
-        <ul>
-          <li><a href="/">Home</a></li>
-          <li><a href="/shop">Shop</a></li>
-        </ul>
-      </div>
-    </div>
-  </section>
-  <section class="product_area p_100">
-    <div class="container">
-      <div class="row product_inner_row">
-        <div class="col-lg-9">
-          <div class="row m0 product_task_bar">
-            <div class="product_task_inner">
-              <div class="float-left">
-                <a class="active" href="#"
-                  ><i class="fa fa-th-large" aria-hidden="true"></i
-                ></a>
-                <a href="#"><i class="fa fa-th-list" aria-hidden="true"></i></a>
-                <span>Showing 1 - 10 of 55 results</span>
-              </div>
-              <div class="float-right">
-                <h4>Sort by :</h4>
-                <select class="short" style="display: none">
-                  <option data-display="Default">Default</option>
-                  <option value="1">Default</option>
-                  <option value="2">Default</option>
-                  <option value="4">Default</option>
-                </select>
-                <div class="nice-select short" tabindex="0">
-                  <span class="current">Default</span>
-                  <ul class="list">
-                    <li
-                      data-value="Default"
-                      data-display="Default"
-                      class="option selected"
-                    >
-                      Default
-                    </li>
-                    <li data-value="1" class="option">Default</li>
-                    <li data-value="2" class="option">Default</li>
-                    <li data-value="4" class="option">Default</li>
-                  </ul>
-                </div>
-              </div>
+  <section class="container mt-100">
+    <div class="flex flex-wrap items-center">
+      <template v-for="product in allProducts">
+        <div
+          v-if="product.slug"
+          :key="product.databaseId"
+          class="flex flex-col mt-6 sm:w1/2 md:w-1/3 lg:1/4 xl:w-1/4"
+        >
+          <a :href="'/products/' + product.slug + '/' + product.databaseId">
+            <img
+              id="product-image"
+              class="container mx-auto transition duration-700 ease-in-out transform cursor-pointer lg:w-64 xl:w-64 sm:p-4 hover:scale-95"
+              :alt="product.name"
+              :src="productImage(product)"
+            />
+          </a>
+          <div class="flex justify-center pt-3">
+            <p class="text-xl font-bold text-center cursor-pointer">
+              {{ product.name }}
+            </p>
+          </div>
+          <div v-if="product.onSale" class="flex justify-center mt-2">
+            <div class="text-lg text-gray-900 line-through">
+              <span v-if="product.variations">
+                {{ filteredVariantPrice(product.price, "right") }}</span
+              >
+              <span v-else>{{ product.regularPrice }}</span>
+            </div>
+            <div class="ml-4 text-xl text-gray-900">
+              <span v-if="product.variations">{{
+                filteredVariantPrice(product.price)
+              }}</span>
+              <span v-else>{{ product.salePrice }}</span>
             </div>
           </div>
-          <div class="row product_item_inner">
-            <div
-              v-for="product in allProducts.dataProvider"
-              :key="product.id"
-              class="col-lg-4 col-md-4 col-6"
-            >
-              <div class="cake_feature_item">
-                <div class="cake_img">
-                  <img v-bind:src="product.imageSrc.source" class="" />
-                </div>
-                <div class="cake_text">
-                  <a :href="'/products/' + product.slug + '/' + product.id">{{
-                    product.name
-                  }}</a>
-                </div>
-                <h4>
-                  {{ FormatToVND(product.price_from) }}
-                </h4>
-
-                <ButtonComponent variant="secondary"
-                  >Add to cart +</ButtonComponent
-                >
-              </div>
-            </div>
+          <div v-else>
+            <p class="mt-2 text-xl text-center text-gray-900">
+              {{ product.price }}
+            </p>
           </div>
         </div>
-        <div class="col-lg-3">
-       <!--  <Sidebar/>  -->
-        </div>
-      </div>
+      </template>
     </div>
   </section>
 </template>
 
 <script setup>
+
 import { filteredVariantPrice } from "../../utils/functions";
 import ButtonComponent from "../UI/ButtonComponent.vue";
 import { FormatToVND } from "../../utils/Formatter";
 
-defineProps(["allProducts"]);
+defineProps(["allProducts"])
 
-const productImage = (product) =>
-  product.cover_image_id
-    ? product.images.sourceUrl
-    : process.env.placeholderSmallImage;
+const productImage = product =>
+  product.image ? product.image.sourceUrl : process.env.placeholderSmallImage
+
 </script>

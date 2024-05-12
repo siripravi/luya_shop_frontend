@@ -1,6 +1,5 @@
 <template>
-  <section class="bg-white p_100">
-   
+  <section class="mt-100">   
     <div id="product-container" class="container">
       <template v-for="product in allProducts" :key="product.id">
 

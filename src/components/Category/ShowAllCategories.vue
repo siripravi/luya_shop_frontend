@@ -8,7 +8,8 @@
     <ul class="category__list">
       <li v-for="category in categories.extras.elements.categories" :key="category.id">
         
-        <a class="category__item"  :href="`/category/${category.id}/${category.slug}`">
+        <a class="category__item"   :href="`/category/${category.slug}/${category.databaseId}`">
+         
        <!--  <img class="category__item-image" :src="category.imageSrc.source" :alt="category.alt" /> --> 
           <h6 class="category__item-name">{{ category.name }}</h6>
           <p class="category__item-description">{{ category.text }}</p>
