@@ -1,14 +1,14 @@
 <template>
-  <div v-if="catData.productCategories">
+  <div v-if="catData">
     <section class="bg-white p_100">
       <div class="container">
         <div class="flex justify-center align-middle flex-col md:flex-row">
-          <template v-for="nodes in catData.productCategories">
+          <template v-for="nodes in catData">
             <template v-for="category in nodes">
               <div v-if="category.slug !== undefined" :key="category.id">               
                   <a
                 class="text-black cursor-pointer hover:underline"
-                :href="`/category/${category.slug}/${category.id}`"
+                :href="`/category/${category.id}/${category.slug}`"
               >
                  
                 <!--   <NuxtLink

@@ -1,7 +1,9 @@
 <template>
   <section class="bg-white p_100">
+   
     <div id="product-container" class="container">
-      <template v-for="product in products" :key="product.id">
+      <template v-for="product in allProducts" :key="product.id">
+
         <div class="flex flex-col mt-6 sm:w-1/2 md:w-1/3 lg:w-1/4 lg:mr-4">
           <a
             class="text-black cursor-pointer hover:underline"
@@ -30,9 +32,9 @@
 import { computed } from "vue";
 import ProductImage from "./ProductImage.vue";
 import ProductPrice from "./ProductPrice.vue";
-defineProps(["allProducts", "allCategoryProducts"]);
+//defineProps(["allProducts", "allCategoryProducts"]);
 const { PUBLIC_PLACEHOLDER_SMALL_IMAGE_URL } = import.meta.env;
-
+defineProps(["allProducts"])
 const productLink = (product) => {
   return {
     path: "/product/" + product.slug,
@@ -42,11 +44,5 @@ const productLink = (product) => {
 
 const productImage = (product) =>
   product.image ? product.image.sourceUrl : PUBLIC_PLACEHOLDER_SMALL_IMAGE_URL;
-const products = computed(({allCategoryProducts}) => {
-  return (
-    allCategoryProducts.value?.productCategory?.products?.nodes ||
-    allProducts.value?.products?.nodes ||
-    []
-  );
-});
+
 </script>

@@ -30,9 +30,9 @@ const props = defineProps({
   height: { type: String, required: false },
 });
 
-const config = useRuntimeConfig();
+const {PUBLIC_PLACEHOLDER_SMALL_IMAGE_URL} = import.meta.env;
 
 const displayedImage = computed(() => {
-  return props.src || config.public.placeholderImage;
+  return props.src || PUBLIC_PLACEHOLDER_SMALL_IMAGE_URL;
 });
 </script>

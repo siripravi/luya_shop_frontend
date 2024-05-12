@@ -1,14 +1,21 @@
 import { fetchAxios } from "../../lib/axios";
+import client from "../../lib/apollo-client";
+import gql from "graphql-tag";
 export async function getAllCategories() {
-  const data = await fetchAxios(
-    {
-      id: 1      
-    }
-  );
+  const variables = { limit: 99 };
+const { data, loading } = await client.query({
+  query: gql`
+     {
+      productCategories(first: 20) {
+        nodes {
+          id
+          databaseId
+          name
+          slug
+        }
+      }
+    }  
+`,variables});
 
-  // return data?.productCategories;
-
-  return data.filter(function (item) {
-    return item.block_name == "CategoryBlock";
-  })[0];
+return data.productCategories;
 }

@@ -7,6 +7,7 @@
     <h3 class="title">Experience Flavours</h3>
     <ul class="category__list">
       <li v-for="category in categories.extras.elements.categories" :key="category.id">
+        
         <a class="category__item"  :href="`/category/${category.id}/${category.slug}`">
        <!--  <img class="category__item-image" :src="category.imageSrc.source" :alt="category.alt" /> --> 
           <h6 class="category__item-name">{{ category.name }}</h6>
