@@ -1,0 +1,88 @@
+---
+import { defineAsyncComponent } from "vue";
+import { useRouter } from "vue-router";
+import Layout from "../../layouts/Layout.astro";
+import ShowAllProducts from "../../components/Products/ShowAllProducts.vue";
+
+import ProductImage from "../../components/Products/ProductImage.vue";
+import ProductPrice from "../../components/Products/ProductPrice.vue";
+import { getAllCategories } from "../../graphql/queries/getAllCategories.js";
+import { getProductsFromCategory } from "../../graphql/queries/getProductsFromCategory.js";
+//const allProducts = await getAllProducts();
+import gql from "graphql-tag";
+import { computed } from "vue";
+import client from "../../lib/apollo-client.js";
+import ShowProductsInCategory from "../../components/Category/ShowProductsInCategory.vue";
+import ViewAllCategories from "../../components/Category/ViewAllCategories.vue";
+import { RadioGroupDescription } from "@headlessui/vue";
+import { getAllProductPaths } from "../../lib/fetchData.js";
+const { PUBLIC_PLACEHOLDER_SMALL_IMAGE_URL } = import.meta.env;
+const { id, slug } = Astro.params;
+
+export async function getStaticPaths() {
+  const paths = await getAllProductPaths();
+
+  console.log(paths);
+  return paths;
+}
+const productVariables = { limit: 99 };
+
+const { data: allProducts } = await client.query({
+  query: gql`
+    {
+      products(first: 24) {
+        nodes {
+          databaseId
+          name
+          onSale
+          slug
+          image {
+            sourceUrl
+          }
+          ... on SimpleProduct {
+            databaseId
+            price
+            regularPrice
+            salePrice
+          }
+          ... on VariableProduct {
+            databaseId
+            price
+            regularPrice
+            salePrice
+            variations {
+              nodes {
+                price
+                regularPrice
+                salePrice
+              }
+            }
+          }
+        }
+      }
+    }
+  `,
+  variables: productVariables,
+});
+
+const { catProducts } = Astro.props;
+console.log(catProducts.productCategory?.products?.nodes.length);
+
+const products =
+  catProducts.productCategory?.products?.nodes 
+ // ||  allProducts.products?.nodes 
+  ||
+  [];
+---
+
+<!--
+<Layout title="Categories">
+    <ViewAllCategories catData={groups} client:load />
+</Layout>
+ -->
+<Layout title="Products">
+  <main>
+    <h1 class="text-3xl text-center font-bold p-6">Products page</h1>
+    <ShowProductsInCategory allProducts={products} client:load />
+  </main>
+</Layout>
