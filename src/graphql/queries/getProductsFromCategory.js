@@ -1,15 +1,16 @@
 import { fetchAxios } from "../../lib/axios";
 import gql from "graphql-tag";
 import client from "../../lib/apollo-client";
-export async function getProductsFromCategory(slug) {
-  const categoryVariables = { slug: slug };
+export async function getProductsFromCategory(tag) {
+  console.log(typeof(tag));
+  const categoryVariables = { slug: tag };
   const { data: allCategoryProducts } = await client.query({
     query: gql`
-      query ProductsFromCategory($slug: ID!) {
+      query ProductsFromCategory($slug:String!) {
         productCategory(id: $slug, idType: SLUG) {
           id
           name
-          products(first: 50) {
+          products(where: { categoryIn: [$slug ]}) {
             nodes {
               id
               productId: databaseId

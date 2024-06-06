@@ -6,9 +6,11 @@ export async function getAllProductPaths() {
     const paths = [];
  
     for (const group of groups.nodes) {
+      console.log("loop");
+      console.log(group.slug);
       const catProducts = await getProductsFromCategory(group.slug);
       console.log(([group.slug,catProducts.productCategory.products.nodes.length]).join(" and "));
-      paths.push({ params: { id: group.id, slug: group.slug }, props: { catProducts } });
+      paths.push({ params: { slug: group.slug }, props: { catProducts } });
     }
   
     return paths;

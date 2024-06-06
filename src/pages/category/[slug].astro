@@ -25,6 +25,7 @@ export async function getStaticPaths() {
   console.log(paths);
   return paths;
 }
+/*
 const productVariables = { limit: 99 };
 
 const { data: allProducts } = await client.query({
@@ -64,7 +65,7 @@ const { data: allProducts } = await client.query({
   `,
   variables: productVariables,
 });
-
+*/
 const { catProducts } = Astro.props;
 console.log(catProducts.productCategory?.products?.nodes.length);
 
