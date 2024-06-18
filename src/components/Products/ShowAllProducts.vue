@@ -6,7 +6,7 @@
         <div class="flex flex-col mt-6 sm:w-1/2 md:w-1/3 lg:w-1/4 lg:mr-4">
           <a
             class="text-black cursor-pointer hover:underline"
-            href="productLink(product)"
+           :href="`/products/${product.slug}`"
           >
           <ProductImage :alt="product.name" :src="productImage(product)" />
           <div class="flex justify-center pt-3">
@@ -36,7 +36,7 @@ const { PUBLIC_PLACEHOLDER_SMALL_IMAGE_URL } = import.meta.env;
 defineProps(["allProducts"])
 const productLink = (product) => {
   return {
-    path: "/product/" + product.slug,
+    path: "/products/" + product.slug,
     query: { id: product.databaseId },
   };
 };

@@ -1,7 +1,10 @@
-import { fetchAxios } from "../../lib/axios";
+import client from "../../lib/apollo-client";
+import gql from "graphql-tag";
 
 export async function getAllProducts() {
-  const data = await fetchAxios(`
+  const variables = { limit: 99 };
+const { data, loading } = await client.query({
+  query: gql`
   {
     products(first: 24) {
       nodes {
@@ -34,7 +37,7 @@ export async function getAllProducts() {
       }
     }
   }  
-    `);
+    `,variables});
 
   return data?.products;
 }

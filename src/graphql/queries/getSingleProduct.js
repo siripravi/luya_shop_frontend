@@ -6,7 +6,7 @@ export async function getSingleProduct(pid) {
   const {data }= await client.query({
     query: gql`
     query Product($id: ID!) {
-      product(id: $id, idType: DATABASE_ID) {
+      product(id: $id, idType: SLUG) {
         databaseId
         averageRating
         name
