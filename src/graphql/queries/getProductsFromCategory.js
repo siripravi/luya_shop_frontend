@@ -6,11 +6,11 @@ export async function getProductsFromCategory(tag) {
   const categoryVariables = { slug: tag };
   const { data: allCategoryProducts } = await client.query({
     query: gql`
-      query ProductsFromCategory($slug:String!) {
-        productCategory(id: $slug, idType: SLUG) {
+      query ProductsFromCategory($slug:ID!) {
+        productCategory(id: $slug, idType: ID) {
           id
           name
-          products(where: { categoryIn: [$slug ]}) {
+          products(where: { categoryId: 20}) {
             nodes {
               id
               productId: databaseId
