@@ -1,12 +1,7 @@
 <template>
-  <img
-    id="product-image"
-    class="h-auto p-8 transition duration-500 ease-in-out transform md:p-0 hover:shadow-lg hover:scale-95"
-    :alt="alt"
-    :src="displayedImage"
-    :width="width"
-    :height="height"
-  />
+  <div class="cake_img">
+    <img :alt="alt" :src="displayedImage" :width="width" :height="height" />
+  </div>
 </template>
 
 <script setup>
@@ -30,7 +25,7 @@ const props = defineProps({
   height: { type: String, required: false },
 });
 
-const {PUBLIC_PLACEHOLDER_SMALL_IMAGE_URL} = import.meta.env;
+const { PUBLIC_PLACEHOLDER_SMALL_IMAGE_URL } = import.meta.env;
 
 const displayedImage = computed(() => {
   return props.src || PUBLIC_PLACEHOLDER_SMALL_IMAGE_URL;

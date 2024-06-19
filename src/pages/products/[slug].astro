@@ -1,22 +1,21 @@
 ---
-import Layout from "../../layouts/Layout.astro"
-import ShowSingleProduct from "../../components/Products/ShowSingleProduct.vue"
+import Layout from "../../layouts/Layout.astro";
+import ShowSingleProduct from "../../components/Products/ShowSingleProduct.vue";
 
-import { getSingleProduct } from "../../graphql/queries/getSingleProduct"
-import { getAllProducts } from "../../graphql/queries/getAllProducts"
+import { getSingleProduct } from "../../graphql/queries/getSingleProduct";
+import { getAllProducts } from "../../graphql/queries/getAllProducts";
 
-const { slug } = Astro.params
+const { slug } = Astro.params;
 
 export async function getStaticPaths() {
-  const products = await getAllProducts()
-  const paths = []; 
- for (const prd of products.nodes) {
-  
-   const product = await getSingleProduct(prd.slug);   
-   paths.push({ params: { slug: product.slug }, props: { product } });
- }
+  const products = await getAllProducts();
+  const paths = [];
+  for (const prd of products.nodes) {
+    const product = await getSingleProduct(prd.slug);
+    paths.push({ params: { slug: product.slug }, props: { product } });
+  }
 
- return paths;  
+  return paths;
 }
 const { product } = Astro.props;
 ---
