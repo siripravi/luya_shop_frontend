@@ -1,4 +1,5 @@
 ---
+
 import Layout from "../../layouts/Layout.astro"
 import ShowSingleProduct from "../../components/Products/ShowSingleProduct.vue"
 
@@ -17,6 +18,25 @@ export async function getStaticPaths() {
  }
 
  return paths;  
+
+import Layout from "../../layouts/Layout.astro";
+import ShowSingleProduct from "../../components/Products/ShowSingleProduct.vue";
+
+import { getSingleProduct } from "../../graphql/queries/getSingleProduct";
+import { getAllProducts } from "../../graphql/queries/getAllProducts";
+
+const { slug } = Astro.params;
+
+export async function getStaticPaths() {
+  const products = await getAllProducts();
+  const paths = [];
+  for (const prd of products.nodes) {
+    const product = await getSingleProduct(prd.slug);
+    paths.push({ params: { slug: product.slug }, props: { product } });
+  }
+
+  return paths;
+
 }
 const { product } = Astro.props;
 ---
@@ -26,4 +46,7 @@ const { product } = Astro.props;
     <h1 class="text-3xl text-center font-bold p-6">Single Product page</h1>
     <ShowSingleProduct product={product} client:load />
   </main>
+
+</Layout>
+
 </Layout>

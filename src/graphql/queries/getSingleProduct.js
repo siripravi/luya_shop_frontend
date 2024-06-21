@@ -1,70 +1,72 @@
-import { fetchAxios } from "../../lib/axios";
 import gql from "graphql-tag";
 import client from "../../lib/apollo-client";
 export async function getSingleProduct(pid) {
   const variables = { id: pid };
-  const {data }= await client.query({
+  const { data } = await client.query({
     query: gql`
-    query Product($id: ID!) {
-      product(id: $id, idType: SLUG) {
-        databaseId
-        averageRating
-        name
-        slug
-        description
-        onSale
-        image {
+       query Product($id: ID!) {
+        product(id: $id, idType: SLUG) {
+
           databaseId
-          uri
-          title
-          srcSet
-          sourceUrl
-        }
-        ... on SimpleProduct {
-          price
-          salePrice
-          regularPrice
-          databaseId
-          stockQuantity
-        }
-        ... on VariableProduct {
-          price
-          salePrice
-          regularPrice
-          databaseId
-         
-          variations {
-            nodes {
-              databaseId
-              name
-              stockStatus
-              stockQuantity
-              purchasable
-              onSale
-              salePrice
-              regularPrice
-            }
+          averageRating
+          name
+          slug
+          description
+          onSale
+          image {
+            databaseId
+            uri
+            title
+            srcSet
+            sourceUrl
           }
-        }
-        ... on ExternalProduct {
-          price
-          databaseId
-          externalUrl
-        }
-        ... on GroupProduct {
-          products {
-            nodes {
-              ... on SimpleProduct {
+          ... on SimpleProduct {
+            price
+            salePrice
+            regularPrice
+            databaseId
+            stockQuantity
+          }
+          ... on VariableProduct {
+            price
+            salePrice
+            regularPrice
+            databaseId
+
+            variations {
+              nodes {
                 databaseId
-                price
+                name
+                stockStatus
+                stockQuantity
+                purchasable
+                onSale
+                salePrice
+                regularPrice
               }
             }
           }
-          id
+          ... on ExternalProduct {
+            price
+            databaseId
+            externalUrl
+          }
+          ... on GroupProduct {
+            products {
+              nodes {
+                ... on SimpleProduct {
+                  databaseId
+                  price
+                }
+              }
+            }
+            id
+          }
         }
       }
-    }
-    `,     variables  });
+    `,
+    variables,
+  });
 
-  return data?.product
+  return data?.product;
 }

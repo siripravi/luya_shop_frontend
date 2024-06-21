@@ -1,0 +1,25 @@
+---
+import Layout from "./Layout.astro";
+import Banner from "./Banner.astro";
+import LeftMenu from "./LeftMenu.astro";
+import ShopFilter from "./ShopFilter.astro";
+---
+
+<Layout>
+  <Banner />
+  <section class="product_area p_100">
+    <div class="container">
+      <div class="row product_inner_row">
+        <div class="col-lg-9">
+          <ShopFilter />
+          <div class="row product_item_inner">
+            <slot />
+          </div>
+        </div>
+        <div class="col-lg-3">
+          <LeftMenu />
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>

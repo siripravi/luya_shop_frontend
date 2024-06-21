@@ -347,12 +347,12 @@
 	$('#datetimepicker4').datetimepicker({
 		format: 'LT'
 	});
-	
+	*/
 	$(document).ready(function() {
 	  $('.product_select, .short').niceSelect();
 	});
     
-	*/
+	
 	
 	/*----------------------------------------------------*/
     /*  portfolio_isotope
