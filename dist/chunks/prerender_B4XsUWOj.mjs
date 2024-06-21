@@ -1,13 +1,13 @@
 import { c as createAstro, a as createComponent, r as renderTemplate, b as renderComponent, m as maybeRenderHead, d as renderSlot, f as addAttribute } from './astro_Bmrxir9W.mjs';
 import 'kleur/colors';
 import 'html-escaper';
-import { $ as $$Layout } from './pages/currencies_epnTc63y.mjs';
+import { $ as $$Layout } from './pages/currencies_Dxnc1htO.mjs';
 import { createSchema, createYoga } from 'graphql-yoga';
 import 'clsx';
 import gql from 'graphql-tag';
 import { useSSRContext, defineComponent, mergeProps, ref, onBeforeMount, withCtx, createVNode, toDisplayString, createTextVNode, openBlock, createBlock, Fragment, renderList, computed, reactive, resolveComponent, resolveDynamicComponent } from 'vue';
 import axios from 'axios';
-import { ssrRenderAttrs, ssrRenderSlot, ssrRenderList, ssrRenderAttr, ssrInterpolate, ssrRenderStyle, ssrRenderComponent, ssrRenderClass, ssrRenderVNode } from 'vue/server-renderer';
+import { ssrRenderAttrs, ssrRenderSlot, ssrRenderList, ssrRenderAttr, ssrInterpolate, ssrRenderComponent, ssrRenderClass, ssrRenderVNode } from 'vue/server-renderer';
 /* empty css                            */
 import { Form, Field, ErrorMessage } from 'vee-validate';
 import { object, string, number } from 'yup';
@@ -18,21 +18,21 @@ import { Swiper, SwiperSlide } from 'swiper/vue';
 import { Autoplay } from 'swiper/modules';
 /* empty css                         */
 
-const $$Astro$i = createAstro();
+const $$Astro$h = createAstro();
 const $$404 = createComponent(async ($$result, $$props, $$slots) => {
-  const Astro2 = $$result.createAstro($$Astro$i, $$props, $$slots);
+  const Astro2 = $$result.createAstro($$Astro$h, $$props, $$slots);
   Astro2.self = $$404;
   return renderTemplate`${renderComponent($$result, "Layout", $$Layout, { "title": "404 not found" }, { "default": ($$result2) => renderTemplate` ${maybeRenderHead()}<main> <h1>Page not found</h1> <ul role="list">There was an error locating the page</ul> </main> ` })}`;
 }, "C:/gitrepos/luya_shop_admin/luya_shop_frontend/src/pages/404.astro", void 0);
 
-const $$file$d = "C:/gitrepos/luya_shop_admin/luya_shop_frontend/src/pages/404.astro";
-const $$url$d = "/404";
+const $$file$c = "C:/gitrepos/luya_shop_admin/luya_shop_frontend/src/pages/404.astro";
+const $$url$c = "/404";
 
 const _404 = /*#__PURE__*/Object.freeze(/*#__PURE__*/Object.defineProperty({
   __proto__: null,
   default: $$404,
-  file: $$file$d,
-  url: $$url$d
+  file: $$file$c,
+  url: $$url$c
 }, Symbol.toStringTag, { value: 'Module' }));
 
 const post = async ({ request }) => {
@@ -123,21 +123,21 @@ const graphql = /*#__PURE__*/Object.freeze(/*#__PURE__*/Object.defineProperty({
   POST
 }, Symbol.toStringTag, { value: 'Module' }));
 
-const $$Astro$h = createAstro();
+const $$Astro$g = createAstro();
 const $$Cart = createComponent(async ($$result, $$props, $$slots) => {
-  const Astro2 = $$result.createAstro($$Astro$h, $$props, $$slots);
+  const Astro2 = $$result.createAstro($$Astro$g, $$props, $$slots);
   Astro2.self = $$Cart;
   return renderTemplate`<template></template>`;
 }, "C:/gitrepos/luya_shop_admin/luya_shop_frontend/src/pages/cart.astro", void 0);
 
-const $$file$c = "C:/gitrepos/luya_shop_admin/luya_shop_frontend/src/pages/cart.astro";
-const $$url$c = "/cart";
+const $$file$b = "C:/gitrepos/luya_shop_admin/luya_shop_frontend/src/pages/cart.astro";
+const $$url$b = "/cart";
 
 const cart = /*#__PURE__*/Object.freeze(/*#__PURE__*/Object.defineProperty({
   __proto__: null,
   default: $$Cart,
-  file: $$file$c,
-  url: $$url$c
+  file: $$file$b,
+  url: $$url$b
 }, Symbol.toStringTag, { value: 'Module' }));
 
 const { PUBLIC_GRAPHQL_URL } = Object.assign({"BASE_URL": "/", "MODE": "production", "DEV": false, "PROD": true, "SSR": true, "SITE": undefined, "ASSETS_PREFIX": undefined}, { PUBLIC: process.env.PUBLIC });
@@ -145,39 +145,6 @@ const client = new ApolloClient({
   uri: PUBLIC_GRAPHQL_URL,
   cache: new InMemoryCache()
 });
-
-const $$Astro$g = createAstro();
-const $$Categories = createComponent(async ($$result, $$props, $$slots) => {
-  const Astro2 = $$result.createAstro($$Astro$g, $$props, $$slots);
-  Astro2.self = $$Categories;
-  const variables = { limit: 99 };
-  await client.query({
-    query: gql`
-     {
-      productCategories(first: 20) {
-        nodes {
-          id
-          databaseId
-          name
-          slug
-        }
-      }
-    }  
-`,
-    variables
-  });
-  return renderTemplate`${renderComponent($$result, "Layout", $$Layout, { "title": "Categories" })}`;
-}, "C:/gitrepos/luya_shop_admin/luya_shop_frontend/src/pages/categories.astro", void 0);
-
-const $$file$b = "C:/gitrepos/luya_shop_admin/luya_shop_frontend/src/pages/categories.astro";
-const $$url$b = "/categories";
-
-const categories = /*#__PURE__*/Object.freeze(/*#__PURE__*/Object.defineProperty({
-  __proto__: null,
-  default: $$Categories,
-  file: $$file$b,
-  url: $$url$b
-}, Symbol.toStringTag, { value: 'Module' }));
 
 /**
  * Checks if the given data object has any variations by accessing the product's variations nodes array.
@@ -292,8 +259,10 @@ const _sfc_main$f = {
 
 
 
-const productImage = (product) =>
+
+const productImage = product =>
   product.image ? product.image.sourceUrl : process.env.placeholderSmallImage;
+
 
 const __returned__ = { productImage, get filteredVariantPrice() { return filteredVariantPrice }, ButtonComponent, get FormatToVND() { return FormatToVND } };
 Object.defineProperty(__returned__, '__isScriptSetup', { enumerable: false, value: true });
@@ -303,33 +272,43 @@ return __returned__
 };
 
 function _sfc_ssrRender$f(_ctx, _push, _parent, _attrs, $props, $setup, $data, $options) {
-  _push(`<section${ssrRenderAttrs(mergeProps({ class: "product_area p_100" }, _attrs))}><div class="container"><div class="row product_inner_row"><div class="col-lg-9"><div class="row product_item_inner"><!--[-->`);
+  _push(`<section${ssrRenderAttrs(mergeProps({ class: "container mt-100" }, _attrs))}><div class="flex flex-wrap items-center"><!--[-->`);
   ssrRenderList($props.allProducts, (product) => {
     _push(`<!--[-->`);
     if (product.slug) {
-      _push(`<div class="cake_feature_item"><div class="cake_img"><a${
+      _push(`<div class="flex flex-col mt-6 sm:w1/2 md:w-1/3 lg:1/4 xl:w-1/4"><a${
         ssrRenderAttr("href", `/products/${product.slug}`)
       }><img id="product-image" class="container mx-auto transition duration-700 ease-in-out transform cursor-pointer lg:w-64 xl:w-64 sm:p-4 hover:scale-95"${
         ssrRenderAttr("alt", product.name)
       }${
         ssrRenderAttr("src", $setup.productImage(product))
-      }></a></div><div class="cake_text"><h4>${
-        ssrInterpolate(product.price)
-      }</h4><h3>${
+      }></a><div class="flex justify-center pt-3"><p class="text-xl font-bold text-center cursor-pointer">${
         ssrInterpolate(product.name)
-      }</h3></div></div>`);
+      }</p></div>`);
+      if (product.onSale) {
+        _push(`<div class="flex justify-center mt-2"><div class="text-lg text-gray-900 line-through">`);
+        if (product.variations) {
+          _push(`<span>${ssrInterpolate($setup.filteredVariantPrice(product.price, "right"))}</span>`);
+        } else {
+          _push(`<span>${ssrInterpolate(product.regularPrice)}</span>`);
+        }
+        _push(`</div><div class="ml-4 text-xl text-gray-900">`);
+        if (product.variations) {
+          _push(`<span>${ssrInterpolate($setup.filteredVariantPrice(product.price))}</span>`);
+        } else {
+          _push(`<span>${ssrInterpolate(product.salePrice)}</span>`);
+        }
+        _push(`</div></div>`);
+      } else {
+        _push(`<div><p class="mt-2 text-xl text-center text-gray-900">${ssrInterpolate(product.price)}</p></div>`);
+      }
+      _push(`</div>`);
     } else {
       _push(`<!---->`);
     }
     _push(`<!--]-->`);
   });
-  _push(`<!--]--></div></div><div class="col-lg-3"><div class="product_left_sidebar"><aside class="left_sidebar search_widget"><div class="input-group"><input type="text" class="form-control" placeholder="Enter Search Keywords"><div class="input-group-append"><button class="btn" type="button"><i class="icon icon-Search"></i></button></div></div></aside><aside class="left_sidebar p_catgories_widget"><div class="p_w_title"><h3>Product Categories</h3></div><ul class="list_style"><li><a href="#">Cupcake (17)</a></li><li><a href="#">Chocolate (15)</a></li><li><a href="#">Celebration (14)</a></li><li><a href="#">Wedding Cake (8)</a></li><li><a href="#">Desserts (11)</a></li></ul></aside><aside class="left_sidebar p_price_widget"><div class="p_w_title"><h3>Filter By Price</h3></div><div class="filter_price"><div id="slider-range" class="ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"><div class="ui-slider-range ui-corner-all ui-widget-header" style="${
-    ssrRenderStyle({"left":"2%","width":"48%"})
-  }"></div><span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default" style="${
-    ssrRenderStyle({"left":"2%"})
-  }"></span><span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default" style="${
-    ssrRenderStyle({"left":"50%"})
-  }"></span></div><label for="amount">Price range:</label><input type="text" id="amount" readonly=""><a href="#">Filter</a></div></aside><aside class="left_sidebar p_sale_widget"><div class="p_w_title"><h3>Top Sale Products</h3></div><div class="media"><div class="d-flex"><img src="img/product/sale-product/s-product-1.jpg" alt=""></div><div class="media-body"><a href="#"><h4>Brown Cake</h4></a><ul class="list_style"><li><a href="#"><i class="fa fa-star-o"></i></a></li><li><a href="#"><i class="fa fa-star-o"></i></a></li><li><a href="#"><i class="fa fa-star-o"></i></a></li><li><a href="#"><i class="fa fa-star-o"></i></a></li><li><a href="#"><i class="fa fa-star-o"></i></a></li></ul><h5>\$29</h5></div></div><div class="media"><div class="d-flex"><img src="img/product/sale-product/s-product-2.jpg" alt=""></div><div class="media-body"><a href="#"><h4>Brown Cake</h4></a><ul class="list_style"><li><a href="#"><i class="fa fa-star-o"></i></a></li><li><a href="#"><i class="fa fa-star-o"></i></a></li><li><a href="#"><i class="fa fa-star-o"></i></a></li><li><a href="#"><i class="fa fa-star-o"></i></a></li><li><a href="#"><i class="fa fa-star-o"></i></a></li></ul><h5>\$29</h5></div></div><div class="media"><div class="d-flex"><img src="img/product/sale-product/s-product-3.jpg" alt=""></div><div class="media-body"><a href="#"><h4>Brown Cake</h4></a><ul class="list_style"><li><a href="#"><i class="fa fa-star-o"></i></a></li><li><a href="#"><i class="fa fa-star-o"></i></a></li><li><a href="#"><i class="fa fa-star-o"></i></a></li><li><a href="#"><i class="fa fa-star-o"></i></a></li><li><a href="#"><i class="fa fa-star-o"></i></a></li></ul><h5>\$29</h5></div></div><div class="media"><div class="d-flex"><img src="img/product/sale-product/s-product-4.jpg" alt=""></div><div class="media-body"><a href="#"><h4>Brown Cake</h4></a><ul class="list_style"><li><a href="#"><i class="fa fa-star-o"></i></a></li><li><a href="#"><i class="fa fa-star-o"></i></a></li><li><a href="#"><i class="fa fa-star-o"></i></a></li><li><a href="#"><i class="fa fa-star-o"></i></a></li><li><a href="#"><i class="fa fa-star-o"></i></a></li></ul><h5>\$29</h5></div></div></aside></div></div></div></div></section>`);
+  _push(`<!--]--></div></section>`);
 }
 const _sfc_setup$f = _sfc_main$f.setup;
 _sfc_main$f.setup = (props, ctx) => {
@@ -493,6 +472,44 @@ const $$slug$1 = createComponent(async ($$result, $$props, $$slots) => {
   Astro2.self = $$slug$1;
   Object.assign({"BASE_URL": "/", "MODE": "production", "DEV": false, "PROD": true, "SSR": true, "SITE": undefined, "ASSETS_PREFIX": undefined}, { Path: process.env.Path, PUBLIC: process.env.PUBLIC });
   Astro2.params;
+  const productVariables = { limit: 99 };
+  await client.query({
+    query: gql`
+    {
+      products(first: 24) {
+        nodes {
+          databaseId
+          name
+          onSale
+          slug
+          image {
+            sourceUrl
+          }
+          ... on SimpleProduct {
+            databaseId
+            price
+            regularPrice
+            salePrice
+          }
+          ... on VariableProduct {
+            databaseId
+            price
+            regularPrice
+            salePrice
+            variations {
+              nodes {
+                price
+                regularPrice
+                salePrice
+              }
+            }
+          }
+        }
+      }
+    }
+  `,
+    variables: productVariables
+  });
   const { catProducts } = Astro2.props;
   console.log(catProducts.productCategory?.products?.nodes.length);
   const products = catProducts.productCategory?.products?.nodes || [];
@@ -1905,4 +1922,4 @@ const index = /*#__PURE__*/Object.freeze(/*#__PURE__*/Object.defineProperty({
   url: $$url
 }, Symbol.toStringTag, { value: 'Module' }));
 
-export { _404 as _, cart as a, categories as b, checkout$1 as c, _slug_$1 as d, checkout as e, error as f, graphql as g, detail as h, _slug_ as i, products as j, success as k, index as l, menu as m, pricelist as p, search as s };
+export { _404 as _, cart as a, _slug_$1 as b, checkout$1 as c, checkout as d, error as e, detail as f, graphql as g, _slug_ as h, products as i, success as j, index as k, menu as m, pricelist as p, search as s };
