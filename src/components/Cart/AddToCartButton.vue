@@ -44,7 +44,7 @@ const hardcodedItemInfo = {
 
 const addProduct = (product) => {
   state.loading = true;
-
+ console.log(product.id)
   const productId = product.databaseId ? product.databaseId : product;
   const productQueryInput = {
     productId,

@@ -1,16 +1,19 @@
-import { c as createAstro, a as createComponent, r as renderTemplate, b as renderComponent, m as maybeRenderHead, d as renderSlot, f as addAttribute } from './astro_Bmrxir9W.mjs';
+import { c as createAstro, a as createComponent, r as renderTemplate, b as renderComponent, m as maybeRenderHead, f as addAttribute, d as renderSlot, F as Fragment, u as unescapeHTML, s as spreadAttributes } from './astro_DBE5qgVg.mjs';
 import 'kleur/colors';
-import 'html-escaper';
-import { $ as $$Layout } from './pages/currencies_Dxnc1htO.mjs';
+import { $ as $$Layout } from './pages/currencies_BSsEWSsF.mjs';
 import { createSchema, createYoga } from 'graphql-yoga';
-import 'clsx';
+import { clsx } from 'clsx';
 import gql from 'graphql-tag';
-import { useSSRContext, defineComponent, mergeProps, ref, onBeforeMount, withCtx, createVNode, toDisplayString, createTextVNode, openBlock, createBlock, Fragment, renderList, computed, reactive, resolveComponent, resolveDynamicComponent } from 'vue';
+import { ssrRenderAttrs, ssrRenderList, ssrRenderAttr, ssrInterpolate, ssrRenderSlot, ssrRenderStyle, ssrRenderComponent, ssrIncludeBooleanAttr, ssrRenderClass, ssrRenderVNode } from 'vue/server-renderer';
+import { useSSRContext, defineComponent, mergeProps, ref, onBeforeMount, withCtx, createVNode, toDisplayString, createTextVNode, openBlock, createBlock, Fragment as Fragment$1, renderList, withModifiers, renderSlot as renderSlot$1, createCommentVNode, onMounted, resolveComponent, computed, reactive, resolveDynamicComponent } from 'vue';
+/* empty css                          */
 import axios from 'axios';
-import { ssrRenderAttrs, ssrRenderSlot, ssrRenderList, ssrRenderAttr, ssrInterpolate, ssrRenderComponent, ssrRenderClass, ssrRenderVNode } from 'vue/server-renderer';
 /* empty css                            */
 import { Form, Field, ErrorMessage } from 'vee-validate';
 import { object, string, number } from 'yup';
+import { nanoid } from 'nanoid';
+import { titleCase } from 'title-case';
+import { marked } from 'marked';
 /* empty css                          */
 import 'uid';
 import { ApolloClient, InMemoryCache } from '@apollo/client/core/index.js';
@@ -18,21 +21,21 @@ import { Swiper, SwiperSlide } from 'swiper/vue';
 import { Autoplay } from 'swiper/modules';
 /* empty css                         */
 
-const $$Astro$h = createAstro();
+const $$Astro$18 = createAstro();
 const $$404 = createComponent(async ($$result, $$props, $$slots) => {
-  const Astro2 = $$result.createAstro($$Astro$h, $$props, $$slots);
+  const Astro2 = $$result.createAstro($$Astro$18, $$props, $$slots);
   Astro2.self = $$404;
   return renderTemplate`${renderComponent($$result, "Layout", $$Layout, { "title": "404 not found" }, { "default": ($$result2) => renderTemplate` ${maybeRenderHead()}<main> <h1>Page not found</h1> <ul role="list">There was an error locating the page</ul> </main> ` })}`;
 }, "C:/gitrepos/luya_shop_admin/luya_shop_frontend/src/pages/404.astro", void 0);
 
-const $$file$c = "C:/gitrepos/luya_shop_admin/luya_shop_frontend/src/pages/404.astro";
-const $$url$c = "/404";
+const $$file$d = "C:/gitrepos/luya_shop_admin/luya_shop_frontend/src/pages/404.astro";
+const $$url$d = "/404";
 
 const _404 = /*#__PURE__*/Object.freeze(/*#__PURE__*/Object.defineProperty({
   __proto__: null,
   default: $$404,
-  file: $$file$c,
-  url: $$url$c
+  file: $$file$d,
+  url: $$url$d
 }, Symbol.toStringTag, { value: 'Module' }));
 
 const post = async ({ request }) => {
@@ -123,21 +126,21 @@ const graphql = /*#__PURE__*/Object.freeze(/*#__PURE__*/Object.defineProperty({
   POST
 }, Symbol.toStringTag, { value: 'Module' }));
 
-const $$Astro$g = createAstro();
+const $$Astro$17 = createAstro();
 const $$Cart = createComponent(async ($$result, $$props, $$slots) => {
-  const Astro2 = $$result.createAstro($$Astro$g, $$props, $$slots);
+  const Astro2 = $$result.createAstro($$Astro$17, $$props, $$slots);
   Astro2.self = $$Cart;
   return renderTemplate`<template></template>`;
 }, "C:/gitrepos/luya_shop_admin/luya_shop_frontend/src/pages/cart.astro", void 0);
 
-const $$file$b = "C:/gitrepos/luya_shop_admin/luya_shop_frontend/src/pages/cart.astro";
-const $$url$b = "/cart";
+const $$file$c = "C:/gitrepos/luya_shop_admin/luya_shop_frontend/src/pages/cart.astro";
+const $$url$c = "/cart";
 
-const cart = /*#__PURE__*/Object.freeze(/*#__PURE__*/Object.defineProperty({
+const cart$1 = /*#__PURE__*/Object.freeze(/*#__PURE__*/Object.defineProperty({
   __proto__: null,
   default: $$Cart,
-  file: $$file$b,
-  url: $$url$b
+  file: $$file$c,
+  url: $$url$c
 }, Symbol.toStringTag, { value: 'Module' }));
 
 const { PUBLIC_GRAPHQL_URL } = Object.assign({"BASE_URL": "/", "MODE": "production", "DEV": false, "PROD": true, "SSR": true, "SITE": undefined, "ASSETS_PREFIX": undefined}, { PUBLIC: process.env.PUBLIC });
@@ -145,6 +148,793 @@ const client = new ApolloClient({
   uri: PUBLIC_GRAPHQL_URL,
   cache: new InMemoryCache()
 });
+
+const $$Astro$16 = createAstro();
+const $$Accordion = createComponent(async ($$result, $$props, $$slots) => {
+  const Astro2 = $$result.createAstro($$Astro$16, $$props, $$slots);
+  Astro2.self = $$Accordion;
+  const {
+    flush,
+    class: className,
+    data = [],
+    id: userId,
+    alwaysOpen,
+    headerClass,
+    itemClass,
+    bodyClass
+  } = Astro2.props;
+  const id = userId || `accordion-${nanoid(8)}`;
+  return renderTemplate`${maybeRenderHead()}<div${addAttribute(["accordion", className, { "accordion-flush": flush }], "class:list")}${addAttribute(id, "id")}> ${renderSlot($$result, $$slots["default"], renderTemplate` ${data && data.map((item, index) => renderTemplate`${renderComponent($$result, "Accordion.Item", Accordion.Item, { "class": itemClass }, { "default": ($$result2) => renderTemplate` ${renderComponent($$result2, "Accordion.Header", Accordion.Header, { "parent": id, "index": index, "class": headerClass, "show": item.show }, { "default": ($$result3) => renderTemplate` ${renderComponent($$result3, "Fragment", Fragment, {}, { "default": ($$result4) => renderTemplate`${unescapeHTML(item.header)}` })} ` })} ${renderComponent($$result2, "Accordion.Body", Accordion.Body, { "parent": id, "index": index, "class": bodyClass, "show": item.show, "alwaysOpen": alwaysOpen }, { "default": ($$result3) => renderTemplate` ${renderComponent($$result3, "Fragment", Fragment, {}, { "default": ($$result4) => renderTemplate`${unescapeHTML(item.body)}` })} ` })} ` })}`)} `)} </div> `;
+}, "C:/gitrepos/luya_shop_admin/luya_shop_frontend/node_modules/astro-bootstrap/lib/components/Accordion.astro", void 0);
+
+const $$Astro$15 = createAstro();
+const $$AccordionBody = createComponent(async ($$result, $$props, $$slots) => {
+  const Astro2 = $$result.createAstro($$Astro$15, $$props, $$slots);
+  Astro2.self = $$AccordionBody;
+  const {
+    parent: id,
+    index: i,
+    show,
+    alwaysOpen = false,
+    class: className,
+    text
+  } = Astro2.props;
+  const dataBsParent = alwaysOpen ? null : `#${id}`;
+  return renderTemplate`${maybeRenderHead()}<div${addAttribute(`${id}-collapse-${i}`, "id")}${addAttribute(["accordion-collapse", "collapse", { show }], "class:list")}${addAttribute(`${id}-heading-${i}`, "aria-labelledby")}${addAttribute(dataBsParent, "data-bs-parent")}> <div${addAttribute(["accordion-body", className], "class:list")}> ${renderSlot($$result, $$slots["default"], renderTemplate`${renderComponent($$result, "Fragment", Fragment, {}, { "default": ($$result2) => renderTemplate`${unescapeHTML(text)}` })}`)} </div> </div>`;
+}, "C:/gitrepos/luya_shop_admin/luya_shop_frontend/node_modules/astro-bootstrap/lib/components/AccordionBody.astro", void 0);
+
+const $$Astro$14 = createAstro();
+const $$AccordionHeader = createComponent(async ($$result, $$props, $$slots) => {
+  const Astro2 = $$result.createAstro($$Astro$14, $$props, $$slots);
+  Astro2.self = $$AccordionHeader;
+  const { parent: id, class: className, index: i, show, text } = Astro2.props;
+  return renderTemplate`${maybeRenderHead()}<h2${addAttribute(["accordion-header", className], "class:list")}${addAttribute(`${id}-heading-${i}`, "id")}> <button class="accordion-button" type="button" data-bs-toggle="collapse"${addAttribute(`#${id}-collapse-${i}`, "data-bs-target")}${addAttribute(show, "aria-expanded")}${addAttribute(`${id}-collapse-${i}`, "aria-controls")}> ${renderSlot($$result, $$slots["default"], renderTemplate`${renderComponent($$result, "Fragment", Fragment, {}, { "default": ($$result2) => renderTemplate`${unescapeHTML(text)}` })}`)} </button> </h2>`;
+}, "C:/gitrepos/luya_shop_admin/luya_shop_frontend/node_modules/astro-bootstrap/lib/components/AccordionHeader.astro", void 0);
+
+const $$Astro$13 = createAstro();
+const $$AccordionItem = createComponent(async ($$result, $$props, $$slots) => {
+  const Astro2 = $$result.createAstro($$Astro$13, $$props, $$slots);
+  Astro2.self = $$AccordionItem;
+  const { class: className } = Astro2.props;
+  return renderTemplate`${maybeRenderHead()}<div${addAttribute(["accordion-item", className], "class:list")}> ${renderSlot($$result, $$slots["default"])} </div>`;
+}, "C:/gitrepos/luya_shop_admin/luya_shop_frontend/node_modules/astro-bootstrap/lib/components/AccordionItem.astro", void 0);
+
+const Accordion = Object.assign($$Accordion, { Body: $$AccordionBody, Header: $$AccordionHeader, Item: $$AccordionItem });
+
+const $$Astro$12 = createAstro();
+const $$Alert = createComponent(async ($$result, $$props, $$slots) => {
+  const Astro2 = $$result.createAstro($$Astro$12, $$props, $$slots);
+  Astro2.self = $$Alert;
+  const { variant, class: className, dismissable } = Astro2.props;
+  return renderTemplate`${maybeRenderHead()}<div${addAttribute([
+    "alert",
+    `alert-${variant}`,
+    className,
+    { "alert-dismissible": dismissable }
+  ], "class:list")} role="alert"> <div>${renderSlot($$result, $$slots["default"])}</div> ${dismissable && renderTemplate`<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>`} </div> `;
+}, "C:/gitrepos/luya_shop_admin/luya_shop_frontend/node_modules/astro-bootstrap/lib/components/Alert.astro", void 0);
+
+const $$Astro$11 = createAstro();
+const $$AlertHeading = createComponent(async ($$result, $$props, $$slots) => {
+  const Astro2 = $$result.createAstro($$Astro$11, $$props, $$slots);
+  Astro2.self = $$AlertHeading;
+  const { text, h = 4, class: className } = Astro2.props;
+  return renderTemplate`${maybeRenderHead()}<div${addAttribute(["alert-heading", `h-${h}`, className], "class:list")}> ${renderSlot($$result, $$slots["default"], renderTemplate`${renderComponent($$result, "Fragment", Fragment, {}, { "default": ($$result2) => renderTemplate`${unescapeHTML(text)}` })}`)} </div>`;
+}, "C:/gitrepos/luya_shop_admin/luya_shop_frontend/node_modules/astro-bootstrap/lib/components/AlertHeading.astro", void 0);
+
+const $$Astro$10 = createAstro();
+const $$AlertLink = createComponent(async ($$result, $$props, $$slots) => {
+  const Astro2 = $$result.createAstro($$Astro$10, $$props, $$slots);
+  Astro2.self = $$AlertLink;
+  const { href, text, class: className } = Astro2.props;
+  return renderTemplate`${maybeRenderHead()}<a${addAttribute(href, "href")}${addAttribute(["alert-link", className], "class:list")}>${renderSlot($$result, $$slots["default"], renderTemplate`${renderComponent($$result, "Fragment", Fragment, {}, { "default": ($$result2) => renderTemplate`${unescapeHTML(text)}` })}`)}</a>`;
+}, "C:/gitrepos/luya_shop_admin/luya_shop_frontend/node_modules/astro-bootstrap/lib/components/AlertLink.astro", void 0);
+
+Object.assign($$Alert, { Heading: $$AlertHeading, Link: $$AlertLink });
+
+const items = (path) => {
+  const slugs = path.split("/").filter((x) => x);
+  let currentPath = "";
+  const parts = [
+    {
+      text: "Home",
+      href: path !== "/" ? "/" : void 0
+    }
+  ];
+  slugs.forEach((slug) => {
+    const text = slug.replace(/[-_]/g, " ");
+    currentPath = `${currentPath}/${slug}`;
+    const href = currentPath;
+    parts.push({
+      text: titleCase(text),
+      href
+    });
+  });
+  return parts;
+};
+
+const $$Astro$$ = createAstro();
+const $$VanishLink = createComponent(async ($$result, $$props, $$slots) => {
+  const Astro2 = $$result.createAstro($$Astro$$, $$props, $$slots);
+  Astro2.self = $$VanishLink;
+  const { href, class: className, text, ...props } = Astro2.props;
+  let Tag = "";
+  if (href) {
+    Tag = "a";
+  } else {
+    Tag = "span";
+  }
+  return renderTemplate`${renderComponent($$result, "Tag", Tag, { "href": href, "class": className, ...props }, { "default": ($$result2) => renderTemplate`${renderSlot($$result2, $$slots["default"], renderTemplate`${text}`)}` })}`;
+}, "C:/gitrepos/luya_shop_admin/luya_shop_frontend/node_modules/astro-bootstrap/lib/utils/VanishLink.astro", void 0);
+
+const $$Astro$_ = createAstro();
+const $$BreadcrumbItemIterate = createComponent(async ($$result, $$props, $$slots) => {
+  const Astro2 = $$result.createAstro($$Astro$_, $$props, $$slots);
+  Astro2.self = $$BreadcrumbItemIterate;
+  const { class: className } = Astro2.props;
+  const path = Astro2.url.pathname;
+  const parts = items(path);
+  return renderTemplate`${parts.map(({ text, href }) => {
+    const active = path === href;
+    const link = active ? void 0 : href;
+    return renderTemplate`${renderComponent($$result, "Breadcrumb.Item", Breadcrumb.Item, { "class": className, "active": active }, { "default": ($$result2) => renderTemplate`${renderComponent($$result2, "VanishLink", $$VanishLink, { "href": link, "class": className }, { "default": ($$result3) => renderTemplate`${text}` })}` })}`;
+  })}`;
+}, "C:/gitrepos/luya_shop_admin/luya_shop_frontend/node_modules/astro-bootstrap/lib/components/BreadcrumbItemIterate.astro", void 0);
+
+const $$Astro$Z = createAstro();
+const $$Breadcrumb = createComponent(async ($$result, $$props, $$slots) => {
+  const Astro2 = $$result.createAstro($$Astro$Z, $$props, $$slots);
+  Astro2.self = $$Breadcrumb;
+  const {
+    id,
+    class: className,
+    itemClass,
+    "aria-label": ariaLabel = "Breadcrumb"
+  } = Astro2.props;
+  return renderTemplate`${maybeRenderHead()}<nav${addAttribute(ariaLabel, "aria-label")}${addAttribute(id, "id")}> <ol class="breadcrumb"${addAttribute(className, "class")}> ${renderSlot($$result, $$slots["default"], renderTemplate` ${renderComponent($$result, "BreadcrumbItemIterate", $$BreadcrumbItemIterate, { "class": itemClass })} `)} </ol> </nav>`;
+}, "C:/gitrepos/luya_shop_admin/luya_shop_frontend/node_modules/astro-bootstrap/lib/components/Breadcrumb.astro", void 0);
+
+const $$Astro$Y = createAstro();
+const $$BreadcrumbItem = createComponent(async ($$result, $$props, $$slots) => {
+  const Astro2 = $$result.createAstro($$Astro$Y, $$props, $$slots);
+  Astro2.self = $$BreadcrumbItem;
+  const { class: className, active } = Astro2.props;
+  const ariaCurrent = active ? "page" : void 0;
+  return renderTemplate`${maybeRenderHead()}<li${addAttribute(["breadcrumb-item", className, { active }], "class:list")}${addAttribute(ariaCurrent, "aria-current")}> ${renderSlot($$result, $$slots["default"])} </li>`;
+}, "C:/gitrepos/luya_shop_admin/luya_shop_frontend/node_modules/astro-bootstrap/lib/components/BreadcrumbItem.astro", void 0);
+
+const Breadcrumb = Object.assign($$Breadcrumb, { Item: $$BreadcrumbItem });
+
+const $$Astro$X = createAstro();
+const $$Button = createComponent(async ($$result, $$props, $$slots) => {
+  const Astro2 = $$result.createAstro($$Astro$X, $$props, $$slots);
+  Astro2.self = $$Button;
+  const {
+    class: className,
+    dropdown = false,
+    variant,
+    text,
+    size,
+    modalClose = false
+  } = Astro2.props;
+  let props = {};
+  if (dropdown) {
+    props = { "data-bs-toggle": "dropdown", "aria-expanded": "false" };
+  } else if (modalClose) {
+    props = { "data-bs-dismiss": "modal" };
+  }
+  return renderTemplate`${maybeRenderHead()}<button${addAttribute([
+    "btn",
+    `btn-${variant}`,
+    className,
+    {
+      "dropdown-toggle": dropdown,
+      "btn-sm": size === "sm",
+      "btn-lg": size === "lg"
+    }
+  ], "class:list")} type="button"${spreadAttributes(props)}> ${renderSlot($$result, $$slots["default"], renderTemplate`${text}`)} </button>`;
+}, "C:/gitrepos/luya_shop_admin/luya_shop_frontend/node_modules/astro-bootstrap/lib/components/Button.astro", void 0);
+
+const $$Astro$W = createAstro();
+const $$Carousel = createComponent(async ($$result, $$props, $$slots) => {
+  const Astro2 = $$result.createAstro($$Astro$W, $$props, $$slots);
+  Astro2.self = $$Carousel;
+  const { id, class: className, dark, fade } = Astro2.props;
+  return renderTemplate`${maybeRenderHead()}<div${addAttribute(id, "id")}${addAttribute([
+    "carousel",
+    "slide",
+    className,
+    { "carousel-dark": dark, "carousel-fade": fade }
+  ], "class:list")} data-bs-ride="carousel"> ${renderSlot($$result, $$slots["default"])} </div> `;
+}, "C:/gitrepos/luya_shop_admin/luya_shop_frontend/node_modules/astro-bootstrap/lib/components/Carousel.astro", void 0);
+
+const $$Astro$V = createAstro();
+const $$CarouselControl = createComponent(async ($$result, $$props, $$slots) => {
+  const Astro2 = $$result.createAstro($$Astro$V, $$props, $$slots);
+  Astro2.self = $$CarouselControl;
+  const { class: className, id, direction } = Astro2.props;
+  const text = direction == "prev" ? "Previous" : "Next";
+  return renderTemplate`${maybeRenderHead()}<button${addAttribute([className, `carousel-control-${direction}`], "class:list")} type="button"${addAttribute(`#${id}`, "data-bs-target")}${addAttribute(direction, "data-bs-slide")}> <span${addAttribute(`carousel-control-${direction}-icon`, "class")} aria-hidden="true"></span> <span class="visually-hidden">${text}</span> </button>`;
+}, "C:/gitrepos/luya_shop_admin/luya_shop_frontend/node_modules/astro-bootstrap/lib/components/CarouselControl.astro", void 0);
+
+const $$Astro$U = createAstro();
+const $$CarouselControls = createComponent(async ($$result, $$props, $$slots) => {
+  const Astro2 = $$result.createAstro($$Astro$U, $$props, $$slots);
+  Astro2.self = $$CarouselControls;
+  const { class: className, id } = Astro2.props;
+  return renderTemplate`${renderComponent($$result, "CarouselControl", $$CarouselControl, { "id": id, "direction": "prev", "class": className })} ${renderComponent($$result, "CarouselControl", $$CarouselControl, { "id": id, "direction": "next", "class": className })}`;
+}, "C:/gitrepos/luya_shop_admin/luya_shop_frontend/node_modules/astro-bootstrap/lib/components/CarouselControls.astro", void 0);
+
+const $$Astro$T = createAstro();
+const $$CarouselIndicator = createComponent(async ($$result, $$props, $$slots) => {
+  const Astro2 = $$result.createAstro($$Astro$T, $$props, $$slots);
+  Astro2.self = $$CarouselIndicator;
+  const {
+    class: className,
+    id,
+    index,
+    active,
+    "aria-current": ariaCurrent,
+    "aria-label": ariaLabel
+  } = Astro2.props;
+  return renderTemplate`${maybeRenderHead()}<button type="button"${addAttribute(`#${id}`, "data-bs-target")}${addAttribute(index, "data-bs-slide-to")}${addAttribute([className, { active }], "class:list")}${addAttribute(ariaCurrent, "aria-current")}${addAttribute(ariaLabel, "aria-label")}></button>`;
+}, "C:/gitrepos/luya_shop_admin/luya_shop_frontend/node_modules/astro-bootstrap/lib/components/CarouselIndicator.astro", void 0);
+
+const $$Astro$S = createAstro();
+const $$CarouselIndicators = createComponent(async ($$result, $$props, $$slots) => {
+  const Astro2 = $$result.createAstro($$Astro$S, $$props, $$slots);
+  Astro2.self = $$CarouselIndicators;
+  const { slides, class: className, id } = Astro2.props;
+  return renderTemplate`${maybeRenderHead()}<div class="carousel-indicators"> ${slides.map((slide, index) => {
+    const ariaCurrent = slide.active ? "page" : void 0;
+    return renderTemplate`${renderComponent($$result, "Carousel.Indicator", Carousel.Indicator, { "id": id, "index": index, "class": className, "aria-current": ariaCurrent, "aria-label": slide.alt, "active": slide.active })}`;
+  })} </div>`;
+}, "C:/gitrepos/luya_shop_admin/luya_shop_frontend/node_modules/astro-bootstrap/lib/components/CarouselIndicators.astro", void 0);
+
+const $$Astro$R = createAstro();
+const $$CarouselInner = createComponent(async ($$result, $$props, $$slots) => {
+  const Astro2 = $$result.createAstro($$Astro$R, $$props, $$slots);
+  Astro2.self = $$CarouselInner;
+  const { class: className } = Astro2.props;
+  return renderTemplate`${maybeRenderHead()}<div${addAttribute(["carousel-inner", className], "class:list")}> ${renderSlot($$result, $$slots["default"])} </div>`;
+}, "C:/gitrepos/luya_shop_admin/luya_shop_frontend/node_modules/astro-bootstrap/lib/components/CarouselInner.astro", void 0);
+
+const $$Astro$Q = createAstro();
+const $$CarouselItem = createComponent(async ($$result, $$props, $$slots) => {
+  const Astro2 = $$result.createAstro($$Astro$Q, $$props, $$slots);
+  Astro2.self = $$CarouselItem;
+  const { class: className, active } = Astro2.props;
+  return renderTemplate`${maybeRenderHead()}<div${addAttribute(["carousel-item", className, { active }], "class:list")}> ${renderSlot($$result, $$slots["default"])} </div>`;
+}, "C:/gitrepos/luya_shop_admin/luya_shop_frontend/node_modules/astro-bootstrap/lib/components/CarouselItem.astro", void 0);
+
+const Carousel = Object.assign($$Carousel, {
+  Controls: $$CarouselControls,
+  Control: $$CarouselControl,
+  Indicator: $$CarouselIndicator,
+  Indicators: $$CarouselIndicators,
+  Inner: $$CarouselInner,
+  Item: $$CarouselItem
+});
+
+const $$Astro$P = createAstro();
+const $$DropdownDivider = createComponent(async ($$result, $$props, $$slots) => {
+  const Astro2 = $$result.createAstro($$Astro$P, $$props, $$slots);
+  Astro2.self = $$DropdownDivider;
+  const { class: className } = Astro2.props;
+  return renderTemplate`${maybeRenderHead()}<hr${addAttribute(["dropdown-divider", className], "class:list")}>`;
+}, "C:/gitrepos/luya_shop_admin/luya_shop_frontend/node_modules/astro-bootstrap/lib/components/DropdownDivider.astro", void 0);
+
+const $$Astro$O = createAstro();
+const $$ActiveLink = createComponent(async ($$result, $$props, $$slots) => {
+  const Astro2 = $$result.createAstro($$Astro$O, $$props, $$slots);
+  Astro2.self = $$ActiveLink;
+  const {
+    href,
+    class: className,
+    disabled = false,
+    activeClass = "active",
+    disabledClass = "disabled",
+    text,
+    parent,
+    ...props
+  } = Astro2.props;
+  let active = href === Astro2.url.pathname;
+  const ariaCurrent = active ? "page" : void 0;
+  const activeClassStr = active ? `${activeClass}` : void 0;
+  const disabledClassStr = disabled ? disabledClass : void 0;
+  const classCompiled = clsx([activeClassStr, disabledClassStr, className]);
+  if (parent) {
+    if (Astro2.url.pathname.includes(href)) {
+      active = true;
+    }
+  }
+  return renderTemplate`${renderComponent($$result, "VanishLink", $$VanishLink, { "href": disabled ? void 0 : href, "class": classCompiled, "aria-current": ariaCurrent, ...props }, { "default": ($$result2) => renderTemplate` ${renderSlot($$result2, $$slots["default"], renderTemplate`${text}`)} ` })}`;
+}, "C:/gitrepos/luya_shop_admin/luya_shop_frontend/node_modules/astro-bootstrap/lib/utils/ActiveLink.astro", void 0);
+
+const $$Astro$N = createAstro();
+const $$DropdownItem = createComponent(async ($$result, $$props, $$slots) => {
+  const Astro2 = $$result.createAstro($$Astro$N, $$props, $$slots);
+  Astro2.self = $$DropdownItem;
+  const { href, text, class: className, ...props } = Astro2.props;
+  return renderTemplate`${renderComponent($$result, "ActiveLink", $$ActiveLink, { "href": href, "class": ["dropdown-item", className], ...props }, { "default": ($$result2) => renderTemplate` ${renderSlot($$result2, $$slots["default"], renderTemplate`${text}`)} ` })}`;
+}, "C:/gitrepos/luya_shop_admin/luya_shop_frontend/node_modules/astro-bootstrap/lib/components/DropdownItem.astro", void 0);
+
+const $$Astro$M = createAstro();
+const $$DropdownHeader = createComponent(async ($$result, $$props, $$slots) => {
+  const Astro2 = $$result.createAstro($$Astro$M, $$props, $$slots);
+  Astro2.self = $$DropdownHeader;
+  const { text, class: className, nav = false } = Astro2.props;
+  return renderTemplate`${maybeRenderHead()}<a${addAttribute(["dropdown-toggle", className, { "nav-link": nav }], "class:list")} href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"> ${renderSlot($$result, $$slots["default"], renderTemplate`${text}`)} </a>`;
+}, "C:/gitrepos/luya_shop_admin/luya_shop_frontend/node_modules/astro-bootstrap/lib/components/DropdownHeader.astro", void 0);
+
+const $$Astro$L = createAstro();
+const $$DropdownMenu = createComponent(async ($$result, $$props, $$slots) => {
+  const Astro2 = $$result.createAstro($$Astro$L, $$props, $$slots);
+  Astro2.self = $$DropdownMenu;
+  const { class: className } = Astro2.props;
+  return renderTemplate`${maybeRenderHead()}<ul${addAttribute(["dropdown-menu", className], "class:list")}> ${renderSlot($$result, $$slots["default"])} </ul>`;
+}, "C:/gitrepos/luya_shop_admin/luya_shop_frontend/node_modules/astro-bootstrap/lib/components/DropdownMenu.astro", void 0);
+
+const $$Astro$K = createAstro();
+const $$Dropdown = createComponent(async ($$result, $$props, $$slots) => {
+  const Astro2 = $$result.createAstro($$Astro$K, $$props, $$slots);
+  Astro2.self = $$Dropdown;
+  const { class: className, nav = false } = Astro2.props;
+  const Tag = nav ? "li" : "div";
+  return renderTemplate`${renderComponent($$result, "Tag", Tag, { "class:list": ["dropdown", className, { "nav-item": nav }] }, { "default": ($$result2) => renderTemplate` ${renderSlot($$result2, $$slots["default"])} ` })} `;
+}, "C:/gitrepos/luya_shop_admin/luya_shop_frontend/node_modules/astro-bootstrap/lib/components/Dropdown.astro", void 0);
+
+const Dropdown = Object.assign($$Dropdown, { Divider: $$DropdownDivider, Item: $$DropdownItem, Header: $$DropdownHeader, Menu: $$DropdownMenu });
+
+const $$Astro$J = createAstro();
+const $$Modal = createComponent(async ($$result, $$props, $$slots) => {
+  const Astro2 = $$result.createAstro($$Astro$J, $$props, $$slots);
+  Astro2.self = $$Modal;
+  const { id, class: className, fade } = Astro2.props;
+  return renderTemplate`${maybeRenderHead()}<div${addAttribute(["modal", className, { fade }], "class:list")}${addAttribute(id, "id")} tabindex="-1"${addAttribute(`${id}-label`, "aria-labelledby")} aria-hidden="true"> <div class="modal-dialog"> <div class="modal-content"> ${renderSlot($$result, $$slots["default"])} </div> </div> </div> `;
+}, "C:/gitrepos/luya_shop_admin/luya_shop_frontend/node_modules/astro-bootstrap/lib/components/Modal.astro", void 0);
+
+const $$Astro$I = createAstro();
+const $$ModalBody = createComponent(async ($$result, $$props, $$slots) => {
+  const Astro2 = $$result.createAstro($$Astro$I, $$props, $$slots);
+  Astro2.self = $$ModalBody;
+  const { class: className } = Astro2.props;
+  return renderTemplate`${maybeRenderHead()}<div${addAttribute(["modal-body", className], "class:list")}> ${renderSlot($$result, $$slots["default"])} </div>`;
+}, "C:/gitrepos/luya_shop_admin/luya_shop_frontend/node_modules/astro-bootstrap/lib/components/ModalBody.astro", void 0);
+
+const $$Astro$H = createAstro();
+const $$ModalClose = createComponent(async ($$result, $$props, $$slots) => {
+  const Astro2 = $$result.createAstro($$Astro$H, $$props, $$slots);
+  Astro2.self = $$ModalClose;
+  const { class: className, variant, text } = Astro2.props;
+  return renderTemplate`${maybeRenderHead()}<button type="button"${addAttribute(["btn", `btn-${variant}`, className], "class:list")} data-bs-dismiss="modal"> ${renderSlot($$result, $$slots["default"], renderTemplate`${text}`)} </button>`;
+}, "C:/gitrepos/luya_shop_admin/luya_shop_frontend/node_modules/astro-bootstrap/lib/components/ModalClose.astro", void 0);
+
+const $$Astro$G = createAstro();
+const $$ModalFooter = createComponent(async ($$result, $$props, $$slots) => {
+  const Astro2 = $$result.createAstro($$Astro$G, $$props, $$slots);
+  Astro2.self = $$ModalFooter;
+  const { class: className } = Astro2.props;
+  return renderTemplate`${maybeRenderHead()}<div${addAttribute(["modal-footer", className], "class:list")}> ${renderSlot($$result, $$slots["default"])} </div>`;
+}, "C:/gitrepos/luya_shop_admin/luya_shop_frontend/node_modules/astro-bootstrap/lib/components/ModalFooter.astro", void 0);
+
+const $$Astro$F = createAstro();
+const $$ModalHeader = createComponent(async ($$result, $$props, $$slots) => {
+  const Astro2 = $$result.createAstro($$Astro$F, $$props, $$slots);
+  Astro2.self = $$ModalHeader;
+  const { parent: id, h = 5, class: className } = Astro2.props;
+  const Heading = `h${h}`;
+  return renderTemplate`${maybeRenderHead()}<div${addAttribute(["modal-header", className], "class:list")}> ${renderComponent($$result, "Heading", Heading, { "class": "modal-title", "id": `${id}-label` }, { "default": ($$result2) => renderTemplate`${renderSlot($$result2, $$slots["default"])}` })} <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> </div>`;
+}, "C:/gitrepos/luya_shop_admin/luya_shop_frontend/node_modules/astro-bootstrap/lib/components/ModalHeader.astro", void 0);
+
+Object.assign($$Modal, { Body: $$ModalBody, Close: $$ModalClose, Footer: $$ModalFooter, Header: $$ModalHeader });
+
+const $$Astro$E = createAstro();
+const $$Nav = createComponent(async ($$result, $$props, $$slots) => {
+  const Astro2 = $$result.createAstro($$Astro$E, $$props, $$slots);
+  Astro2.self = $$Nav;
+  const { class: className, tabs, pills, justified, fill } = Astro2.props;
+  return renderTemplate`${maybeRenderHead()}<ul${addAttribute(["nav", className, { "nav-tabs": tabs, "nav-pills": pills, "nav-justified": justified, "nav-fill": fill }], "class:list")}> ${renderSlot($$result, $$slots["default"])} </ul>`;
+}, "C:/gitrepos/luya_shop_admin/luya_shop_frontend/node_modules/astro-bootstrap/lib/components/Nav.astro", void 0);
+
+const $$Astro$D = createAstro();
+const $$NavLink = createComponent(async ($$result, $$props, $$slots) => {
+  const Astro2 = $$result.createAstro($$Astro$D, $$props, $$slots);
+  Astro2.self = $$NavLink;
+  const { href, class: className, disabled, text } = Astro2.props;
+  return renderTemplate`${renderComponent($$result, "ActiveLink", $$ActiveLink, { "href": href, "class": ["nav-link", className], "disabled": disabled }, { "default": ($$result2) => renderTemplate` ${renderSlot($$result2, $$slots["default"], renderTemplate`${text}`)} ` })}`;
+}, "C:/gitrepos/luya_shop_admin/luya_shop_frontend/node_modules/astro-bootstrap/lib/components/NavLink.astro", void 0);
+
+const $$Astro$C = createAstro();
+const $$NavItem = createComponent(async ($$result, $$props, $$slots) => {
+  const Astro2 = $$result.createAstro($$Astro$C, $$props, $$slots);
+  Astro2.self = $$NavItem;
+  const { class: className, href, disabled, text, linkClass, ...props } = Astro2.props;
+  return renderTemplate`${maybeRenderHead()}<li${addAttribute(["nav-item", className], "class:list")}> ${renderComponent($$result, "Nav.Link", Nav.Link, { "class": linkClass, "disabled": disabled, "href": href, ...props }, { "default": ($$result2) => renderTemplate`${renderSlot($$result2, $$slots["default"], renderTemplate`${text}`)}` })} </li>`;
+}, "C:/gitrepos/luya_shop_admin/luya_shop_frontend/node_modules/astro-bootstrap/lib/components/NavItem.astro", void 0);
+
+const Nav = Object.assign($$Nav, { Link: $$NavLink, Item: $$NavItem });
+
+const $$Astro$B = createAstro();
+const $$Navbar = createComponent(async ($$result, $$props, $$slots) => {
+  const Astro2 = $$result.createAstro($$Astro$B, $$props, $$slots);
+  Astro2.self = $$Navbar;
+  const { class: className, ...props } = Astro2.props;
+  return renderTemplate`${maybeRenderHead()}<nav${addAttribute(["navbar", className], "class:list")}${spreadAttributes(props)}> ${renderSlot($$result, $$slots["default"])} </nav>`;
+}, "C:/gitrepos/luya_shop_admin/luya_shop_frontend/node_modules/astro-bootstrap/lib/components/Navbar.astro", void 0);
+
+const $$Astro$A = createAstro();
+const $$NavbarCollapse = createComponent(async ($$result, $$props, $$slots) => {
+  const Astro2 = $$result.createAstro($$Astro$A, $$props, $$slots);
+  Astro2.self = $$NavbarCollapse;
+  const { id } = Astro2.props;
+  return renderTemplate`${maybeRenderHead()}<div class="collapse navbar-collapse"${addAttribute(id, "id")}> ${renderSlot($$result, $$slots["default"])} </div> `;
+}, "C:/gitrepos/luya_shop_admin/luya_shop_frontend/node_modules/astro-bootstrap/lib/components/NavbarCollapse.astro", void 0);
+
+const $$Astro$z = createAstro();
+const $$NavbarItems = createComponent(async ($$result, $$props, $$slots) => {
+  const Astro2 = $$result.createAstro($$Astro$z, $$props, $$slots);
+  Astro2.self = $$NavbarItems;
+  const { items, class: className } = Astro2.props;
+  return renderTemplate`${renderComponent($$result, "Navbar.Nav", Navbar.Nav, { "class": className }, { "default": ($$result2) => renderTemplate`${items.map(
+    (item) => item.subItems ? renderTemplate`${renderComponent($$result2, "Dropdown", Dropdown, { "nav": true }, { "default": ($$result3) => renderTemplate` ${renderComponent($$result3, "Dropdown.Header", Dropdown.Header, { "nav": true }, { "default": ($$result4) => renderTemplate`${item.text}` })} ${renderComponent($$result3, "Dropdown.Menu", Dropdown.Menu, {}, { "default": ($$result4) => renderTemplate`${item.subItems.map(
+      (subItem) => subItem.divider ? renderTemplate`${renderComponent($$result4, "Dropdown.Divider", Dropdown.Divider, {})}` : renderTemplate`${renderComponent($$result4, "Dropdown.Item", Dropdown.Item, { ...subItem })}`
+    )}` })} ` })}` : renderTemplate`${renderComponent($$result2, "Nav.Item", Nav.Item, { ...item })}`
+  )}` })}`;
+}, "C:/gitrepos/luya_shop_admin/luya_shop_frontend/node_modules/astro-bootstrap/lib/components/NavbarItems.astro", void 0);
+
+const $$Astro$y = createAstro();
+const $$NavbarNav = createComponent(async ($$result, $$props, $$slots) => {
+  const Astro2 = $$result.createAstro($$Astro$y, $$props, $$slots);
+  Astro2.self = $$NavbarNav;
+  const { class: className } = Astro2.props;
+  return renderTemplate`${maybeRenderHead()}<ul${addAttribute(["navbar-nav", className], "class:list")}> ${renderSlot($$result, $$slots["default"])} </ul>`;
+}, "C:/gitrepos/luya_shop_admin/luya_shop_frontend/node_modules/astro-bootstrap/lib/components/NavbarNav.astro", void 0);
+
+const $$Astro$x = createAstro();
+const $$NavbarToggler = createComponent(async ($$result, $$props, $$slots) => {
+  const Astro2 = $$result.createAstro($$Astro$x, $$props, $$slots);
+  Astro2.self = $$NavbarToggler;
+  const { controls } = Astro2.props;
+  return renderTemplate`${maybeRenderHead()}<button class="navbar-toggler" type="button" data-bs-toggle="collapse"${addAttribute(`#${controls}`, "data-bs-target")}${addAttribute(controls, "aria-controls")} aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button>`;
+}, "C:/gitrepos/luya_shop_admin/luya_shop_frontend/node_modules/astro-bootstrap/lib/components/NavbarToggler.astro", void 0);
+
+const Navbar = Object.assign($$Navbar, {
+  Collapse: $$NavbarCollapse,
+  Nav: $$NavbarNav,
+  Items: $$NavbarItems,
+  Toggler: $$NavbarToggler
+});
+
+const getRange = (start, end) => {
+  return Array(end - start + 1).fill(void 0).map((v, i) => i + start);
+};
+const createPageNumbers = (currentPage, pageCount) => {
+  let delta;
+  if (pageCount <= 7) {
+    delta = 7;
+  } else {
+    delta = currentPage > 4 && currentPage < pageCount - 3 ? 2 : 4;
+  }
+  const range = {
+    start: Math.round(currentPage - delta / 2),
+    end: Math.round(currentPage + delta / 2)
+  };
+  if (range.start - 1 === 1 || range.end + 1 === pageCount) {
+    range.start += 1;
+    range.end += 1;
+  }
+  let pages = currentPage > delta ? getRange(
+    Math.min(range.start, pageCount - delta),
+    Math.min(range.end, pageCount)
+  ) : getRange(1, Math.min(pageCount, delta + 1));
+  const withDots = (value, pair) => pages.length + 1 !== pageCount ? pair : [value];
+  if (pages[0] !== 1) {
+    pages = withDots(1, [1, "..."]).concat(pages);
+  }
+  if (pages[pages.length - 1] < pageCount) {
+    pages = pages.concat(withDots(pageCount, ["...", pageCount]));
+  }
+  return pages;
+};
+const createComponentData = (page, pathname) => {
+  const { currentPage, lastPage, url } = page;
+  const { prev, next } = url;
+  const pageNums = createPageNumbers(currentPage, lastPage);
+  let baseURL = pathname.replace(/\d+$/, "");
+  baseURL = baseURL.replace(/\/$/, "");
+  const pages = [
+    {
+      disabled: prev == null,
+      href: prev,
+      page: "Previous"
+    }
+  ];
+  pageNums.forEach((page2) => {
+    pages.push({
+      disabled: false,
+      href: page2 === "..." ? void 0 : page2 === 1 ? `${baseURL}` : `${baseURL}/${page2}`,
+      page: page2.toString()
+    });
+  });
+  pages.push({
+    disabled: next == null,
+    href: next,
+    page: "Next"
+  });
+  return pages;
+};
+
+const $$Astro$w = createAstro();
+const $$Pagination = createComponent(async ($$result, $$props, $$slots) => {
+  const Astro2 = $$result.createAstro($$Astro$w, $$props, $$slots);
+  Astro2.self = $$Pagination;
+  const {
+    page,
+    "aria-label": ariaLabel = "Page pagination control",
+    class: className,
+    itemClass,
+    linkClass,
+    size
+  } = Astro2.props;
+  const { pathname } = Astro2.url;
+  const pages = createComponentData(page, pathname);
+  return renderTemplate`${maybeRenderHead()}<nav${addAttribute(ariaLabel, "aria-label")}> <ul${addAttribute([
+    "pagination",
+    className,
+    { "pagination-sm": size === "sm", "pagination-lg": size === "lg" }
+  ], "class:list")}> ${renderSlot($$result, $$slots["default"], renderTemplate` ${pages && pages.map(({ href, disabled, page: page2 }) => renderTemplate`${renderComponent($$result, "Pagination.Item", Pagination.Item, { "class": itemClass, "disabled": disabled }, { "default": ($$result2) => renderTemplate` ${renderComponent($$result2, "Pagination.Link", Pagination.Link, { "href": href, "class": linkClass }, { "default": ($$result3) => renderTemplate`${page2}` })} ` })}`)} `)} </ul> </nav>`;
+}, "C:/gitrepos/luya_shop_admin/luya_shop_frontend/node_modules/astro-bootstrap/lib/components/Pagination.astro", void 0);
+
+const $$Astro$v = createAstro();
+const $$PaginationItem = createComponent(async ($$result, $$props, $$slots) => {
+  const Astro2 = $$result.createAstro($$Astro$v, $$props, $$slots);
+  Astro2.self = $$PaginationItem;
+  const { disabled = false, class: className } = Astro2.props;
+  return renderTemplate`${maybeRenderHead()}<li${addAttribute(["page-item", className, { disabled }], "class:list")}> ${renderSlot($$result, $$slots["default"])} </li>`;
+}, "C:/gitrepos/luya_shop_admin/luya_shop_frontend/node_modules/astro-bootstrap/lib/components/PaginationItem.astro", void 0);
+
+const $$Astro$u = createAstro();
+const $$PaginationLink = createComponent(async ($$result, $$props, $$slots) => {
+  const Astro2 = $$result.createAstro($$Astro$u, $$props, $$slots);
+  Astro2.self = $$PaginationLink;
+  const { href, class: className = "" } = Astro2.props;
+  return renderTemplate`${renderComponent($$result, "ActiveLink", $$ActiveLink, { "href": href, "class": `page-link ${className}` }, { "default": ($$result2) => renderTemplate` ${renderSlot($$result2, $$slots["default"])} ` })} <!-- class:list={['page-link', className]} -->`;
+}, "C:/gitrepos/luya_shop_admin/luya_shop_frontend/node_modules/astro-bootstrap/lib/components/PaginationLink.astro", void 0);
+
+const Pagination = Object.assign($$Pagination, { Item: $$PaginationItem, Link: $$PaginationLink });
+
+const $$Astro$t = createAstro();
+const $$TabList = createComponent(async ($$result, $$props, $$slots) => {
+  const Astro2 = $$result.createAstro($$Astro$t, $$props, $$slots);
+  Astro2.self = $$TabList;
+  const { id, class: className } = Astro2.props;
+  return renderTemplate`${maybeRenderHead()}<ul${addAttribute(["nav nav-tabs", className], "class:list")}${addAttribute(`${id}-tabs`, "id")} role="tablist"> ${renderSlot($$result, $$slots["default"])} </ul> `;
+}, "C:/gitrepos/luya_shop_admin/luya_shop_frontend/node_modules/astro-bootstrap/lib/components/TabList.astro", void 0);
+
+const $$Astro$s = createAstro();
+const $$TabItem = createComponent(async ($$result, $$props, $$slots) => {
+  const Astro2 = $$result.createAstro($$Astro$s, $$props, $$slots);
+  Astro2.self = $$TabItem;
+  const {
+    index,
+    active = false,
+    id,
+    class: className,
+    linkClass
+  } = Astro2.props;
+  return renderTemplate`${maybeRenderHead()}<li${addAttribute(["nav-item", className], "class:list")} role="presentation"> <button${addAttribute(["nav-link", linkClass, { active }], "class:list")}${addAttribute(`${id}-tab-${index}`, "id")} data-bs-toggle="tab"${addAttribute(`#${id}-tab-pane-${index}`, "data-bs-target")} type="button" role="tab"${addAttribute(`${id}-tab-pane-${index}`, "aria-controls")}${addAttribute(index === 0, "aria-selected")}> ${renderSlot($$result, $$slots["default"])} </button> </li>`;
+}, "C:/gitrepos/luya_shop_admin/luya_shop_frontend/node_modules/astro-bootstrap/lib/components/TabItem.astro", void 0);
+
+const $$Astro$r = createAstro();
+const $$TabContent = createComponent(async ($$result, $$props, $$slots) => {
+  const Astro2 = $$result.createAstro($$Astro$r, $$props, $$slots);
+  Astro2.self = $$TabContent;
+  const { class: className = "", id } = Astro2.props;
+  return renderTemplate`${maybeRenderHead()}<div${addAttribute(["tab-content", className], "class:list")}${addAttribute(`${id}-tab-content`, "id")}> ${renderSlot($$result, $$slots["default"])} </div>`;
+}, "C:/gitrepos/luya_shop_admin/luya_shop_frontend/node_modules/astro-bootstrap/lib/components/TabContent.astro", void 0);
+
+const $$Astro$q = createAstro();
+const $$TabPane = createComponent(async ($$result, $$props, $$slots) => {
+  const Astro2 = $$result.createAstro($$Astro$q, $$props, $$slots);
+  Astro2.self = $$TabPane;
+  const {
+    index,
+    class: className,
+    active = false,
+    fade = false,
+    id
+  } = Astro2.props;
+  const show = fade && active;
+  return renderTemplate`${maybeRenderHead()}<div${addAttribute(["tab-pane", className, { fade, show, active }], "class:list")}${addAttribute(`${id}-tab-pane-${index}`, "id")} role="tabpanel"${addAttribute(`${id}-tab-${index}`, "aria-labelledby")} tabindex="0"> ${renderSlot($$result, $$slots["default"])} </div>`;
+}, "C:/gitrepos/luya_shop_admin/luya_shop_frontend/node_modules/astro-bootstrap/lib/components/TabPane.astro", void 0);
+
+const Tab = Object.assign({ List: $$TabList, Item: $$TabItem, Content: $$TabContent, Pane: $$TabPane });
+
+const $$Astro$p = createAstro();
+const $$Tabs = createComponent(async ($$result, $$props, $$slots) => {
+  const Astro2 = $$result.createAstro($$Astro$p, $$props, $$slots);
+  Astro2.self = $$Tabs;
+  const {
+    tabs,
+    id: userId,
+    listClass,
+    itemClass,
+    linkClass,
+    contentClass,
+    paneClass,
+    fade = false
+  } = Astro2.props;
+  const id = userId || `tabs-${nanoid(8)}`;
+  return renderTemplate`${renderComponent($$result, "Tab.List", Tab.List, { "id": id, "class": listClass }, { "default": ($$result2) => renderTemplate`${tabs && tabs.map((tab, index) => renderTemplate`${renderComponent($$result2, "Tab.Item", Tab.Item, { "index": index, "id": id, "active": tab.active, "class": itemClass, "linkClass": linkClass }, { "default": ($$result3) => renderTemplate`${tab.title}` })}`)}` })} ${renderComponent($$result, "Tab.Content", Tab.Content, { "class": contentClass, "id": id }, { "default": ($$result2) => renderTemplate`${tabs && tabs.map((tab, index) => renderTemplate`${renderComponent($$result2, "Tab.Pane", Tab.Pane, { "index": index, "fade": fade, "id": id, "active": tab.active, "class": paneClass }, { "default": ($$result3) => renderTemplate`${tab.body}` })}`)}` })}`;
+}, "C:/gitrepos/luya_shop_admin/luya_shop_frontend/node_modules/astro-bootstrap/lib/components/Tabs.astro", void 0);
+
+const $$Astro$o = createAstro();
+const $$Toast = createComponent(async ($$result, $$props, $$slots) => {
+  const Astro2 = $$result.createAstro($$Astro$o, $$props, $$slots);
+  Astro2.self = $$Toast;
+  const { id, class: className, animation = true, autohide = true, delay = 5e3 } = Astro2.props;
+  const config = { delay, animation, autohide };
+  return renderTemplate`${maybeRenderHead()}<div${addAttribute(id, "id")}${addAttribute(["toast", className], "class:list")} role="alert" aria-live="assertive" aria-atomic="true"${addAttribute(JSON.stringify(config), "data-bs-config")}> ${renderSlot($$result, $$slots["default"])} </div>`;
+}, "C:/gitrepos/luya_shop_admin/luya_shop_frontend/node_modules/astro-bootstrap/lib/components/Toast.astro", void 0);
+
+const $$Astro$n = createAstro();
+const $$ToastBody = createComponent(async ($$result, $$props, $$slots) => {
+  const Astro2 = $$result.createAstro($$Astro$n, $$props, $$slots);
+  Astro2.self = $$ToastBody;
+  const { class: className } = Astro2.props;
+  return renderTemplate`${maybeRenderHead()}<div${addAttribute(["toast-body", className], "class:list")}> ${renderSlot($$result, $$slots["default"])} </div>`;
+}, "C:/gitrepos/luya_shop_admin/luya_shop_frontend/node_modules/astro-bootstrap/lib/components/ToastBody.astro", void 0);
+
+const $$Astro$m = createAstro();
+const $$ToastClose = createComponent(async ($$result, $$props, $$slots) => {
+  const Astro2 = $$result.createAstro($$Astro$m, $$props, $$slots);
+  Astro2.self = $$ToastClose;
+  const { class: className } = Astro2.props;
+  return renderTemplate`${maybeRenderHead()}<button type="button"${addAttribute(["btn-close", className], "class:list")} data-bs-dismiss="toast" aria-label="Close"></button>`;
+}, "C:/gitrepos/luya_shop_admin/luya_shop_frontend/node_modules/astro-bootstrap/lib/components/ToastClose.astro", void 0);
+
+const $$Astro$l = createAstro();
+const $$ToastContainer = createComponent(async ($$result, $$props, $$slots) => {
+  const Astro2 = $$result.createAstro($$Astro$l, $$props, $$slots);
+  Astro2.self = $$ToastContainer;
+  const { class: className } = Astro2.props;
+  return renderTemplate`${maybeRenderHead()}<div${addAttribute(["toast-container", className], "class:list")}> ${renderSlot($$result, $$slots["default"])} </div>`;
+}, "C:/gitrepos/luya_shop_admin/luya_shop_frontend/node_modules/astro-bootstrap/lib/components/ToastContainer.astro", void 0);
+
+const $$Astro$k = createAstro();
+const $$ToastHeader = createComponent(async ($$result, $$props, $$slots) => {
+  const Astro2 = $$result.createAstro($$Astro$k, $$props, $$slots);
+  Astro2.self = $$ToastHeader;
+  const { class: className } = Astro2.props;
+  return renderTemplate`${maybeRenderHead()}<div${addAttribute(["toast-header", className], "class:list")}> ${renderSlot($$result, $$slots["default"])} </div>`;
+}, "C:/gitrepos/luya_shop_admin/luya_shop_frontend/node_modules/astro-bootstrap/lib/components/ToastHeader.astro", void 0);
+
+Object.assign($$Toast, { Body: $$ToastBody, Close: $$ToastClose, Container: $$ToastContainer, Header: $$ToastHeader });
+
+const $$Astro$j = createAstro();
+const $$Tooltip = createComponent(async ($$result, $$props, $$slots) => {
+  const Astro2 = $$result.createAstro($$Astro$j, $$props, $$slots);
+  Astro2.self = $$Tooltip;
+  const {
+    title,
+    placement,
+    animation,
+    delay,
+    html,
+    trigger,
+    customClass
+  } = Astro2.props;
+  const config = { title, placement, animation, delay, html, trigger, customClass };
+  return renderTemplate`${renderComponent($$result, "tooltip-wrapper", "tooltip-wrapper", {}, { "default": () => renderTemplate` ${maybeRenderHead()}<span data-bs-toggle="tooltip"${addAttribute(JSON.stringify(config), "data-bs-config")}> ${renderSlot($$result, $$slots["default"])} </span> ` })} `;
+}, "C:/gitrepos/luya_shop_admin/luya_shop_frontend/node_modules/astro-bootstrap/lib/components/Tooltip.astro", void 0);
+
+const $$Astro$i = createAstro();
+const $$Marked = createComponent(async ($$result, $$props, $$slots) => {
+  const Astro2 = $$result.createAstro($$Astro$i, $$props, $$slots);
+  Astro2.self = $$Marked;
+  const { inline = false } = Astro2.props;
+  const slot = await Astro2.slots.render("default");
+  return renderTemplate`${Astro2.slots.has("default") && (inline ? renderTemplate`${renderComponent($$result, "Fragment", Fragment, {}, { "default": ($$result2) => renderTemplate`${unescapeHTML(marked.parseInline(slot))}` })}` : renderTemplate`${renderComponent($$result, "Fragment", Fragment, {}, { "default": ($$result2) => renderTemplate`${unescapeHTML(marked.parse(slot))}` })}`)}`;
+}, "C:/gitrepos/luya_shop_admin/luya_shop_frontend/node_modules/astro-bootstrap/lib/utils/Marked.astro", void 0);
+
+const $$Astro$h = createAstro();
+const $$InlineCode = createComponent(async ($$result, $$props, $$slots) => {
+  const Astro2 = $$result.createAstro($$Astro$h, $$props, $$slots);
+  Astro2.self = $$InlineCode;
+  const { code } = Astro2.props;
+  return renderTemplate`${renderComponent($$result, "Marked", $$Marked, { "inline": true }, { "default": ($$result2) => renderTemplate`\`${renderComponent($$result2, "Fragment", Fragment, {}, { "default": ($$result3) => renderTemplate`${unescapeHTML(code)}` })}\`` })}`;
+}, "C:/gitrepos/luya_shop_admin/luya_shop_frontend/node_modules/astro-bootstrap/lib/utils/InlineCode.astro", void 0);
+
+const _export_sfc = (sfc, props) => {
+  const target = sfc.__vccOpts || sfc;
+  for (const [key, val] of props) {
+    target[key] = val;
+  }
+  return target;
+};
+
+const _sfc_main$j = {
+  __name: 'ViewAllCategories',
+  props: ["catData"],
+  setup(__props, { expose: __expose }) {
+  __expose();
+
+
+
+const __returned__ = { get ActiveLink() { return $$ActiveLink } };
+Object.defineProperty(__returned__, '__isScriptSetup', { enumerable: false, value: true });
+return __returned__
+}
+
+};
+
+function _sfc_ssrRender$j(_ctx, _push, _parent, _attrs, $props, $setup, $data, $options) {
+  if ($props.catData) {
+    _push(`<div${ssrRenderAttrs(_attrs)}><section class="bg-white p_100"><div class="container"><div class="flex justify-center align-middle flex-col md:flex-row"><!--[-->`);
+    ssrRenderList($props.catData, (nodes) => {
+      _push(`<!--[--><!--[-->`);
+      ssrRenderList(nodes, (category) => {
+        _push(`<!--[-->`);
+        if (category.slug !== undefined) {
+          _push(`<div><a class="text-black cursor-pointer hover:underline"${
+            ssrRenderAttr("href", `/category/${category.slug}`)
+          }><div class="cursor-pointer ml-4 mt-[5rem] md:mt-[20rem] w-full md:w-64 flex-row"><div class="p-4 min-w-[10rem] flex items-center justify-center w-full h-16 text-center border border-gray-300 rounded-lg shadow hover:shadow-outline"><p class="text-lg">${
+            ssrInterpolate(category.name)
+          }</p></div></div></a></div>`);
+        } else {
+          _push(`<!---->`);
+        }
+        _push(`<!--]-->`);
+      });
+      _push(`<!--]--><!--]-->`);
+    });
+    _push(`<!--]--></div></div></section></div>`);
+  } else {
+    _push(`<!---->`);
+  }
+}
+const _sfc_setup$j = _sfc_main$j.setup;
+_sfc_main$j.setup = (props, ctx) => {
+  const ssrContext = useSSRContext()
+  ;(ssrContext.modules || (ssrContext.modules = new Set())).add("src/components/Category/ViewAllCategories.vue");
+  return _sfc_setup$j ? _sfc_setup$j(props, ctx) : undefined
+};
+const ViewAllCategories = /*#__PURE__*/_export_sfc(_sfc_main$j, [['ssrRender',_sfc_ssrRender$j]]);
+
+const $$Astro$g = createAstro();
+const $$Categories = createComponent(async ($$result, $$props, $$slots) => {
+  const Astro2 = $$result.createAstro($$Astro$g, $$props, $$slots);
+  Astro2.self = $$Categories;
+  const variables = { limit: 99 };
+  const { data, loading } = await client.query({
+    query: gql`
+     {
+      productCategories(first: 20) {
+        nodes {
+          id
+          databaseId
+          name
+          slug
+        }
+      }
+    }  
+`,
+    variables
+  });
+  console.log(data.productCategories);
+  return renderTemplate`${renderComponent($$result, "Layout", $$Layout, { "title": "Categories" }, { "default": ($$result2) => renderTemplate` ${renderComponent($$result2, "ViewAllCategories", ViewAllCategories, { "catData": data.productCategories, "client:load": true, "client:component-hydration": "load", "client:component-path": "C:/gitrepos/luya_shop_admin/luya_shop_frontend/src/components/Category/ViewAllCategories.vue", "client:component-export": "default" })} ` })}`;
+}, "C:/gitrepos/luya_shop_admin/luya_shop_frontend/src/pages/categories.astro", void 0);
+
+const $$file$b = "C:/gitrepos/luya_shop_admin/luya_shop_frontend/src/pages/categories.astro";
+const $$url$b = "/categories";
+
+const categories = /*#__PURE__*/Object.freeze(/*#__PURE__*/Object.defineProperty({
+  __proto__: null,
+  default: $$Categories,
+  file: $$file$b,
+  url: $$url$b
+}, Symbol.toStringTag, { value: 'Module' }));
 
 /**
  * Checks if the given data object has any variations by accessing the product's variations nodes array.
@@ -187,6 +977,14 @@ function formatPrice(price, currency, currencyLocale) {
 }
 
 /**
+ * Strips HTML from the inputted string
+ * @param {String} description Input text to strip HTML from
+ */
+function stripHTML(string) {
+  return string.replace(/<\/?[^>]+(>|$)/gi, "");
+}
+
+/**
  * Filter variant price. Changes "kr198.00 - kr299.00" to kr299.00 or kr198 depending on the side variable
  * @param {String} side Which side of the string to return (which side of the "-" symbol)
  * @param {String} price The inputted price that we need to convert
@@ -198,15 +996,7 @@ const filteredVariantPrice = (price, side) => {
   return price.substring(0, price.indexOf("-")).replace("-", "");
 };
 
-const _export_sfc = (sfc, props) => {
-  const target = sfc.__vccOpts || sfc;
-  for (const [key, val] of props) {
-    target[key] = val;
-  }
-  return target;
-};
-
-const _sfc_main$g = /* @__PURE__ */ defineComponent({
+const _sfc_main$i = /* @__PURE__ */ defineComponent({
   __name: "ButtonComponent",
   props: {
     type: {},
@@ -221,7 +1011,7 @@ const _sfc_main$g = /* @__PURE__ */ defineComponent({
     return __returned__;
   }
 });
-function _sfc_ssrRender$g(_ctx, _push, _parent, _attrs, $props, $setup, $data, $options) {
+function _sfc_ssrRender$i(_ctx, _push, _parent, _attrs, $props, $setup, $data, $options) {
   _push(`<button${ssrRenderAttrs(mergeProps({
     type: $props.type ?? "button",
     class: [
@@ -239,19 +1029,19 @@ function _sfc_ssrRender$g(_ctx, _push, _parent, _attrs, $props, $setup, $data, $
   ssrRenderSlot(_ctx.$slots, "default", {}, null, _push, _parent);
   _push(`</button>`);
 }
-const _sfc_setup$g = _sfc_main$g.setup;
-_sfc_main$g.setup = (props, ctx) => {
+const _sfc_setup$i = _sfc_main$i.setup;
+_sfc_main$i.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("src/components/UI/ButtonComponent.vue");
-  return _sfc_setup$g ? _sfc_setup$g(props, ctx) : void 0;
+  return _sfc_setup$i ? _sfc_setup$i(props, ctx) : void 0;
 };
-const ButtonComponent = /* @__PURE__ */ _export_sfc(_sfc_main$g, [["ssrRender", _sfc_ssrRender$g], ["__scopeId", "data-v-442194c8"]]);
+const ButtonComponent = /* @__PURE__ */ _export_sfc(_sfc_main$i, [["ssrRender", _sfc_ssrRender$i], ["__scopeId", "data-v-442194c8"]]);
 
 const FormatToVND = (price) => {
   return price.toLocaleString("rs", { style: "currency", currency: "INR" });
 };
 
-const _sfc_main$f = {
+const _sfc_main$h = {
   __name: 'ShowAllProductsCategory',
   props: ["allProducts"],
   setup(__props, { expose: __expose }) {
@@ -259,10 +1049,8 @@ const _sfc_main$f = {
 
 
 
-
-const productImage = product =>
+const productImage = (product) =>
   product.image ? product.image.sourceUrl : process.env.placeholderSmallImage;
-
 
 const __returned__ = { productImage, get filteredVariantPrice() { return filteredVariantPrice }, ButtonComponent, get FormatToVND() { return FormatToVND } };
 Object.defineProperty(__returned__, '__isScriptSetup', { enumerable: false, value: true });
@@ -271,54 +1059,44 @@ return __returned__
 
 };
 
-function _sfc_ssrRender$f(_ctx, _push, _parent, _attrs, $props, $setup, $data, $options) {
-  _push(`<section${ssrRenderAttrs(mergeProps({ class: "container mt-100" }, _attrs))}><div class="flex flex-wrap items-center"><!--[-->`);
+function _sfc_ssrRender$h(_ctx, _push, _parent, _attrs, $props, $setup, $data, $options) {
+  _push(`<!--[--><section class="banner_area"><div class="container"><div class="banner_text"><h3>Shop</h3><ul><li><a href="index.html">Home</a></li><li><a href="shop.html">Shop</a></li></ul></div></div></section><section class="product_area p_100"><div class="container"><div class="row product_inner_row"><div class="col-lg-9"><div class="row m0 product_task_bar"><div class="product_task_inner"><div class="float-left"><a class="active" href="#"><i class="fa fa-th-large" aria-hidden="true"></i></a><a href="#"><i class="fa fa-th-list" aria-hidden="true"></i></a><span>Showing 1 - 10 of 55 results</span></div><div class="float-right"><h4>Sort by :</h4><select class="short" style="${ssrRenderStyle({"display":"none"})}"><option data-display="Default">Default</option><option value="1">Default</option><option value="2">Default</option><option value="4">Default</option></select><div class="nice-select short" tabindex="0"><span class="current">Default</span><ul class="list"><li data-value="Default" data-display="Default" class="option selected"> Default </li><li data-value="1" class="option">Default</li><li data-value="2" class="option">Default</li><li data-value="4" class="option">Default</li></ul></div></div></div></div><div class="row product_item_inner"><!--[-->`);
   ssrRenderList($props.allProducts, (product) => {
     _push(`<!--[-->`);
     if (product.slug) {
-      _push(`<div class="flex flex-col mt-6 sm:w1/2 md:w-1/3 lg:1/4 xl:w-1/4"><a${
+      _push(`<div class="cake_feature_item"><div class="cake_img"><a${
         ssrRenderAttr("href", `/products/${product.slug}`)
       }><img id="product-image" class="container mx-auto transition duration-700 ease-in-out transform cursor-pointer lg:w-64 xl:w-64 sm:p-4 hover:scale-95"${
         ssrRenderAttr("alt", product.name)
       }${
         ssrRenderAttr("src", $setup.productImage(product))
-      }></a><div class="flex justify-center pt-3"><p class="text-xl font-bold text-center cursor-pointer">${
+      }></a></div><div class="cake_text"><h4>${
+        ssrInterpolate(product.price)
+      }</h4><h3>${
         ssrInterpolate(product.name)
-      }</p></div>`);
-      if (product.onSale) {
-        _push(`<div class="flex justify-center mt-2"><div class="text-lg text-gray-900 line-through">`);
-        if (product.variations) {
-          _push(`<span>${ssrInterpolate($setup.filteredVariantPrice(product.price, "right"))}</span>`);
-        } else {
-          _push(`<span>${ssrInterpolate(product.regularPrice)}</span>`);
-        }
-        _push(`</div><div class="ml-4 text-xl text-gray-900">`);
-        if (product.variations) {
-          _push(`<span>${ssrInterpolate($setup.filteredVariantPrice(product.price))}</span>`);
-        } else {
-          _push(`<span>${ssrInterpolate(product.salePrice)}</span>`);
-        }
-        _push(`</div></div>`);
-      } else {
-        _push(`<div><p class="mt-2 text-xl text-center text-gray-900">${ssrInterpolate(product.price)}</p></div>`);
-      }
-      _push(`</div>`);
+      }</h3></div></div>`);
     } else {
       _push(`<!---->`);
     }
     _push(`<!--]-->`);
   });
-  _push(`<!--]--></div></section>`);
+  _push(`<!--]--></div></div><div class="col-lg-3"><div class="product_left_sidebar"><aside class="left_sidebar search_widget"><div class="input-group"><input type="text" class="form-control" placeholder="Enter Search Keywords"><div class="input-group-append"><button class="btn" type="button"><i class="icon icon-Search"></i></button></div></div></aside><aside class="left_sidebar p_catgories_widget"><div class="p_w_title"><h3>Product Categories</h3></div><ul class="list_style"><li><a href="#">Cupcake (17)</a></li><li><a href="#">Chocolate (15)</a></li><li><a href="#">Celebration (14)</a></li><li><a href="#">Wedding Cake (8)</a></li><li><a href="#">Desserts (11)</a></li></ul></aside><aside class="left_sidebar p_price_widget"><div class="p_w_title"><h3>Filter By Price</h3></div><div class="filter_price"><div id="slider-range" class="ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"><div class="ui-slider-range ui-corner-all ui-widget-header" style="${
+    ssrRenderStyle({"left":"2%","width":"48%"})
+  }"></div><span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default" style="${
+    ssrRenderStyle({"left":"2%"})
+  }"></span><span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default" style="${
+    ssrRenderStyle({"left":"50%"})
+  }"></span></div><label for="amount">Price range:</label><input type="text" id="amount" readonly=""><a href="#">Filter</a></div></aside><aside class="left_sidebar p_sale_widget"><div class="p_w_title"><h3>Top Sale Products</h3></div><div class="media"><div class="d-flex"><img src="img/product/sale-product/s-product-1.jpg" alt=""></div><div class="media-body"><a href="#"><h4>Brown Cake</h4></a><ul class="list_style"><li><a href="#"><i class="fa fa-star-o"></i></a></li><li><a href="#"><i class="fa fa-star-o"></i></a></li><li><a href="#"><i class="fa fa-star-o"></i></a></li><li><a href="#"><i class="fa fa-star-o"></i></a></li><li><a href="#"><i class="fa fa-star-o"></i></a></li></ul><h5>\$29</h5></div></div><div class="media"><div class="d-flex"><img src="img/product/sale-product/s-product-2.jpg" alt=""></div><div class="media-body"><a href="#"><h4>Brown Cake</h4></a><ul class="list_style"><li><a href="#"><i class="fa fa-star-o"></i></a></li><li><a href="#"><i class="fa fa-star-o"></i></a></li><li><a href="#"><i class="fa fa-star-o"></i></a></li><li><a href="#"><i class="fa fa-star-o"></i></a></li><li><a href="#"><i class="fa fa-star-o"></i></a></li></ul><h5>\$29</h5></div></div><div class="media"><div class="d-flex"><img src="img/product/sale-product/s-product-3.jpg" alt=""></div><div class="media-body"><a href="#"><h4>Brown Cake</h4></a><ul class="list_style"><li><a href="#"><i class="fa fa-star-o"></i></a></li><li><a href="#"><i class="fa fa-star-o"></i></a></li><li><a href="#"><i class="fa fa-star-o"></i></a></li><li><a href="#"><i class="fa fa-star-o"></i></a></li><li><a href="#"><i class="fa fa-star-o"></i></a></li></ul><h5>\$29</h5></div></div><div class="media"><div class="d-flex"><img src="img/product/sale-product/s-product-4.jpg" alt=""></div><div class="media-body"><a href="#"><h4>Brown Cake</h4></a><ul class="list_style"><li><a href="#"><i class="fa fa-star-o"></i></a></li><li><a href="#"><i class="fa fa-star-o"></i></a></li><li><a href="#"><i class="fa fa-star-o"></i></a></li><li><a href="#"><i class="fa fa-star-o"></i></a></li><li><a href="#"><i class="fa fa-star-o"></i></a></li></ul><h5>\$29</h5></div></div></aside></div></div></div></div></section><!--]-->`);
 }
-const _sfc_setup$f = _sfc_main$f.setup;
-_sfc_main$f.setup = (props, ctx) => {
+const _sfc_setup$h = _sfc_main$h.setup;
+_sfc_main$h.setup = (props, ctx) => {
   const ssrContext = useSSRContext()
   ;(ssrContext.modules || (ssrContext.modules = new Set())).add("src/components/Products/ShowAllProductsCategory.vue");
-  return _sfc_setup$f ? _sfc_setup$f(props, ctx) : undefined
+  return _sfc_setup$h ? _sfc_setup$h(props, ctx) : undefined
 };
-const ShowAllProductsCategory = /*#__PURE__*/_export_sfc(_sfc_main$f, [['ssrRender',_sfc_ssrRender$f]]);
+const ShowAllProductsCategory = /*#__PURE__*/_export_sfc(_sfc_main$h, [['ssrRender',_sfc_ssrRender$h]]);
 
-const _sfc_main$e = {
+const _sfc_main$g = {
   __name: 'ShowProductsInCategory',
   props: ["allProducts"],
   setup(__props, { expose: __expose }) {
@@ -334,7 +1112,7 @@ return __returned__
 
 };
 
-function _sfc_ssrRender$e(_ctx, _push, _parent, _attrs, $props, $setup, $data, $options) {
+function _sfc_ssrRender$g(_ctx, _push, _parent, _attrs, $props, $setup, $data, $options) {
   _push(`<section${ssrRenderAttrs(mergeProps({ class: "mt-100" }, _attrs))}><div class="container">`);
   if ($props.allProducts) {
     _push(`<div><h1 class="h-10 p-6 text-3xl font-bold text-center">${ssrInterpolate($props.allProducts.name)}</h1><br>`);
@@ -350,13 +1128,13 @@ function _sfc_ssrRender$e(_ctx, _push, _parent, _attrs, $props, $setup, $data, $
   }
   _push(`</div></section>`);
 }
-const _sfc_setup$e = _sfc_main$e.setup;
-_sfc_main$e.setup = (props, ctx) => {
+const _sfc_setup$g = _sfc_main$g.setup;
+_sfc_main$g.setup = (props, ctx) => {
   const ssrContext = useSSRContext()
   ;(ssrContext.modules || (ssrContext.modules = new Set())).add("src/components/Category/ShowProductsInCategory.vue");
-  return _sfc_setup$e ? _sfc_setup$e(props, ctx) : undefined
+  return _sfc_setup$g ? _sfc_setup$g(props, ctx) : undefined
 };
-const ShowProductsInCategory = /*#__PURE__*/_export_sfc(_sfc_main$e, [['ssrRender',_sfc_ssrRender$e]]);
+const ShowProductsInCategory = /*#__PURE__*/_export_sfc(_sfc_main$g, [['ssrRender',_sfc_ssrRender$g]]);
 
 async function fetchAxios(params) {
   Object.assign({"BASE_URL": "/", "MODE": "production", "DEV": false, "PROD": true, "SSR": true, "SITE": undefined, "ASSETS_PREFIX": undefined}, { OS: process.env.OS, PUBLIC: process.env.PUBLIC });
@@ -472,44 +1250,6 @@ const $$slug$1 = createComponent(async ($$result, $$props, $$slots) => {
   Astro2.self = $$slug$1;
   Object.assign({"BASE_URL": "/", "MODE": "production", "DEV": false, "PROD": true, "SSR": true, "SITE": undefined, "ASSETS_PREFIX": undefined}, { Path: process.env.Path, PUBLIC: process.env.PUBLIC });
   Astro2.params;
-  const productVariables = { limit: 99 };
-  await client.query({
-    query: gql`
-    {
-      products(first: 24) {
-        nodes {
-          databaseId
-          name
-          onSale
-          slug
-          image {
-            sourceUrl
-          }
-          ... on SimpleProduct {
-            databaseId
-            price
-            regularPrice
-            salePrice
-          }
-          ... on VariableProduct {
-            databaseId
-            price
-            regularPrice
-            salePrice
-            variations {
-              nodes {
-                price
-                regularPrice
-                salePrice
-              }
-            }
-          }
-        }
-      }
-    }
-  `,
-    variables: productVariables
-  });
   const { catProducts } = Astro2.props;
   console.log(catProducts.productCategory?.products?.nodes.length);
   const products = catProducts.productCategory?.products?.nodes || [];
@@ -720,7 +1460,7 @@ async function updateCart(product) {
   return data?.items;
 }
 
-const _sfc_main$d = {
+const _sfc_main$f = {
   __name: 'CartCheckoutButton',
   props: ["type"],
   setup(__props, { expose: __expose }) {
@@ -735,24 +1475,24 @@ return __returned__
 
 };
 
-function _sfc_ssrRender$d(_ctx, _push, _parent, _attrs, $props, $setup, $data, $options) {
+function _sfc_ssrRender$f(_ctx, _push, _parent, _attrs, $props, $setup, $data, $options) {
   _push(`<a${
     ssrRenderAttrs(mergeProps({ href: "/checkout" }, _attrs))
   }><button class="w-48 h-12 px-4 py-2 mt-4 font-bold text-white bg-blue-500 rounded hover:bg-blue-800 ease-in-out duration-300"${
     ssrRenderAttr("type", $setup.props.type)
   }> Checkout </button></a>`);
 }
-const _sfc_setup$d = _sfc_main$d.setup;
-_sfc_main$d.setup = (props, ctx) => {
+const _sfc_setup$f = _sfc_main$f.setup;
+_sfc_main$f.setup = (props, ctx) => {
   const ssrContext = useSSRContext()
   ;(ssrContext.modules || (ssrContext.modules = new Set())).add("src/components/Cart/CartCheckoutButton.vue");
-  return _sfc_setup$d ? _sfc_setup$d(props, ctx) : undefined
+  return _sfc_setup$f ? _sfc_setup$f(props, ctx) : undefined
 };
-const CartCheckoutButton = /*#__PURE__*/_export_sfc(_sfc_main$d, [['ssrRender',_sfc_ssrRender$d]]);
+const CartCheckoutButton = /*#__PURE__*/_export_sfc(_sfc_main$f, [['ssrRender',_sfc_ssrRender$f]]);
 
-const _sfc_main$c = {};
+const _sfc_main$e = {};
 
-function _sfc_ssrRender$c(_ctx, _push, _parent, _attrs) {
+function _sfc_ssrRender$e(_ctx, _push, _parent, _attrs) {
   _push(`<svg${ssrRenderAttrs(mergeProps({
     id: "xsvg",
     xmlns: "https://www.w3.org/2000/svg",
@@ -767,15 +1507,15 @@ function _sfc_ssrRender$c(_ctx, _push, _parent, _attrs) {
     class: "cursor-pointer"
   }, _attrs))}><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>`);
 }
-const _sfc_setup$c = _sfc_main$c.setup;
-_sfc_main$c.setup = (props, ctx) => {
+const _sfc_setup$e = _sfc_main$e.setup;
+_sfc_main$e.setup = (props, ctx) => {
   const ssrContext = useSSRContext()
   ;(ssrContext.modules || (ssrContext.modules = new Set())).add("src/components/UI/BaseXSVG.vue");
-  return _sfc_setup$c ? _sfc_setup$c(props, ctx) : undefined
+  return _sfc_setup$e ? _sfc_setup$e(props, ctx) : undefined
 };
-const BaseXSVG = /*#__PURE__*/_export_sfc(_sfc_main$c, [['ssrRender',_sfc_ssrRender$c]]);
+const BaseXSVG = /*#__PURE__*/_export_sfc(_sfc_main$e, [['ssrRender',_sfc_ssrRender$e]]);
 
-const _sfc_main$b = {
+const _sfc_main$d = {
   __name: 'Cart',
   props: ["showCheckoutButton"],
   setup(__props, { expose: __expose }) {
@@ -814,7 +1554,7 @@ return __returned__
 
 };
 
-function _sfc_ssrRender$b(_ctx, _push, _parent, _attrs, $props, $setup, $data, $options) {
+function _sfc_ssrRender$d(_ctx, _push, _parent, _attrs, $props, $setup, $data, $options) {
   if ($setup.cartContent) {
     _push(`<div${ssrRenderAttrs(_attrs)} data-v-c0110599><!--[-->`);
     ssrRenderList($setup.cartContent, (products) => {
@@ -847,15 +1587,15 @@ function _sfc_ssrRender$b(_ctx, _push, _parent, _attrs, $props, $setup, $data, $
     _push(`<div${ssrRenderAttrs(_attrs)} data-v-c0110599><h2 class="m-4 text-3xl text-center" data-v-c0110599>Cart is currently empty</h2></div>`);
   }
 }
-const _sfc_setup$b = _sfc_main$b.setup;
-_sfc_main$b.setup = (props, ctx) => {
+const _sfc_setup$d = _sfc_main$d.setup;
+_sfc_main$d.setup = (props, ctx) => {
   const ssrContext = useSSRContext()
   ;(ssrContext.modules || (ssrContext.modules = new Set())).add("src/components/Cart/Cart.vue");
-  return _sfc_setup$b ? _sfc_setup$b(props, ctx) : undefined
+  return _sfc_setup$d ? _sfc_setup$d(props, ctx) : undefined
 };
-const Cart = /*#__PURE__*/_export_sfc(_sfc_main$b, [['ssrRender',_sfc_ssrRender$b],['__scopeId',"data-v-c0110599"]]);
+const Cart = /*#__PURE__*/_export_sfc(_sfc_main$d, [['ssrRender',_sfc_ssrRender$d],['__scopeId',"data-v-c0110599"]]);
 
-const _sfc_main$a = {
+const _sfc_main$c = {
   __name: 'BaseButton',
   props: ["type"],
   setup(__props, { expose: __expose }) {
@@ -870,7 +1610,7 @@ return __returned__
 
 };
 
-function _sfc_ssrRender$a(_ctx, _push, _parent, _attrs, $props, $setup, $data, $options) {
+function _sfc_ssrRender$c(_ctx, _push, _parent, _attrs, $props, $setup, $data, $options) {
   _push(`<button${ssrRenderAttrs(mergeProps({
     class: "px-4 py-2 font-bold bg-white border border-gray-400 border-solid rounded hover:bg-gray-400 ease-in-out duration-300",
     type: $setup.props.type
@@ -878,13 +1618,13 @@ function _sfc_ssrRender$a(_ctx, _push, _parent, _attrs, $props, $setup, $data, $
   ssrRenderSlot(_ctx.$slots, "default", {}, null, _push, _parent);
   _push(`</button>`);
 }
-const _sfc_setup$a = _sfc_main$a.setup;
-_sfc_main$a.setup = (props, ctx) => {
+const _sfc_setup$c = _sfc_main$c.setup;
+_sfc_main$c.setup = (props, ctx) => {
   const ssrContext = useSSRContext()
   ;(ssrContext.modules || (ssrContext.modules = new Set())).add("src/components/UI/BaseButton.vue");
-  return _sfc_setup$a ? _sfc_setup$a(props, ctx) : undefined
+  return _sfc_setup$c ? _sfc_setup$c(props, ctx) : undefined
 };
-const BaseButton = /*#__PURE__*/_export_sfc(_sfc_main$a, [['ssrRender',_sfc_ssrRender$a]]);
+const BaseButton = /*#__PURE__*/_export_sfc(_sfc_main$c, [['ssrRender',_sfc_ssrRender$c]]);
 
 const BILLING_FIELDS = [
   {
@@ -944,7 +1684,7 @@ async function checkoutOrder(order) {
   return data?.checkout.result;
 }
 
-const _sfc_main$9 = {
+const _sfc_main$b = {
   __name: "Checkout",
   setup(__props, { expose: __expose }) {
     __expose();
@@ -1002,7 +1742,7 @@ const _sfc_main$9 = {
     return __returned__;
   }
 };
-function _sfc_ssrRender$9(_ctx, _push, _parent, _attrs, $props, $setup, $data, $options) {
+function _sfc_ssrRender$b(_ctx, _push, _parent, _attrs, $props, $setup, $data, $options) {
   _push(`<section${ssrRenderAttrs(mergeProps({ class: "text-gray-700 container p-4 py-2 mx-auto" }, _attrs))}>`);
   _push(ssrRenderComponent($setup["Form"], {
     "validation-schema": $setup.BILLING_SCHEMA,
@@ -1068,7 +1808,7 @@ function _sfc_ssrRender$9(_ctx, _push, _parent, _attrs, $props, $setup, $data, $
       } else {
         return [
           createVNode("div", { class: "mx-auto lg:w-1/2 flex flex-wrap" }, [
-            (openBlock(true), createBlock(Fragment, null, renderList($setup.BILLING_FIELDS, (field) => {
+            (openBlock(true), createBlock(Fragment$1, null, renderList($setup.BILLING_FIELDS, (field) => {
               return openBlock(), createBlock("div", {
                 key: field.inputId,
                 class: "w-1/2 p-2"
@@ -1114,13 +1854,13 @@ function _sfc_ssrRender$9(_ctx, _push, _parent, _attrs, $props, $setup, $data, $
   }, _parent));
   _push(`</section>`);
 }
-const _sfc_setup$9 = _sfc_main$9.setup;
-_sfc_main$9.setup = (props, ctx) => {
+const _sfc_setup$b = _sfc_main$b.setup;
+_sfc_main$b.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("src/components/Checkout/Checkout.vue");
-  return _sfc_setup$9 ? _sfc_setup$9(props, ctx) : void 0;
+  return _sfc_setup$b ? _sfc_setup$b(props, ctx) : void 0;
 };
-const Checkout = /* @__PURE__ */ _export_sfc(_sfc_main$9, [["ssrRender", _sfc_ssrRender$9]]);
+const Checkout = /* @__PURE__ */ _export_sfc(_sfc_main$b, [["ssrRender", _sfc_ssrRender$b]]);
 
 const $$Astro$e = createAstro();
 const $$Checkout = createComponent(async ($$result, $$props, $$slots) => {
@@ -1208,26 +1948,411 @@ const detail = /*#__PURE__*/Object.freeze(/*#__PURE__*/Object.defineProperty({
   url: $$url$5
 }, Symbol.toStringTag, { value: 'Module' }));
 
+/**
+   * Vue.js component that renders a button.
+   *
+   * @component CommonButton
+   * @example
+   * <CommonButton @common-button-click="functionName" is-loading="true" center-button="false" link-to="/link">Common button</CommonButton>
+   */
+  
+  
+const _sfc_main$a = {
+  __name: 'CommonButton',
+  props: {
+    isLoading: {
+      type: Boolean,
+      required: false,
+      default: false,
+    },
+    linkTo: {
+      type: String,
+      required: false,
+      default: "",
+    },
+    centerButton: { type: Boolean, required: false, default: false },
+  },
+  emits: ["CommonButtonClick"],
+  setup(__props, { expose: __expose }) {
+  __expose();
+
+  
+  
+  
+  
+const __returned__ = { get ActiveLink() { return $$ActiveLink } };
+Object.defineProperty(__returned__, '__isScriptSetup', { enumerable: false, value: true });
+return __returned__
+}
+
+};
+
+function _sfc_ssrRender$a(_ctx, _push, _parent, _attrs, $props, $setup, $data, $options) {
+  if ($props.linkTo) {
+    _push(`<div${ssrRenderAttrs(mergeProps({
+      class: { center: $props.centerButton }
+    }, _attrs))} data-v-bce69507>`);
+    _push(ssrRenderComponent($setup["ActiveLink"], {
+      to: $props.linkTo,
+      class: "button-link"
+    }, {
+      default: withCtx((_, _push, _parent, _scopeId) => {
+        if (_push) {
+          _push(`<button${
+            (ssrIncludeBooleanAttr($props.isLoading)) ? " disabled" : ""
+          } class="${
+            ssrRenderClass({ disabled: $props.isLoading })
+          }" type="submit" data-v-bce69507${
+            _scopeId
+          }>`);
+          ssrRenderSlot(_ctx.$slots, "default", {}, null, _push, _parent, _scopeId);
+          if ($props.isLoading) {
+            _push(`<svg class="absolute -mt-6 -ml-2 animate-spin" width="25" height="25" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" data-v-bce69507${
+              _scopeId
+            }><path fill-rule="evenodd" clip-rule="evenodd" d="M12 0C5.37258 0 0 5.37258 0 12C0 18.6274 5.37258 24 12 24C18.6274 24 24 18.6274 24 12C24 5.37258 18.6274 0 12 0ZM4.14355 13.5165C4.85219 17.2096 8.10023 20 12 20C16.4183 20 20 16.4183 20 12C20 7.58172 16.4183 4 12 4C8.0886 4 4.83283 6.80704 4.13728 10.5165L6.72824 10.5071C7.37819 8.20738 9.49236 6.52222 12.0001 6.52222C15.0254 6.52222 17.4779 8.9747 17.4779 12C17.4779 15.0253 15.0254 17.4778 12.0001 17.4778C9.49752 17.4778 7.3869 15.7995 6.73228 13.5071L4.14355 13.5165ZM9.52234 12C9.52234 13.3684 10.6317 14.4778 12.0001 14.4778C13.3685 14.4778 14.4779 13.3684 14.4779 12C14.4779 10.6316 13.3685 9.52222 12.0001 9.52222C10.6317 9.52222 9.52234 10.6316 9.52234 12Z" fill="white" data-v-bce69507${
+              _scopeId
+            }></path></svg>`);
+          } else {
+            _push(`<!---->`);
+          }
+          _push(`</button>`);
+        } else {
+          return [
+            createVNode("button", {
+              disabled: $props.isLoading,
+              class: { disabled: $props.isLoading },
+              onClick: withModifiers($event => (_ctx.$emit('CommonButtonClick')), ["stop"]),
+              type: "submit"
+            }, [
+              renderSlot$1(_ctx.$slots, "default", {}, undefined, true),
+              ($props.isLoading)
+                ? (openBlock(), createBlock("svg", {
+                    key: 0,
+                    class: "absolute -mt-6 -ml-2 animate-spin",
+                    width: "25",
+                    height: "25",
+                    viewBox: "0 0 24 24",
+                    fill: "none",
+                    xmlns: "http://www.w3.org/2000/svg"
+                  }, [
+                    createVNode("path", {
+                      "fill-rule": "evenodd",
+                      "clip-rule": "evenodd",
+                      d: "M12 0C5.37258 0 0 5.37258 0 12C0 18.6274 5.37258 24 12 24C18.6274 24 24 18.6274 24 12C24 5.37258 18.6274 0 12 0ZM4.14355 13.5165C4.85219 17.2096 8.10023 20 12 20C16.4183 20 20 16.4183 20 12C20 7.58172 16.4183 4 12 4C8.0886 4 4.83283 6.80704 4.13728 10.5165L6.72824 10.5071C7.37819 8.20738 9.49236 6.52222 12.0001 6.52222C15.0254 6.52222 17.4779 8.9747 17.4779 12C17.4779 15.0253 15.0254 17.4778 12.0001 17.4778C9.49752 17.4778 7.3869 15.7995 6.73228 13.5071L4.14355 13.5165ZM9.52234 12C9.52234 13.3684 10.6317 14.4778 12.0001 14.4778C13.3685 14.4778 14.4779 13.3684 14.4779 12C14.4779 10.6316 13.3685 9.52222 12.0001 9.52222C10.6317 9.52222 9.52234 10.6316 9.52234 12Z",
+                      fill: "white"
+                    })
+                  ]))
+                : createCommentVNode("", true)
+            ], 10, ["disabled", "onClick"])
+          ]
+        }
+      }),
+      _: 3
+    }, _parent));
+    _push(`</div>`);
+  } else {
+    _push(`<div${
+      ssrRenderAttrs(mergeProps({
+        class: { center: $props.centerButton }
+      }, _attrs))
+    } data-v-bce69507><button${
+      (ssrIncludeBooleanAttr($props.isLoading)) ? " disabled" : ""
+    } class="${
+      ssrRenderClass({ disabled: $props.isLoading })
+    }" type="submit" data-v-bce69507>`);
+    ssrRenderSlot(_ctx.$slots, "default", {}, null, _push, _parent);
+    if ($props.isLoading) {
+      _push(`<svg class="absolute -mt-6 -ml-2 animate-spin" width="25" height="25" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" data-v-bce69507><path fill-rule="evenodd" clip-rule="evenodd" d="M12 0C5.37258 0 0 5.37258 0 12C0 18.6274 5.37258 24 12 24C18.6274 24 24 18.6274 24 12C24 5.37258 18.6274 0 12 0ZM4.14355 13.5165C4.85219 17.2096 8.10023 20 12 20C16.4183 20 20 16.4183 20 12C20 7.58172 16.4183 4 12 4C8.0886 4 4.83283 6.80704 4.13728 10.5165L6.72824 10.5071C7.37819 8.20738 9.49236 6.52222 12.0001 6.52222C15.0254 6.52222 17.4779 8.9747 17.4779 12C17.4779 15.0253 15.0254 17.4778 12.0001 17.4778C9.49752 17.4778 7.3869 15.7995 6.73228 13.5071L4.14355 13.5165ZM9.52234 12C9.52234 13.3684 10.6317 14.4778 12.0001 14.4778C13.3685 14.4778 14.4779 13.3684 14.4779 12C14.4779 10.6316 13.3685 9.52222 12.0001 9.52222C10.6317 9.52222 9.52234 10.6316 9.52234 12Z" fill="white" data-v-bce69507></path></svg>`);
+    } else {
+      _push(`<!---->`);
+    }
+    _push(`</button></div>`);
+  }
+}
+const _sfc_setup$a = _sfc_main$a.setup;
+_sfc_main$a.setup = (props, ctx) => {
+  const ssrContext = useSSRContext()
+  ;(ssrContext.modules || (ssrContext.modules = new Set())).add("src/components/common/CommonButton.vue");
+  return _sfc_setup$a ? _sfc_setup$a(props, ctx) : undefined
+};
+const CommonButton = /*#__PURE__*/_export_sfc(_sfc_main$a, [['ssrRender',_sfc_ssrRender$a],['__scopeId',"data-v-bce69507"]]);
+
+const _sfc_main$9 = {
+  __name: 'ShowSingleProduct',
+  props: ["product"],
+  setup(__props, { expose: __expose }) {
+  __expose();
+
+//import ADD_TO_CART_MUTATION from "../../apollo/mutations/ADD_TO_CART_MUTATION.gql";
+const addProductToCart = async (product) => {
+  await cart.addToCart(product);
+
+  watchEffect(() => {
+    if (isLoading.value === false) {
+      window.location.reload();
+    }
+  });
+};
+const props = __props;
+
+const selectedVariation = ref(18);
+
+onMounted(() => {
+  if (props.product.variations) {
+    const firstVariant = props.product.variations.nodes[0].databaseId;
+    selectedVariation.value = firstVariant;
+  }
+});
+
+const changeVariation = (event) => {
+  selectedVariation.value = event.target.value;
+};
+
+/*
+watch(
+  () => data.value,
+  (dataValue) => {
+    if (dataValue && dataValue.product?.variations?.nodes?.length > 0) {
+      selectedVariation.value =
+        dataValue.product?.variations?.nodes[0].databaseId;
+    }
+  },
+  { immediate: true }
+);  */
+
+
+const __returned__ = { addProductToCart, props, selectedVariation, changeVariation, ref, onMounted, get filteredVariantPrice() { return filteredVariantPrice }, get stripHTML() { return stripHTML }, CommonButton };
+Object.defineProperty(__returned__, '__isScriptSetup', { enumerable: false, value: true });
+return __returned__
+}
+
+};
+
+function _sfc_ssrRender$9(_ctx, _push, _parent, _attrs, $props, $setup, $data, $options) {
+  const _component_AddToCartButton = resolveComponent("AddToCartButton");
+
+  if ($props.product) {
+    _push(`<div${ssrRenderAttrs(_attrs)}><section><div class="container flex flex-wrap items-center pt-4 pb-12 mx-auto"><div class="grid grid-cols-1 gap-4 mt-8 lg:grid-cols-2 xl:grid-cols-2 md:grid-cols-2 sm:grid-cols-2">`);
+    if ($props.product.image) {
+      _push(`<img id="product-image" class="h-auto p-8 transition duration-700 ease-in-out transform xl:p-2 md:p-2 lg:p-2 hover:grow hover:shadow-lg hover:scale-95"${
+        ssrRenderAttr("alt", $props.product.name)
+      }${
+        ssrRenderAttr("src", $props.product.image.sourceUrl)
+      }>`);
+    } else {
+      _push(`<img id="product-image" class="h-auto p-8 transition duration-700 ease-in-out transform xl:p-2 md:p-2 lg:p-2 hover:grow hover:shadow-lg hover:scale-95"${
+        ssrRenderAttr("alt", $props.product.name)
+      }${
+        ssrRenderAttr("src", _ctx.process.env.placeholderSmallImage)
+      }>`);
+    }
+    _push(`<div class="ml-8"><p class="text-3xl font-bold text-left">${ssrInterpolate($props.product.name)}</p>`);
+    if ($props.product.onSale) {
+      _push(`<div class="flex"><p class="pt-1 mt-4 text-3xl text-gray-900">`);
+      if ($props.product.variations) {
+        _push(`<span>${ssrInterpolate($setup.filteredVariantPrice($props.product.price))}</span>`);
+      } else {
+        _push(`<span>${ssrInterpolate($props.product.salePrice)}</span>`);
+      }
+      _push(`</p><p class="pt-1 pl-8 mt-4 text-2xl text-gray-900 line-through">`);
+      if ($props.product.variations) {
+        _push(`<span>${ssrInterpolate($setup.filteredVariantPrice($props.product.price, "right"))}</span>`);
+      } else {
+        _push(`<span>${ssrInterpolate($props.product.regularPrice)}</span>`);
+      }
+      _push(`</p></div>`);
+    } else {
+      _push(`<p class="pt-1 mt-4 text-2xl text-gray-900">${ssrInterpolate($props.product.price)}</p>`);
+    }
+    _push(`<br><p class="pt-1 mt-4 text-2xl text-gray-900">${ssrInterpolate($setup.stripHTML($props.product.description))}</p>`);
+    if ($props.product.stockQuantity) {
+      _push(`<p class="pt-1 mt-4 text-2xl text-gray-900">${ssrInterpolate($props.product.stockQuantity)} in stock </p>`);
+    } else {
+      _push(`<!---->`);
+    }
+    if ($props.product.variations) {
+      _push(`<p class="pt-1 mt-4 text-xl text-gray-900"><span class="py-2">Variants</span><select id="variant" name="variant" class="block w-64 px-6 py-2 bg-white border border-gray-500 rounded-lg focus:outline-none focus:shadow-outline"><!--[-->`);
+      ssrRenderList($props.product.variations.nodes, (variation, index) => {
+        _push(`<option${
+          ssrRenderAttr("value", variation.databaseId)
+        }${
+          (ssrIncludeBooleanAttr(index === 0)) ? " selected" : ""
+        }>${
+          ssrInterpolate(variation.name)
+        } (${
+          ssrInterpolate(variation.stockQuantity)
+        } in stock) </option>`);
+      });
+      _push(`<!--]--></select></p>`);
+    } else {
+      _push(`<!---->`);
+    }
+    _push(`<div class="pt-1 mt-2">`);
+    if ($props.product.variations) {
+      _push(ssrRenderComponent(_component_AddToCartButton, {
+        product: $setup.selectedVariation,
+        "client:visible": ""
+      }, null, _parent));
+    } else {
+      _push(`<!---->`);
+    }
+    _push(ssrRenderComponent($setup["CommonButton"], {
+      onCommonButtonClick: $event => ($setup.addProductToCart($props.product)),
+      "is-loading": _ctx.isLoading
+    }, {
+      default: withCtx((_, _push, _parent, _scopeId) => {
+        if (_push) {
+          _push(` ADD TO CART`);
+        } else {
+          return [
+            createTextVNode(" ADD TO CART")
+          ]
+        }
+      }),
+      _: 1
+    }, _parent));
+    _push(`</div></div></div></div></section></div>`);
+  } else {
+    _push(`<!---->`);
+  }
+}
+const _sfc_setup$9 = _sfc_main$9.setup;
+_sfc_main$9.setup = (props, ctx) => {
+  const ssrContext = useSSRContext()
+  ;(ssrContext.modules || (ssrContext.modules = new Set())).add("src/components/Products/ShowSingleProduct.vue");
+  return _sfc_setup$9 ? _sfc_setup$9(props, ctx) : undefined
+};
+const ShowSingleProduct = /*#__PURE__*/_export_sfc(_sfc_main$9, [['ssrRender',_sfc_ssrRender$9]]);
+
+async function getSingleProduct(pid) {
+  const variables = { id: pid };
+  const { data } = await client.query({
+    query: gql`
+      query Product($id: ID!) {
+        product(id: $id, idType: SLUG) {
+          databaseId
+          averageRating
+          name
+          slug
+          description
+          onSale
+          image {
+            databaseId
+            uri
+            title
+            srcSet
+            sourceUrl
+          }
+          ... on SimpleProduct {
+            price
+            salePrice
+            regularPrice
+            databaseId
+            stockQuantity
+          }
+          ... on VariableProduct {
+            price
+            salePrice
+            regularPrice
+            databaseId
+
+            variations {
+              nodes {
+                databaseId
+                name
+                stockStatus
+                stockQuantity
+                purchasable
+                onSale
+                salePrice
+                regularPrice
+              }
+            }
+          }
+          ... on ExternalProduct {
+            price
+            databaseId
+            externalUrl
+          }
+          ... on GroupProduct {
+            products {
+              nodes {
+                ... on SimpleProduct {
+                  databaseId
+                  price
+                }
+              }
+            }
+            id
+          }
+        }
+      }
+    `,
+    variables,
+  });
+
+  return data?.product;
+}
+
+async function getAllProducts() {
+  const variables = { limit: 99 };
+const { data, loading } = await client.query({
+  query: gql`
+  {
+    products(first: 24) {
+      nodes {
+        databaseId
+        name
+        onSale
+        slug
+        image {
+          sourceUrl
+        }
+        ... on SimpleProduct {
+          databaseId
+          price
+          regularPrice
+          salePrice
+        }
+        ... on VariableProduct {
+          databaseId
+          price
+          regularPrice
+          salePrice
+          variations {
+            nodes {
+              price
+              regularPrice
+              salePrice
+            }
+          }
+        }
+      }
+    }
+  }  
+    `,variables});
+
+  return data?.products;
+}
+
 const $$Astro$9 = createAstro();
 async function getStaticPaths() {
-  const paths = await getAllProductPaths();
-  console.log(paths);
+  const products = await getAllProducts();
+  const paths = [];
+  for (const prd of products.nodes) {
+    const product = await getSingleProduct(prd.slug);
+    paths.push({ params: { slug: product.slug }, props: { product } });
+  }
   return paths;
 }
 const $$slug = createComponent(async ($$result, $$props, $$slots) => {
   const Astro2 = $$result.createAstro($$Astro$9, $$props, $$slots);
   Astro2.self = $$slug;
-  Object.assign({"BASE_URL": "/", "MODE": "production", "DEV": false, "PROD": true, "SSR": true, "SITE": undefined, "ASSETS_PREFIX": undefined}, { Path: process.env.Path, PUBLIC: process.env.PUBLIC });
   Astro2.params;
-  const { catProducts } = Astro2.props;
-  console.log(catProducts.productCategory?.products?.nodes.length);
-  const products = catProducts.productCategory?.products?.nodes || [];
-  return renderTemplate`<!--
-<Layout title="Categories">
-    <ViewAllCategories catData={groups} client:load />
-</Layout>
- -->${renderComponent($$result, "Layout", $$Layout, { "title": "Products" }, { "default": ($$result2) => renderTemplate` ${maybeRenderHead()}<main> <h1 class="text-3xl text-center font-bold p-6">Products page</h1> ${renderComponent($$result2, "ShowProductsInCategory", ShowProductsInCategory, { "allProducts": products, "client:load": true, "client:component-hydration": "load", "client:component-path": "C:/gitrepos/luya_shop_admin/luya_shop_frontend/src/components/Category/ShowProductsInCategory.vue", "client:component-export": "default" })} </main> ` })}`;
+  const { product } = Astro2.props;
+  return renderTemplate`${renderComponent($$result, "Layout", $$Layout, { "title": "Welcome to Single Products" }, { "default": ($$result2) => renderTemplate` ${maybeRenderHead()}<main> <h1 class="text-3xl text-center font-bold p-6">Single Product page</h1> ${renderComponent($$result2, "ShowSingleProduct", ShowSingleProduct, { "product": product, "client:load": true, "client:component-hydration": "load", "client:component-path": "C:/gitrepos/luya_shop_admin/luya_shop_frontend/src/components/Products/ShowSingleProduct.vue", "client:component-export": "default" })} </main> ` })}`;
 }, "C:/gitrepos/luya_shop_admin/luya_shop_frontend/src/pages/products/[slug].astro", void 0);
+
 const $$file$4 = "C:/gitrepos/luya_shop_admin/luya_shop_frontend/src/pages/products/[slug].astro";
 const $$url$4 = "/products/[slug]";
 
@@ -1922,4 +3047,4 @@ const index = /*#__PURE__*/Object.freeze(/*#__PURE__*/Object.defineProperty({
   url: $$url
 }, Symbol.toStringTag, { value: 'Module' }));
 
-export { _404 as _, cart as a, _slug_$1 as b, checkout$1 as c, checkout as d, error as e, detail as f, graphql as g, _slug_ as h, products as i, success as j, index as k, menu as m, pricelist as p, search as s };
+export { _404 as _, cart$1 as a, categories as b, checkout$1 as c, _slug_$1 as d, checkout as e, error as f, graphql as g, detail as h, _slug_ as i, products as j, success as k, index as l, menu as m, pricelist as p, search as s };

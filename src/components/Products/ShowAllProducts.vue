@@ -3,11 +3,7 @@
     <template v-for="product in allProducts" :key="product.id">
       <div class="col-lg-4 col-md-4 col-6">
         <div class="cake_feature_item">
-          <ProductImage
-            :alt="product.name"
-            :src="productImage(product)"
-            :width="270"
-          />
+          <ProductImage :alt="product.name" :src="productImage(product)" :width="270"/>
           <div class="cake_text">
             <ProductPrice
               :product="product"

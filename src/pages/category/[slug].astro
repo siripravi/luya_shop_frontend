@@ -25,7 +25,47 @@ export async function getStaticPaths() {
   console.log(paths);
   return paths;
 }
+/*
+const productVariables = { limit: 99 };
 
+const { data: allProducts } = await client.query({
+  query: gql`
+    {
+      products(first: 24) {
+        nodes {
+          databaseId
+          name
+          onSale
+          slug
+          image {
+            sourceUrl
+          }
+          ... on SimpleProduct {
+            databaseId
+            price
+            regularPrice
+            salePrice
+          }
+          ... on VariableProduct {
+            databaseId
+            price
+            regularPrice
+            salePrice
+            variations {
+              nodes {
+                price
+                regularPrice
+                salePrice
+              }
+            }
+          }
+        }
+      }
+    }
+  `,
+  variables: productVariables,
+});
+*/
 const { catProducts } = Astro.props;
 console.log(catProducts.productCategory?.products?.nodes.length);
 
@@ -36,6 +76,11 @@ const products =
   [];
 ---
 
+<!--
+<Layout title="Categories">
+    <ViewAllCategories catData={groups} client:load />
+</Layout>
+ -->
 <Layout title="Products">
   <main>
     <h1 class="text-3xl text-center font-bold p-6">Products page</h1>

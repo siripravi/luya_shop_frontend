@@ -76,7 +76,13 @@
                 :product="selectedVariation"
                 client:visible
               />
-              <AddToCartButton v-else :product="product" client:visible />
+             <!-- <AddToCartButton v-else :product="product" client:visible /> -->
+             <CommonButton
+                @common-button-click="addProductToCart(product)"
+                :is-loading="isLoading"
+              >
+                ADD TO CART</CommonButton
+              >
             </div>
           </div>
         </div>
@@ -86,12 +92,28 @@
 </template>
 
 <script setup>
+//import ADD_TO_CART_MUTATION from "../../apollo/mutations/ADD_TO_CART_MUTATION.gql";
 import { ref, onMounted } from "vue";
 
 import { filteredVariantPrice, stripHTML } from "../../utils/functions";
 
-import AddToCartButton from "../Cart/AddToCartButton.vue";
+//import AddToCartButton from "../Cart/AddToCartButton.vue";
+/**
+ * Adds a product to the cart by calling the addToCart mutation with the given product.
+ *
+ * @param {object} product - The product to add to the cart.
+ * @return {Promise<void>} A Promise that resolves when the product has been successfully added to the cart.
+ */
+ const addProductToCart = async (product) => {
+  await cart.addToCart(product);
 
+  watchEffect(() => {
+    if (isLoading.value === false) {
+      window.location.reload();
+    }
+  });
+};
+import CommonButton from "../common/CommonButton.vue";
 const props = defineProps(["product"]);
 
 const selectedVariation = ref(18);
@@ -106,4 +128,17 @@ onMounted(() => {
 const changeVariation = (event) => {
   selectedVariation.value = event.target.value;
 };
+
+/*
+watch(
+  () => data.value,
+  (dataValue) => {
+    if (dataValue && dataValue.product?.variations?.nodes?.length > 0) {
+      selectedVariation.value =
+        dataValue.product?.variations?.nodes[0].databaseId;
+    }
+  },
+  { immediate: true }
+);  */
+
 </script>
