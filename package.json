@@ -40,6 +40,7 @@
     "nanostores": "^0.7.3",
     "pinia": "^2.1.7",
     "scroll-lock": "^2.1.5",
+    "string-strip-html": "^4.4.1",
     "swiper": "^11.1.0",
     "uid": "^2.0.2",
     "vee-validate": "^4.12.6",

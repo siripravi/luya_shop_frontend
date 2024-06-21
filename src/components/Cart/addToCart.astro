@@ -1,0 +1,59 @@
+<template>
+  <button @click="addToCart">Add to Cart</button>
+</template>
+
+<script>
+  import apolloClient from "../../lib/apollo-client.js";
+  import gql from "graphql-tag";
+  import { ref } from "vue";
+
+  const ADD_TO_CART_MUTATION = gql`
+   mutation addToCart($productId: Int!, $quantity: Int = 1) {
+  addToCart(productId: $productId, quantity: $quantity) {
+    cart {
+      items {
+        key
+        product {
+          name
+          image {
+            url
+          }
+        }
+      }
+      totalItems
+    }
+  }
+}
+
+  `;
+
+  export default {
+    setup() {
+      const productId = ref(null); // Assume product ID is available in your component
+
+      const addToCart = async () => {
+        if (!productId.value) {
+          console.error("Product ID is missing");
+          return;
+        }
+
+        try {
+          const { data } = await apolloClient.mutate({
+            mutation: ADD_TO_CART_MUTATION,
+            variables: {
+              productId: productId.value,
+              quantity: 1, // Adjust as needed
+            },
+          });
+
+          // Handle successful cart update (e.g., show success message, update cart state)
+          console.log("Added to cart:", data.addToCart.cart);
+        } catch (error) {
+          console.error("Error adding to cart:", error);
+        }
+      };
+
+      return { addToCart };
+    },
+  };
+</script>

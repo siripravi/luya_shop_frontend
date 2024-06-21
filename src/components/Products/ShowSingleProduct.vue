@@ -24,13 +24,13 @@
             <div v-if="product.onSale" class="flex">
               <p class="pt-1 mt-4 text-3xl text-gray-900">
                 <span v-if="product.variations">
-                  {{ filteredVariantPrice(product.price) }}</span
+                  {{ product.price}}</span
                 >
                 <span v-else>{{ product.salePrice }}</span>
               </p>
               <p class="pt-1 pl-8 mt-4 text-2xl text-gray-900 line-through">
                 <span v-if="product.variations">
-                  {{ filteredVariantPrice(product.price, "right") }}</span
+                  {{ product.price }}</span
                 >
                 <span v-else>{{ product.regularPrice }}</span>
               </p>
@@ -40,7 +40,7 @@
             </p>
             <br />
             <p class="pt-1 mt-4 text-2xl text-gray-900">
-              {{ stripHTML(product.description) }}
+              {{ product.description }}
             </p>
             <p
               v-if="product.stockQuantity"
@@ -77,12 +77,13 @@
                 client:visible
               />
              <!-- <AddToCartButton v-else :product="product" client:visible /> -->
-             <CommonButton
+             <!--<AddToCart :product-id="product.id" />-->
+            <CommonButton
                 @common-button-click="addProductToCart(product)"
                 :is-loading="isLoading"
               >
                 ADD TO CART</CommonButton
-              >
+              > 
             </div>
           </div>
         </div>
@@ -90,47 +91,107 @@
     </section>
   </div>
 </template>
-
 <script setup>
+const props = defineProps(["product"]);
+/**
+ * Component that displays a single product.
+ *
+ * @component
+ * @example
+ * <single-product id="1" slug="example-product"></single-product>
+ * @prop {string} id - The ID of the product to display.
+ * @prop {string} slug - The slug of the product to display.
+ */
+
+import { ref, watch } from "vue";
+import gql from 'graphql-tag';
+//import GET_SINGLE_PRODUCT_QUERY from "../../apollo/queries/GET_SINGLE_PRODUCT_QUERY.gql";
 //import ADD_TO_CART_MUTATION from "../../apollo/mutations/ADD_TO_CART_MUTATION.gql";
-import { ref, onMounted } from "vue";
+
+//import ProductImage from "@/components/Products/ProductImage.vue";
+//import ProductPrice from "@/components/Products/ProductPrice.vue";
 
 import { filteredVariantPrice, stripHTML } from "../../utils/functions";
 
-//import AddToCartButton from "../Cart/AddToCartButton.vue";
-/**
- * Adds a product to the cart by calling the addToCart mutation with the given product.
- *
- * @param {object} product - The product to add to the cart.
- * @return {Promise<void>} A Promise that resolves when the product has been successfully added to the cart.
- */
- const addProductToCart = async (product) => {
-  await cart.addToCart(product);
+//import { useCart } from "../../stores/useCart";
 
-  watchEffect(() => {
-    if (isLoading.value === false) {
-      window.location.reload();
+//const cart = useCart();
+
+//const isLoading = computed(() => cart.loading);
+
+//const selectedVariation = ref(); // TODO Pass this value to addProductToCart()
+
+/*const props = defineProps({
+  id: { type: String, required: true },
+  slug: { type: String, required: true },
+});*/
+
+const variables = { id: props.id, slug: props.slug };
+//const { data } = await useAsyncQuery(GET_SINGLE_PRODUCT_QUERY, variables);
+/*const { data } = await client.query({
+  query: gql`
+    query Product($id: ID!) {
+  product(id: $id, idType: DATABASE_ID) {
+    databaseId
+    averageRating
+    name
+    slug
+    description
+    onSale
+    image {
+      databaseId
+      uri
+      title
+      srcSet
+      sourceUrl
     }
-  });
-};
-import CommonButton from "../common/CommonButton.vue";
-const props = defineProps(["product"]);
-
-const selectedVariation = ref(18);
-
-onMounted(() => {
-  if (props.product.variations) {
-    const firstVariant = props.product.variations.nodes[0].databaseId;
-    selectedVariation.value = firstVariant;
+    ... on SimpleProduct {
+      price
+      salePrice
+      regularPrice
+      databaseId
+      stockQuantity
+    }
+    ... on VariableProduct {
+      price
+      salePrice
+      regularPrice
+      databaseId
+     
+      variations {
+        nodes {
+          databaseId
+          name
+          stockStatus
+          stockQuantity
+          purchasable
+          onSale
+          salePrice
+          regularPrice
+        }
+      }
+    }
+    ... on ExternalProduct {
+      price
+      databaseId
+      externalUrl
+    }
+    ... on GroupProduct {
+      products {
+        nodes {
+          ... on SimpleProduct {
+            databaseId
+            price
+          }
+        }
+      }
+      id
+    }
   }
-});
-
-const changeVariation = (event) => {
-  selectedVariation.value = event.target.value;
-};
-
-/*
-watch(
+}
+ 
+`,variables}); */
+/*watch(
   () => data.value,
   (dataValue) => {
     if (dataValue && dataValue.product?.variations?.nodes?.length > 0) {
@@ -139,6 +200,21 @@ watch(
     }
   },
   { immediate: true }
-);  */
+);*/
 
+/**
+ * Adds a product to the cart by calling the addToCart mutation with the given product.
+ *
+ * @param {object} product - The product to add to the cart.
+ * @return {Promise<void>} A Promise that resolves when the product has been successfully added to the cart.
+ */
+const addProductToCart = async (product) => {
+ // await cart.addToCart(product);
+
+ /* watchEffect(() => {
+    if (isLoading.value === false) {
+      window.location.reload();
+    }
+  });*/
+};
 </script>
