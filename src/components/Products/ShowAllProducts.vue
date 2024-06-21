@@ -1,22 +1,13 @@
 <template>
-
-  <section class="mt-100">   
-    <div id="product-container" class="container">
-      <template v-for="product in allProducts" :key="product.id">
-
-        <div class="flex flex-col mt-6 sm:w-1/2 md:w-1/3 lg:w-1/4 lg:mr-4">
-          <a
-            class="text-black cursor-pointer hover:underline"
-           :href="`/products/${product.slug}`"
-          >
-          <ProductImage :alt="product.name" :src="productImage(product)" />
-          <div class="flex justify-center pt-3">
-
   <div class="row product_item_inner">
     <template v-for="product in allProducts" :key="product.id">
       <div class="col-lg-4 col-md-4 col-6">
         <div class="cake_feature_item">
-          <ProductImage :alt="product.name" :src="productImage(product)" :width="270"/>
+          <ProductImage
+            :alt="product.name"
+            :src="productImage(product)"
+            :width="270"
+          />
           <div class="cake_text">
             <ProductPrice
               :product="product"
@@ -25,7 +16,6 @@
             />
             <h3>
               <a class="" :href="`/products/${product.slug}`">
-
                 {{ product.name }}
               </a>
             </h3>
