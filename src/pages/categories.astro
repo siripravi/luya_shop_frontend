@@ -2,7 +2,7 @@
 import Layout from "../layouts/Layout.astro";
 import gql from "graphql-tag";
 import client from "../lib/apollo-client";
-
+import ViewAllCategories from "../components/Category/ViewAllCategories.vue";
 const variables = { limit: 99 };
 const { data, loading } = await client.query({
   query: gql`
@@ -17,19 +17,7 @@ const { data, loading } = await client.query({
       }
     }  
 `,variables});
-
-console.log(data.productCategories);
-import { useQuery } from '@vue/apollo-composable'
-import ViewAllCategories from "../components/Category/ViewAllCategories.vue";
-//import { getAllCategories } from "../graphql/queries/getAllCategories";
-//const categories = await getAllCategories();
-//import FETCH_ALL_CATEGORIES_QUERY from "../apollo/queries/FETCH_ALL_CATEGORIES_QUERY.gql";
-
-import { TabGroup } from "@headlessui/vue";
-import CategoryList from "../views/HomeView/components/CategoryList.vue";
-
 ---
-
 <Layout title="Categories">
- <ViewAllCategories catData={data.productCategories} client:load />
+
 </Layout>

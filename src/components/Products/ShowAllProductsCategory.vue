@@ -1,76 +1,9 @@
 <template>
-  <section class="container mt-100">
-    <div class="flex flex-wrap items-center">
-      <template v-for="product in allProducts">
-        <div
-          v-if="product.slug"
-          :key="product.databaseId"
-          class="flex flex-col mt-6 sm:w1/2 md:w-1/3 lg:1/4 xl:w-1/4"
-        >
-        <a :href="`/products/${product.slug}`">
-            <img
-              id="product-image"
-              class="container mx-auto transition duration-700 ease-in-out transform cursor-pointer lg:w-64 xl:w-64 sm:p-4 hover:scale-95"
-              :alt="product.name"
-              :src="productImage(product)"
-            />
-          </a>
-          <div class="flex justify-center pt-3">
-            <p class="text-xl font-bold text-center cursor-pointer">
-              {{ product.name }}
-            </p>
-
-  <section class="banner_area">
-    <div class="container">
-      <div class="banner_text">
-        <h3>Shop</h3>
-        <ul>
-          <li><a href="index.html">Home</a></li>
-          <li><a href="shop.html">Shop</a></li>
-        </ul>
-      </div>
-    </div>
-  </section>
-  <section class="product_area p_100">
+    <section class="product_area p_100">
     <div class="container">
       <div class="row product_inner_row">
         <div class="col-lg-9">
-          <div class="row m0 product_task_bar">
-            <div class="product_task_inner">
-              <div class="float-left">
-                <a class="active" href="#"
-                  ><i class="fa fa-th-large" aria-hidden="true"></i
-                ></a>
-                <a href="#"><i class="fa fa-th-list" aria-hidden="true"></i></a>
-                <span>Showing 1 - 10 of 55 results</span>
-              </div>
-              <div class="float-right">
-                <h4>Sort by :</h4>
-                <select class="short" style="display: none">
-                  <option data-display="Default">Default</option>
-                  <option value="1">Default</option>
-                  <option value="2">Default</option>
-                  <option value="4">Default</option>
-                </select>
-                <div class="nice-select short" tabindex="0">
-                  <span class="current">Default</span>
-                  <ul class="list">
-                    <li
-                      data-value="Default"
-                      data-display="Default"
-                      class="option selected"
-                    >
-                      Default
-                    </li>
-                    <li data-value="1" class="option">Default</li>
-                    <li data-value="2" class="option">Default</li>
-                    <li data-value="4" class="option">Default</li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-
-          </div>
+         
           <div class="row product_item_inner">
             <template v-for="product in allProducts">
               <div
