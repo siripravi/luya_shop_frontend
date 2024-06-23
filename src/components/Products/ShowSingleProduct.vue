@@ -105,6 +105,7 @@ const props = defineProps(["product"]);
 
 import { ref, watch } from "vue";
 import gql from 'graphql-tag';
+import client from "../../lib/apollo-client";
 //import GET_SINGLE_PRODUCT_QUERY from "../../apollo/queries/GET_SINGLE_PRODUCT_QUERY.gql";
 //import ADD_TO_CART_MUTATION from "../../apollo/mutations/ADD_TO_CART_MUTATION.gql";
 
@@ -113,9 +114,9 @@ import gql from 'graphql-tag';
 
 import { filteredVariantPrice, stripHTML } from "../../utils/functions";
 
-//import { useCart } from "../../stores/useCart";
+import { useCart } from "../../stores/useCart";
 
-//const cart = useCart();
+const cart = useCart();
 
 //const isLoading = computed(() => cart.loading);
 
@@ -126,9 +127,10 @@ import { filteredVariantPrice, stripHTML } from "../../utils/functions";
   slug: { type: String, required: true },
 });*/
 
-const variables = { id: props.id, slug: props.slug };
+//const variables = { id: product.id, slug: product.slug };
+const variables = { id: 24, slug: "along-sleeve-tee"};
 //const { data } = await useAsyncQuery(GET_SINGLE_PRODUCT_QUERY, variables);
-/*const { data } = await client.query({
+const { data } = await client.query({
   query: gql`
     query Product($id: ID!) {
   product(id: $id, idType: DATABASE_ID) {
@@ -190,9 +192,10 @@ const variables = { id: props.id, slug: props.slug };
   }
 }
  
-`,variables}); */
-/*watch(
-  () => data.value,
+`,variables}); 
+//console.log(props);
+watch(
+  () => data,
   (dataValue) => {
     if (dataValue && dataValue.product?.variations?.nodes?.length > 0) {
       selectedVariation.value =
@@ -200,7 +203,7 @@ const variables = { id: props.id, slug: props.slug };
     }
   },
   { immediate: true }
-);*/
+);
 
 /**
  * Adds a product to the cart by calling the addToCart mutation with the given product.
@@ -209,12 +212,12 @@ const variables = { id: props.id, slug: props.slug };
  * @return {Promise<void>} A Promise that resolves when the product has been successfully added to the cart.
  */
 const addProductToCart = async (product) => {
- // await cart.addToCart(product);
+  await cart.addToCart(product);
 
- /* watchEffect(() => {
+  watchEffect(() => {
     if (isLoading.value === false) {
       window.location.reload();
     }
-  });*/
+  });
 };
 </script>
