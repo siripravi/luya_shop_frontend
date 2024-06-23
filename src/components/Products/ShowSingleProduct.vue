@@ -122,13 +122,13 @@ const cart = useCart();
 
 //const selectedVariation = ref(); // TODO Pass this value to addProductToCart()
 
-/*const props = defineProps({
+const props2 = defineProps({
   id: { type: String, required: true },
   slug: { type: String, required: true },
-});*/
+});
 
-//const variables = { id: product.id, slug: product.slug };
-const variables = { id: 24, slug: "along-sleeve-tee"};
+const variables = { id: props2.id, slug: props2.slug };
+//const variables = { id: 24, slug: "along-sleeve-tee"};
 //const { data } = await useAsyncQuery(GET_SINGLE_PRODUCT_QUERY, variables);
 const { data } = await client.query({
   query: gql`
@@ -211,8 +211,8 @@ watch(
  * @param {object} product - The product to add to the cart.
  * @return {Promise<void>} A Promise that resolves when the product has been successfully added to the cart.
  */
-const addProductToCart = async (product) => {
-  await cart.addToCart(product);
+const addProductToCart = async (data) => {
+  await cart.addToCart(data);
 
   watchEffect(() => {
     if (isLoading.value === false) {
