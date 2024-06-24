@@ -114,21 +114,21 @@ import client from "../../lib/apollo-client";
 
 import { filteredVariantPrice, stripHTML } from "../../utils/functions";
 
-import { useCart } from "../../stores/useCart";
+//import { useCart } from "../../stores/useCart";
 
-const cart = useCart();
+//const cart = useCart();
 
 //const isLoading = computed(() => cart.loading);
 
 //const selectedVariation = ref(); // TODO Pass this value to addProductToCart()
 
-const props2 = defineProps({
+/*const props2 = defineProps({
   id: { type: String, required: true },
   slug: { type: String, required: true },
-});
+});*/
 
-const variables = { id: props2.id, slug: props2.slug };
-//const variables = { id: 24, slug: "along-sleeve-tee"};
+//const variables = { id: props2.id, slug: props2.slug };
+const variables = { id: 24, slug: "along-sleeve-tee"};
 //const { data } = await useAsyncQuery(GET_SINGLE_PRODUCT_QUERY, variables);
 const { data } = await client.query({
   query: gql`
@@ -194,7 +194,7 @@ const { data } = await client.query({
  
 `,variables}); 
 //console.log(props);
-watch(
+/*watch(
   () => data,
   (dataValue) => {
     if (dataValue && dataValue.product?.variations?.nodes?.length > 0) {
@@ -203,7 +203,7 @@ watch(
     }
   },
   { immediate: true }
-);
+);*/
 
 /**
  * Adds a product to the cart by calling the addToCart mutation with the given product.
@@ -211,6 +211,7 @@ watch(
  * @param {object} product - The product to add to the cart.
  * @return {Promise<void>} A Promise that resolves when the product has been successfully added to the cart.
  */
+/*
 const addProductToCart = async (data) => {
   await cart.addToCart(data);
 
@@ -219,5 +220,5 @@ const addProductToCart = async (data) => {
       window.location.reload();
     }
   });
-};
+};  */
 </script>
