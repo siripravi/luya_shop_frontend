@@ -1,6 +1,7 @@
 ---
-import Footer from "./Footer.astro";
+import Footer2 from "./Footer.astro";
 import Navbar from "./Navbar.astro";
+import OffcanvasMenu from "./OffcanvasMenu.astro";
 import Header from "./Header.astro";
 import { siteConfig } from "../config/siteConfig";
 import CartFlyout from "../components/Cart/CartFlyout.vue";
@@ -8,7 +9,10 @@ import CartFlyout from "../components/Cart/CartFlyout.vue";
 const { title } = Astro.props;
 
 import "bootstrap/dist/css/bootstrap.css";
+import "../assets/css/flaticon.css";
+import "../assets/css/owl.carousel.min.css";
 import "../assets/css/style.css";
+import "../assets/css/header.css";
 import "../assets/css/responsive.css";
 import "../assets/css/font-awesome.min.css";
 import "../assets/css/nice-select.css";
@@ -29,14 +33,14 @@ import "../assets/css/nice-select.css";
       crossorigin="anonymous"></script>
   </head>
   <body>
+    <!-- Page Preloder -->
+    <div id="preloder">
+      <div class="loader"></div>
+    </div>
+    <OffcanvasMenu/>
     <Header />
     <slot />
-
-    <!-- Details 2 -->
-
-    <!-- end of details 2 -->
-
-    <Footer />
+    <Footer2 />
     <script is:inline src="https://code.jquery.com/jquery-3.7.0.min.js"
     ></script>
 
@@ -49,7 +53,10 @@ import "../assets/css/nice-select.css";
     ></script>
     <script src="../assets/js/popper.min.js"></script>
     <script src="../assets/js/jquery.nice-select.min.js"></script>
-    <script src="../assets/js/theme.js"></script>
+    <script src="../assets/js/owl.carousel.min.js"></script>
+    <script src="../assets/js/jquery.slicknav.js"></script>
+    <script src="../assets/js/main.js"></script>
+    
   </body>
 </html>
 <style>

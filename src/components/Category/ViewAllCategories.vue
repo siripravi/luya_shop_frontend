@@ -1,44 +1,35 @@
 <template>
   <div v-if="catData">
-    <section class="bg-white p_100">
+    <div class="categories">
       <div class="container">
-        <div class="flex justify-center align-middle flex-col md:flex-row">
+        <div class="row">
+          <div class="categories__slider owl-carousel">
           <template v-for="nodes in catData">
             <template v-for="category in nodes">
-              <div v-if="category.slug !== undefined" :key="category.id">               
+               
+                <div class="categories__item" v-if="category.slug !== undefined" :key="category.id">              
                   <a
                 class="text-black cursor-pointer hover:underline"
                 :href="`/category/${category.slug}`"
               >
-                 
-                <!--   <NuxtLink
-              class="text-black cursor-pointer hover:underline"
-              :to="{
-                path: '/category/' + category.slug,
-                query: { id: category.id },
-              }"
-            >   -->
-                <div
-                  class="cursor-pointer ml-4 mt-[5rem] md:mt-[20rem] w-full md:w-64 flex-row"
-                >
-                  <div
-                    class="p-4 min-w-[10rem] flex items-center justify-center w-full h-16 text-center border border-gray-300 rounded-lg shadow hover:shadow-outline"
-                  >
-                    <p class="text-lg">{{ category.name }}</p>
+              <div class="categories__item__icon">
+                    <span class="flaticon-030-cupcake-2"></span>
+                    <h5>{{ category.name }}</h5>
                   </div>
-                </div>
+                
                 </a>
-                <!--    </NuxtLink>    -->
-              </div>
+                </div>
+             
             </template>
           </template>
         </div>
+        </div>
       </div>
-    </section>
+    </div>
   </div>
 </template>
 
+
 <script setup>
-import { ActiveLink } from 'astro-bootstrap';
 defineProps(["catData"]);
 </script>
