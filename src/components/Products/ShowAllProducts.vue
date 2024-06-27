@@ -12,9 +12,10 @@
             />
             <h3>
               <a class="" :href="`/products/${product.slug}`">
-                {{ product.name }}
+                {{ product.name }} {{  product.id }}
               </a>
             </h3>
+            <button v-bind:data-product-id="product.id">Add to Cart</button>
           </div>
         </div>
       </div>
