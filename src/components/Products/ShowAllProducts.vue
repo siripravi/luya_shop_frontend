@@ -15,7 +15,7 @@
                 {{ product.name }} {{  product.id }}
               </a>
             </h3>
-            <button v-bind:data-product-id="product.id">Add to Cart</button>
+            <button @click="handleClick" v-bind:data-product-id="product.id">Add to Cart</button>
           </div>
         </div>
       </div>
