@@ -78,7 +78,7 @@
     /*--------------------------
         Categories Slider
     ----------------------------*/
-    $(".categories__slider").owlCarousel({
+   /* $(".categories__slider").owlCarousel({
         loop: true,
         margin: 22,
         items: 5,
@@ -106,7 +106,7 @@
                 items: 5
             }
         }
-    });
+    }); */
 
     /*-----------------------------
         Testimonial Slider
@@ -161,30 +161,30 @@
     /*--------------------------
         Select
     ----------------------------*/
-    $("select").niceSelect();
+    //$("select").niceSelect();
 
     /*------------------
 		Magnific
 	--------------------*/
-    $('.video-popup').magnificPopup({
+   /* $('.video-popup').magnificPopup({
         type: 'iframe'
-    });
+    });  */
 
     /*------------------
         Barfiller
     --------------------*/
-    $('#bar1').barfiller({
+   /* $('#bar1').barfiller({
         barColor: '#111111',
         duration: 2000
     });
     $('#bar2').barfiller({
         barColor: '#111111',
         duration: 2000
-    });
+    });  
     $('#bar3').barfiller({
         barColor: '#111111',
         duration: 2000
-    });
+    });  */
 
 
     /*------------------
@@ -226,10 +226,10 @@
 
     
 
-    $(".product__details__thumb").niceScroll({
+   /* $(".product__details__thumb").niceScroll({
         cursorborder: "",
         cursorcolor: "rgba(0, 0, 0, 0.5)",
         boxzoom: false
-      });
+      });*/
 
 })(jQuery);

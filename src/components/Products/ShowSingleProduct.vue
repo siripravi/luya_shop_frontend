@@ -1,89 +1,212 @@
+<!-- Shop Details Section Begin -->
 <template>
   <div v-if="product">
-    <section>
-      <div class="container flex flex-wrap items-center pt-4 pb-12 mx-auto">
-        <div
-          class="grid grid-cols-1 gap-4 mt-8 lg:grid-cols-2 xl:grid-cols-2 md:grid-cols-2 sm:grid-cols-2"
-        >
-          <img
-            v-if="product.image"
-            id="product-image"
-            class="h-auto p-8 transition duration-700 ease-in-out transform xl:p-2 md:p-2 lg:p-2 hover:grow hover:shadow-lg hover:scale-95"
-            :alt="product.name"
-            :src="product.image.sourceUrl"
-          />
-          <img
-            v-else
-            id="product-image"
-            class="h-auto p-8 transition duration-700 ease-in-out transform xl:p-2 md:p-2 lg:p-2 hover:grow hover:shadow-lg hover:scale-95"
-            :alt="product.name"
-            :src="process.env.placeholderSmallImage"
-          />
-          <div class="ml-8">
-            <p class="text-3xl font-bold text-left">{{ product.name }}</p>
-            <div v-if="product.onSale" class="flex">
-              <p class="pt-1 mt-4 text-3xl text-gray-900">
-                <span v-if="product.variations">
-                  {{ product.price}}</span
-                >
-                <span v-else>{{ product.salePrice }}</span>
-              </p>
-              <p class="pt-1 pl-8 mt-4 text-2xl text-gray-900 line-through">
-                <span v-if="product.variations">
-                  {{ product.price }}</span
-                >
-                <span v-else>{{ product.regularPrice }}</span>
-              </p>
+    <section class="product-details spad">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="product__details__img">
+              <div class="product__details__big__img">
+                <!-- <img class="big_img" src="/images/shop/details/product-big-1.jpg" alt="">  -->
+                <img
+                  v-if="product.image"
+                  id="product-image"
+                  class="big_img"
+                  :alt="product.name"
+                  :src="product.image.sourceUrl"
+                />
+                <img
+                  v-else
+                  id="product-image"
+                  class="big_img"
+                  :alt="product.name"
+                  :src="process.env.placeholderSmallImage"
+                />
+              </div>
+              <div class="product__details__thumb">
+                <div class="pt__item active">
+                  <img
+                    data-imgbigurl="/images/shop/details/product-big-2.jpg"
+                    src="/images/shop/details/product-big-2.jpg"
+                    alt=""
+                  />
+                </div>
+                <div class="pt__item">
+                  <img
+                    data-imgbigurl="/images/shop/details/product-big-1.jpg"
+                    src="/images/shop/details/product-big-1.jpg"
+                    alt=""
+                  />
+                </div>
+                <div class="pt__item">
+                  <img
+                    data-imgbigurl="/images/shop/details/product-big-4.jpg"
+                    src="/images/shop/details/product-big-4.jpg"
+                    alt=""
+                  />
+                </div>
+                <div class="pt__item">
+                  <img
+                    data-imgbigurl="/images/shop/details/product-big-3.jpg"
+                    src="/images/shop/details/product-big-3.jpg"
+                    alt=""
+                  />
+                </div>
+                <div class="pt__item">
+                  <img
+                    data-imgbigurl="/images/shop/details/product-big-5.jpg"
+                    src="/images/shop/details/product-big-5.jpg"
+                    alt=""
+                  />
+                </div>
+              </div>
             </div>
-            <p v-else class="pt-1 mt-4 text-2xl text-gray-900">
-              {{ product.price }}
-            </p>
-            <br />
-            <p class="pt-1 mt-4 text-2xl text-gray-900">
-              {{ product.description }}
-            </p>
-            <p
-              v-if="product.stockQuantity"
-              class="pt-1 mt-4 text-2xl text-gray-900"
-            >
-              {{ product.stockQuantity }} in stock
-            </p>
-            <p
-              v-if="product.variations"
-              class="pt-1 mt-4 text-xl text-gray-900"
-            >
-              <span class="py-2">Variants</span>
-              <select
-                id="variant"
-                name="variant"
-                class="block w-64 px-6 py-2 bg-white border border-gray-500 rounded-lg focus:outline-none focus:shadow-outline"
-                @change="changeVariation()"
+          </div>
+          <div class="col-lg-6">
+            <div class="product__details__text">
+              <div class="product__label">Cupcake</div>
+              <h4>{{ product.name }}</h4>
+              <h5>$26.41</h5>
+              <div v-if="product.onSale" class="flex">
+                <p class="pt-1 mt-4 text-3xl text-gray-900">
+                  <span v-if="product.variations"> {{ product.price }}</span>
+                  <span v-else>{{ product.salePrice }}</span>
+                </p>
+                <p class="pt-1 pl-8 mt-4 text-2xl text-gray-900 line-through">
+                  <span v-if="product.variations"> {{ product.price }}</span>
+                  <span v-else>{{ product.regularPrice }}</span>
+                </p>
+              </div>
+              <p v-else class="pt-1 mt-4 text-2xl text-gray-900">
+                {{ product.price }}
+              </p>
+              <br />
+              <p
+                v-if="product.stockQuantity"
+                class="pt-1 mt-4 text-2xl text-gray-900"
               >
-                <option
-                  v-for="(variation, index) in product.variations.nodes"
-                  :key="variation.databaseId"
-                  :value="variation.databaseId"
-                  :selected="index === 0"
-                >
-                  {{ variation.name }} ({{ variation.stockQuantity }} in stock)
-                </option>
-              </select>
-            </p>
-            <div class="pt-1 mt-2">
-              <!-- Doesn't work?`-->
-              <AddToCartButton
+                {{ product.stockQuantity }} in stock
+              </p>
+              <p
                 v-if="product.variations"
-                :product="selectedVariation"
-                client:visible
-              />
-             <!-- <AddToCartButton v-else :product="product" client:visible /> -->
-             <!--<AddToCart :product-id="product.id" />-->
-            <CommonButton
-                @common-button-click="addProductToCart(product)"
-                :is-loading="isLoading"
+                class="pt-1 mt-4 text-xl text-gray-900"
               >
-                ADD TO CART</CommonButton
-              > 
+                <span class="py-2">Variants</span>
+                <select
+                  id="variant"
+                  name="variant"
+                  class="block w-64 px-6 py-2 bg-white border border-gray-500 rounded-lg focus:outline-none focus:shadow-outline"
+                  @change="changeVariation()"
+                >
+                  <option
+                    v-for="(variation, index) in product.variations.nodes"
+                    :key="variation.databaseId"
+                    :value="variation.databaseId"
+                    :selected="index === 0"
+                  >
+                    {{ variation.name }} ({{ variation.stockQuantity }} in
+                    stock)
+                  </option>
+                </select>
+              </p>
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, eiusmod
+                tempor incididunt ut labore et dolore magna aliqua. Quis ipsum
+                suspendisse ultrices gravida
+              </p>
+              <ul>
+                <li>SKU: <span>17</span></li>
+                <li>Category: <span>Biscuit cake</span></li>
+                <li>Tags: <span>Gadgets, minimalisstic</span></li>
+              </ul>
+              <div class="product__details__option">
+                <div class="quantity">
+                  <div class="pro-qty">
+                    <input type="text" value="2" />
+                  </div>
+                </div>
+                <!-- <AddToCartButton v-else :product="product" client:visible /> -->
+                <!--<AddToCart :product-id="product.id" />-->
+                <CommonButton
+                  @common-button-click="addProductToCart(product)"
+                  :is-loading="isLoading"
+                >
+                  ADD TO CART</CommonButton
+                >
+                <!--  <a href="#" class="primary-btn">Add to cart</a> -->
+                <a href="#" class="heart__btn"
+                  ><span class="icon_heart_alt"></span
+                ></a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="product__details__tab">
+          <div class="col-lg-12">
+            <ul class="nav nav-tabs" role="tablist">
+              <li class="nav-item">
+                <a
+                  class="nav-link active"
+                  data-bs-toggle="tab"
+                  href="#tabs-1"
+                  role="tab"
+                  >Description</a
+                >
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" data-bs-toggle="tab" href="#tabs-2" role="tab"
+                  >Additional information</a
+                >
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" data-bs-toggle="tab" href="#tabs-3" role="tab"
+                  >Previews(1)</a
+                >
+              </li>
+            </ul>
+            <div class="tab-content">
+              <div class="tab-pane active" id="tabs-1" role="tabpanel">
+                <div class="row d-flex justify-content-center">
+                  <div class="col-lg-8">
+                    <p>
+                      This delectable Strawberry Pie is an extraordinary treat
+                      filled with sweet and tasty chunks of delicious
+                      strawberries. Made with the freshest ingredients, one bite
+                      will send you to summertime. Each gift arrives in an
+                      elegant gift box and arrives with a greeting card of your
+                      choice that you can personalize online!
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="tab-pane" id="tabs-2" role="tabpanel">
+                <div class="row d-flex justify-content-center">
+                  <div class="col-lg-8">
+                    <p>
+                      This delectable Strawberry Pie is an extraordinary treat
+                      filled with sweet and tasty chunks of delicious
+                      strawberries. Made with the freshest ingredients, one bite
+                      will send you to summertime. Each gift arrives in an
+                      elegant gift box and arrives with a greeting card of your
+                      choice that you can personalize online!2
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="tab-pane" id="tabs-3" role="tabpanel">
+                <div class="row d-flex justify-content-center">
+                  <div class="col-lg-8">
+                    <p>
+                      This delectable Strawberry Pie is an extraordinary treat
+                      filled with sweet and tasty chunks of delicious
+                      strawberries. Made with the freshest ingredients, one bite
+                      will send you to summertime. Each gift arrives in an
+                      elegant gift box and arrives with a greeting card of your
+                      choice that you can personalize online!3
+                    </p>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -91,6 +214,7 @@
     </section>
   </div>
 </template>
+<!-- Shop Details Section End -->
 <script setup>
 const props = defineProps(["product"]);
 /**
@@ -104,7 +228,7 @@ const props = defineProps(["product"]);
  */
 
 import { ref, watch } from "vue";
-import gql from 'graphql-tag';
+import gql from "graphql-tag";
 import client from "../../lib/apollo-client";
 //import GET_SINGLE_PRODUCT_QUERY from "../../apollo/queries/GET_SINGLE_PRODUCT_QUERY.gql";
 //import ADD_TO_CART_MUTATION from "../../apollo/mutations/ADD_TO_CART_MUTATION.gql";
@@ -128,71 +252,72 @@ import { filteredVariantPrice, stripHTML } from "../../utils/functions";
 });*/
 
 //const variables = { id: props2.id, slug: props2.slug };
-const variables = { id: 24, slug: "along-sleeve-tee"};
+const variables = { id: 24, slug: "along-sleeve-tee" };
 //const { data } = await useAsyncQuery(GET_SINGLE_PRODUCT_QUERY, variables);
 const { data } = await client.query({
   query: gql`
     query Product($id: ID!) {
-  product(id: $id, idType: DATABASE_ID) {
-    databaseId
-    averageRating
-    name
-    slug
-    description
-    onSale
-    image {
-      databaseId
-      uri
-      title
-      srcSet
-      sourceUrl
-    }
-    ... on SimpleProduct {
-      price
-      salePrice
-      regularPrice
-      databaseId
-      stockQuantity
-    }
-    ... on VariableProduct {
-      price
-      salePrice
-      regularPrice
-      databaseId
-     
-      variations {
-        nodes {
+      product(id: $id, idType: DATABASE_ID) {
+        databaseId
+        averageRating
+        name
+        slug
+        description
+        onSale
+        image {
           databaseId
-          name
-          stockStatus
-          stockQuantity
-          purchasable
-          onSale
+          uri
+          title
+          srcSet
+          sourceUrl
+        }
+        ... on SimpleProduct {
+          price
           salePrice
           regularPrice
+          databaseId
+          stockQuantity
         }
-      }
-    }
-    ... on ExternalProduct {
-      price
-      databaseId
-      externalUrl
-    }
-    ... on GroupProduct {
-      products {
-        nodes {
-          ... on SimpleProduct {
-            databaseId
-            price
+        ... on VariableProduct {
+          price
+          salePrice
+          regularPrice
+          databaseId
+
+          variations {
+            nodes {
+              databaseId
+              name
+              stockStatus
+              stockQuantity
+              purchasable
+              onSale
+              salePrice
+              regularPrice
+            }
           }
         }
+        ... on ExternalProduct {
+          price
+          databaseId
+          externalUrl
+        }
+        ... on GroupProduct {
+          products {
+            nodes {
+              ... on SimpleProduct {
+                databaseId
+                price
+              }
+            }
+          }
+          id
+        }
       }
-      id
     }
-  }
-}
- 
-`,variables}); 
+  `,
+  variables,
+});
 //console.log(props);
 /*watch(
   () => data,
