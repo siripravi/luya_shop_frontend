@@ -66,20 +66,20 @@
             <div class="product__details__text">
               <div class="product__label">Cupcake</div>
               <h4>{{ product.name }}</h4>
-              <h5>$26.41</h5>
+              <!--<h5>$26.41</h5> -->
               <div v-if="product.onSale" class="flex">
-                <p class="pt-1 mt-4 text-3xl text-gray-900">
+                <h5 class="pt-1 mt-4 text-3xl text-gray-900">
                   <span v-if="product.variations"> {{ product.price }}</span>
                   <span v-else>{{ product.salePrice }}</span>
-                </p>
-                <p class="pt-1 pl-8 mt-4 text-2xl text-gray-900 line-through">
+                </h5>
+                <h5 class="pt-1 pl-8 mt-4 text-2xl text-gray-900 line-through">
                   <span v-if="product.variations"> {{ product.price }}</span>
                   <span v-else>{{ product.regularPrice }}</span>
-                </p>
+                </h5>
               </div>
-              <p v-else class="pt-1 mt-4 text-2xl text-gray-900">
+              <h5 v-else class="pt-1 mt-4 text-2xl text-gray-900">
                 {{ product.price }}
-              </p>
+              </h5>
               <br />
               <p
                 v-if="product.stockQuantity"
@@ -110,9 +110,7 @@
                 </select>
               </p>
               <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, eiusmod
-                tempor incididunt ut labore et dolore magna aliqua. Quis ipsum
-                suspendisse ultrices gravida
+                {{ product.description }}
               </p>
               <ul>
                 <li>SKU: <span>17</span></li>
@@ -127,6 +125,7 @@
                 </div>
                 <!-- <AddToCartButton v-else :product="product" client:visible /> -->
                 <!--<AddToCart :product-id="product.id" />-->
+                <button data-product-id="`${product.id}`" v-bind:id="product.id">Add to Cart</button>
                 <CommonButton
                   @common-button-click="addProductToCart(product)"
                   :is-loading="isLoading"
@@ -169,7 +168,7 @@
                 <div class="row d-flex justify-content-center">
                   <div class="col-lg-8">
                     <p>
-                      This delectable Strawberry Pie is an extraordinary treat
+                      Tab1:Description:This delectable Strawberry Pie is an extraordinary treat
                       filled with sweet and tasty chunks of delicious
                       strawberries. Made with the freshest ingredients, one bite
                       will send you to summertime. Each gift arrives in an
@@ -183,7 +182,7 @@
                 <div class="row d-flex justify-content-center">
                   <div class="col-lg-8">
                     <p>
-                      This delectable Strawberry Pie is an extraordinary treat
+                      Tab2-Additional Information:This delectable Strawberry Pie is an extraordinary treat
                       filled with sweet and tasty chunks of delicious
                       strawberries. Made with the freshest ingredients, one bite
                       will send you to summertime. Each gift arrives in an
@@ -197,7 +196,7 @@
                 <div class="row d-flex justify-content-center">
                   <div class="col-lg-8">
                     <p>
-                      This delectable Strawberry Pie is an extraordinary treat
+                      Tab3-Reviews:This delectable Strawberry Pie is an extraordinary treat
                       filled with sweet and tasty chunks of delicious
                       strawberries. Made with the freshest ingredients, one bite
                       will send you to summertime. Each gift arrives in an
