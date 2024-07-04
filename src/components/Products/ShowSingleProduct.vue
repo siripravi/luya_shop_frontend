@@ -125,13 +125,22 @@
                 </div>
                 <!-- <AddToCartButton v-else :product="product" client:visible /> -->
                 <!--<AddToCart :product-id="product.id" />-->
-                <button data-product-id="`${product.id}`" v-bind:id="product.id">Add to Cart</button>
-                <CommonButton
+                <button
+                  data-product-id="`${product.id}`"
+                  v-bind:id="product.id"
+                >
+                  Add to Cart
+                </button>
+                <AddToCartForm item="{product}" client:load>
+                  <!--<button type="submit">Add to cart</button> -->
+                  <CommonButton
                   @common-button-click="addProductToCart(product)"
                   :is-loading="isLoading"
                 >
                   ADD TO CART</CommonButton
                 >
+                </AddToCartForm>
+                
                 <!--  <a href="#" class="primary-btn">Add to cart</a> -->
                 <a href="#" class="heart__btn"
                   ><span class="icon_heart_alt"></span
@@ -153,12 +162,20 @@
                 >
               </li>
               <li class="nav-item">
-                <a class="nav-link" data-bs-toggle="tab" href="#tabs-2" role="tab"
+                <a
+                  class="nav-link"
+                  data-bs-toggle="tab"
+                  href="#tabs-2"
+                  role="tab"
                   >Additional information</a
                 >
               </li>
               <li class="nav-item">
-                <a class="nav-link" data-bs-toggle="tab" href="#tabs-3" role="tab"
+                <a
+                  class="nav-link"
+                  data-bs-toggle="tab"
+                  href="#tabs-3"
+                  role="tab"
                   >Previews(1)</a
                 >
               </li>
@@ -168,12 +185,13 @@
                 <div class="row d-flex justify-content-center">
                   <div class="col-lg-8">
                     <p>
-                      Tab1:Description:This delectable Strawberry Pie is an extraordinary treat
-                      filled with sweet and tasty chunks of delicious
-                      strawberries. Made with the freshest ingredients, one bite
-                      will send you to summertime. Each gift arrives in an
-                      elegant gift box and arrives with a greeting card of your
-                      choice that you can personalize online!
+                      Tab1:Description:This delectable Strawberry Pie is an
+                      extraordinary treat filled with sweet and tasty chunks of
+                      delicious strawberries. Made with the freshest
+                      ingredients, one bite will send you to summertime. Each
+                      gift arrives in an elegant gift box and arrives with a
+                      greeting card of your choice that you can personalize
+                      online!
                     </p>
                   </div>
                 </div>
@@ -182,12 +200,13 @@
                 <div class="row d-flex justify-content-center">
                   <div class="col-lg-8">
                     <p>
-                      Tab2-Additional Information:This delectable Strawberry Pie is an extraordinary treat
-                      filled with sweet and tasty chunks of delicious
-                      strawberries. Made with the freshest ingredients, one bite
-                      will send you to summertime. Each gift arrives in an
-                      elegant gift box and arrives with a greeting card of your
-                      choice that you can personalize online!2
+                      Tab2-Additional Information:This delectable Strawberry Pie
+                      is an extraordinary treat filled with sweet and tasty
+                      chunks of delicious strawberries. Made with the freshest
+                      ingredients, one bite will send you to summertime. Each
+                      gift arrives in an elegant gift box and arrives with a
+                      greeting card of your choice that you can personalize
+                      online!2
                     </p>
                   </div>
                 </div>
@@ -196,12 +215,13 @@
                 <div class="row d-flex justify-content-center">
                   <div class="col-lg-8">
                     <p>
-                      Tab3-Reviews:This delectable Strawberry Pie is an extraordinary treat
-                      filled with sweet and tasty chunks of delicious
-                      strawberries. Made with the freshest ingredients, one bite
-                      will send you to summertime. Each gift arrives in an
-                      elegant gift box and arrives with a greeting card of your
-                      choice that you can personalize online!3
+                      Tab3-Reviews:This delectable Strawberry Pie is an
+                      extraordinary treat filled with sweet and tasty chunks of
+                      delicious strawberries. Made with the freshest
+                      ingredients, one bite will send you to summertime. Each
+                      gift arrives in an elegant gift box and arrives with a
+                      greeting card of your choice that you can personalize
+                      online!3
                     </p>
                   </div>
                 </div>
@@ -229,6 +249,7 @@ const props = defineProps(["product"]);
 import { ref, watch } from "vue";
 import gql from "graphql-tag";
 import client from "../../lib/apollo-client";
+import AddToCartForm from '../../components/AddToCartForm';
 //import GET_SINGLE_PRODUCT_QUERY from "../../apollo/queries/GET_SINGLE_PRODUCT_QUERY.gql";
 //import ADD_TO_CART_MUTATION from "../../apollo/mutations/ADD_TO_CART_MUTATION.gql";
 
