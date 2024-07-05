@@ -1,7 +1,7 @@
 ---
 import MobileMenu from "../components/Header/MobileMenu.vue";
 import CartIcon from "../components/Header/CartIcon.vue";
-import CartFlyoutToggle from "../components/Cart/CartFlyoutToggle.vue";
+import CartFlyoutToggle from "../components/Cart/CartFlyoutToggle";
 // demonstration data
 const siteTitle = "Astro site"; // pull this in from a config file
 ---
@@ -75,4 +75,5 @@ const siteTitle = "Astro site"; // pull this in from a config file
       <li><a href="contact.html">Contact Us</a></li>
     </ul>
   </div>
+  <CartFlyoutToggle client:load />
 </nav>

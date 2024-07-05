@@ -1,10 +1,10 @@
 ---
 import Footer2 from "./Footer.astro";
 import Navbar from "./Navbar.astro";
-import OffcanvasMenu from "./OffcanvasMenu.astro";
+import OffcanvasMenu from "./OffcanvasMenu"
 import Header from "./Header.astro";
 import { siteConfig } from "../config/siteConfig";
-import CartFlyout from "../components/Cart/CartFlyout.vue";
+import CartFlyout from "../components/Cart/CartFlyout";
 
 const { title } = Astro.props;
 
@@ -37,9 +37,11 @@ import "../assets/css/nice-select.css";
     <div id="preloder">
       <div class="loader"></div>
     </div>
-    <OffcanvasMenu/>
+    <div class="offcanvas-menu-overlay"></div>
+    <OffcanvasMenu client:load/>
     <Header />
     <slot />
+    <!--<CartFlyout client:load /> -->
     <div id="parent-div">Target here</div>
     <Footer2 />
     <script is:inline src="https://code.jquery.com/jquery-3.7.0.min.js"
