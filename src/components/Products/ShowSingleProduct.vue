@@ -125,21 +125,29 @@
                 </div>
                 <!-- <AddToCartButton v-else :product="product" client:visible /> -->
                 <!--<AddToCart :product-id="product.id" />-->
-                <button
+                <!--<button
                   data-product-id="`${product.id}`"
                   v-bind:id="product.id"
                 >
                   Add to Cart
-                </button>
-                <AddToCartForm item="{product}" client:load>
+                </button> -->
+               
                   <!--<button type="submit">Add to cart</button> -->
-                  <CommonButton
+              
+                  <!--<CommonButton
                   @common-button-click="addProductToCart(product)"
                   :is-loading="isLoading"
                 >
                   ADD TO CART</CommonButton
-                >
-                </AddToCartForm>
+                > -->
+                
+                <button hx-get="/partials/bakes/"
+    hx-trigger="click"
+    hx-target="#parent-div"
+    hx-swap="innerHTML"
+  >
+      Click Me!
+  </button>
                 
                 <!--  <a href="#" class="primary-btn">Add to cart</a> -->
                 <a href="#" class="heart__btn"
@@ -249,7 +257,8 @@ const props = defineProps(["product"]);
 import { ref, watch } from "vue";
 import gql from "graphql-tag";
 import client from "../../lib/apollo-client";
-import AddToCartForm from '../../components/AddToCartForm';
+
+//import AddToCartForm from '../../components/AddToCartForm';
 //import GET_SINGLE_PRODUCT_QUERY from "../../apollo/queries/GET_SINGLE_PRODUCT_QUERY.gql";
 //import ADD_TO_CART_MUTATION from "../../apollo/mutations/ADD_TO_CART_MUTATION.gql";
 
@@ -258,7 +267,7 @@ import AddToCartForm from '../../components/AddToCartForm';
 
 import { filteredVariantPrice, stripHTML } from "../../utils/functions";
 
-//import { useCart } from "../../stores/useCart";
+import { useCart } from "../../stores/useCart";
 
 //const cart = useCart();
 
@@ -272,9 +281,9 @@ import { filteredVariantPrice, stripHTML } from "../../utils/functions";
 });*/
 
 //const variables = { id: props2.id, slug: props2.slug };
-const variables = { id: 24, slug: "along-sleeve-tee" };
+const variables = { id: props.databaseId, slug: props.slug };
 //const { data } = await useAsyncQuery(GET_SINGLE_PRODUCT_QUERY, variables);
-const { data } = await client.query({
+/*const { data } = await client.query({
   query: gql`
     query Product($id: ID!) {
       product(id: $id, idType: DATABASE_ID) {
@@ -337,8 +346,26 @@ const { data } = await client.query({
     }
   `,
   variables,
-});
-//console.log(props);
+});*/
+console.log(props);
+const ADD_TO_CART_MUTATION = gql`
+ mutation addToCart($productId: Int!, $quantity: Int = 1) {
+  addToCart(productId: $productId, quantity: $quantity) {
+    cart {
+      items {
+        key
+        product {
+          name
+          image {
+            url
+          }
+        }
+      }
+      totalItems
+    }
+  }
+}
+`;
 /*watch(
   () => data,
   (dataValue) => {
@@ -356,14 +383,54 @@ const { data } = await client.query({
  * @param {object} product - The product to add to the cart.
  * @return {Promise<void>} A Promise that resolves when the product has been successfully added to the cart.
  */
-/*
-const addProductToCart = async (data) => {
-  await cart.addToCart(data);
 
-  watchEffect(() => {
+const addProductToCart = async (product) => {
+ // await cart.addToCart(data);
+ /* watchEffect(() => {
     if (isLoading.value === false) {
       window.location.reload();
     }
-  });
-};  */
+  });*/
+ 
+      this.loading = true;
+      try {
+        const { mutate } = useMutation(ADD_TO_CART_MUTATION);
+        const response = await mutate({
+          input: {
+            productId: product.databaseId,
+            quantity: 1,
+          },
+        });
+
+        if (response.data && response.data.addToCart) {
+          this.loading = false;
+          const newCartItem = response.data.addToCart.cartItem;
+          const foundProductInCartIndex = this.cart.findIndex(
+            (cartProduct) => newCartItem.product.node.slug === cartProduct.slug
+          );
+
+          if (foundProductInCartIndex > -1) {
+            this.cart[foundProductInCartIndex].quantity += 1;
+          } else {
+            // We need to construct a cart item that matches the expected structure in `this.cart`
+            const productCopy = {
+              ...newCartItem.product.node,
+              quantity: newCartItem.quantity,
+              price: newCartItem.total, // Assuming 'total' is the price for one item
+              slug: newCartItem.product.node.slug,
+            };
+
+            this.cart.push(productCopy);
+          }
+        } else {
+          // Handle the case where the mutation does not return the expected data
+          this.error = "Did not receive expected cart data from the server.";
+        }
+      } catch (error) {
+        this.error = error.message || "An error occurred while adding to cart.";
+      } finally {
+        this.loading = false;
+      }
+  
+}; 
 </script>

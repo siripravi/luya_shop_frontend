@@ -258,4 +258,6 @@ defineProps(["allProducts"]);
 
 const productImage = (product) =>
   product.image ? product.image.sourceUrl : process.env.placeholderSmallImage;
+
+  
 </script>
