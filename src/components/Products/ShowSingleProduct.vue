@@ -123,6 +123,10 @@
                     <input type="text" value="2" />
                   </div>
                 </div>
+               
+				<AddToCartForm item={item} client:load>
+					<button type="submit">Add to cart</button>
+				</AddToCartForm>
                 <!-- <AddToCartButton v-else :product="product" client:visible /> -->
                 <!--<AddToCart :product-id="product.id" />-->
                 <!--<button
@@ -148,7 +152,7 @@
   >
       Click Me!
   </button>
-                
+  <button id="tgt">Click Here</button>
                 <!--  <a href="#" class="primary-btn">Add to cart</a> -->
                 <a href="#" class="heart__btn"
                   ><span class="icon_heart_alt"></span
@@ -257,7 +261,15 @@ const props = defineProps(["product"]);
 import { ref, watch } from "vue";
 import gql from "graphql-tag";
 import client from "../../lib/apollo-client";
+//import  CartItemDisplayInfo from '../../stores/cartStore';
 
+import AddToCartForm from '../Cart/AddToCartForm';
+import FigurineDescription from '../FigurineDescription.astro';
+const item = {
+	id: 'astronaut-figurine',
+	name: 'Astronaut Figurine',
+	imageSrc: '/images/cake-piece.png',
+};
 //import AddToCartForm from '../../components/AddToCartForm';
 //import GET_SINGLE_PRODUCT_QUERY from "../../apollo/queries/GET_SINGLE_PRODUCT_QUERY.gql";
 //import ADD_TO_CART_MUTATION from "../../apollo/mutations/ADD_TO_CART_MUTATION.gql";
@@ -433,4 +445,8 @@ const addProductToCart = async (product) => {
       }
   
 }; 
+const tgt = document.querySelector("#tgt");
+  tgt.addEventListener("click", () => {
+    console.log("Hello, on client");
+  });
 </script>
