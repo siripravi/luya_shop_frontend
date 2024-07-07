@@ -123,10 +123,7 @@
                     <input type="text" value="1" />
                   </div>
                 </div>
-               
-				<AddToCartForm item={item} client:load>
-					<button type="submit">Add to cart</button>
-				</AddToCartForm>
+
                 <!-- <AddToCartButton v-else :product="product" client:visible /> -->
                 <!--<AddToCart :product-id="product.id" />-->
                 <!--<button
@@ -135,15 +132,15 @@
                 >
                   Add to Cart
                 </button> -->
-               
-                  <!--<button type="submit">Add to cart</button> -->
-              
-                  <!--<CommonButton
+
+                <!--<button type="submit">Add to cart</button> -->
+
+                <!--<CommonButton
                   @common-button-click="addProductToCart(product)"
                   :is-loading="isLoading"
                 >
                   ADD TO CART</CommonButton
-                > -->
+                > 
                 
                 <button hx-get="/partials/bakes/"
     hx-trigger="click"
@@ -152,11 +149,14 @@
   >
       Click Me!
   </button>
-  <button id="tgt">Click Here</button>
+  <button id="tgt">Click Here</button> -->
                 <!--  <a href="#" class="primary-btn">Add to cart</a> -->
                 <a href="#" class="heart__btn"
                   ><span class="icon_heart_alt"></span
                 ></a>
+                <AddToCartForm item="{item}" client:load>
+                  <button type="submit">Add to cart</button>
+                </AddToCartForm>
               </div>
             </div>
           </div>
@@ -263,12 +263,12 @@ import gql from "graphql-tag";
 import client from "../../lib/apollo-client";
 //import  CartItemDisplayInfo from '../../stores/cartStore';
 
-import {AddToCartForm} from '../Cart/AddToCartForm';
-import FigurineDescription from '../FigurineDescription.astro';
+import AddToCartForm from "../Cart/AddToCartForm";
+import FigurineDescription from "../FigurineDescription.astro";
 const item = {
-	id: 'astronaut-figurine',
-	name: 'Astronaut Figurine',
-	imageSrc: '/images/cake-piece.png',
+  id: "astronaut-figurine",
+  name: "Astronaut Figurine",
+  imageSrc: "/images/cake-piece.png",
 };
 //import AddToCartForm from '../../components/AddToCartForm';
 //import GET_SINGLE_PRODUCT_QUERY from "../../apollo/queries/GET_SINGLE_PRODUCT_QUERY.gql";
@@ -361,22 +361,22 @@ const variables = { id: props.databaseId, slug: props.slug };
 });*/
 console.log(props);
 const ADD_TO_CART_MUTATION = gql`
- mutation addToCart($productId: Int!, $quantity: Int = 1) {
-  addToCart(productId: $productId, quantity: $quantity) {
-    cart {
-      items {
-        key
-        product {
-          name
-          image {
-            url
+  mutation addToCart($productId: Int!, $quantity: Int = 1) {
+    addToCart(productId: $productId, quantity: $quantity) {
+      cart {
+        items {
+          key
+          product {
+            name
+            image {
+              url
+            }
           }
         }
+        totalItems
       }
-      totalItems
     }
   }
-}
 `;
 /*watch(
   () => data,
@@ -397,56 +397,55 @@ const ADD_TO_CART_MUTATION = gql`
  */
 
 const addProductToCart = async (product) => {
- // await cart.addToCart(data);
- /* watchEffect(() => {
+  // await cart.addToCart(data);
+  /* watchEffect(() => {
     if (isLoading.value === false) {
       window.location.reload();
     }
   });*/
- 
-      this.loading = true;
-      try {
-        const { mutate } = useMutation(ADD_TO_CART_MUTATION);
-        const response = await mutate({
-          input: {
-            productId: product.databaseId,
-            quantity: 1,
-          },
-        });
 
-        if (response.data && response.data.addToCart) {
-          this.loading = false;
-          const newCartItem = response.data.addToCart.cartItem;
-          const foundProductInCartIndex = this.cart.findIndex(
-            (cartProduct) => newCartItem.product.node.slug === cartProduct.slug
-          );
+  this.loading = true;
+  try {
+    const { mutate } = useMutation(ADD_TO_CART_MUTATION);
+    const response = await mutate({
+      input: {
+        productId: product.databaseId,
+        quantity: 1,
+      },
+    });
 
-          if (foundProductInCartIndex > -1) {
-            this.cart[foundProductInCartIndex].quantity += 1;
-          } else {
-            // We need to construct a cart item that matches the expected structure in `this.cart`
-            const productCopy = {
-              ...newCartItem.product.node,
-              quantity: newCartItem.quantity,
-              price: newCartItem.total, // Assuming 'total' is the price for one item
-              slug: newCartItem.product.node.slug,
-            };
+    if (response.data && response.data.addToCart) {
+      this.loading = false;
+      const newCartItem = response.data.addToCart.cartItem;
+      const foundProductInCartIndex = this.cart.findIndex(
+        (cartProduct) => newCartItem.product.node.slug === cartProduct.slug
+      );
 
-            this.cart.push(productCopy);
-          }
-        } else {
-          // Handle the case where the mutation does not return the expected data
-          this.error = "Did not receive expected cart data from the server.";
-        }
-      } catch (error) {
-        this.error = error.message || "An error occurred while adding to cart.";
-      } finally {
-        this.loading = false;
+      if (foundProductInCartIndex > -1) {
+        this.cart[foundProductInCartIndex].quantity += 1;
+      } else {
+        // We need to construct a cart item that matches the expected structure in `this.cart`
+        const productCopy = {
+          ...newCartItem.product.node,
+          quantity: newCartItem.quantity,
+          price: newCartItem.total, // Assuming 'total' is the price for one item
+          slug: newCartItem.product.node.slug,
+        };
+
+        this.cart.push(productCopy);
       }
-  
-}; 
+    } else {
+      // Handle the case where the mutation does not return the expected data
+      this.error = "Did not receive expected cart data from the server.";
+    }
+  } catch (error) {
+    this.error = error.message || "An error occurred while adding to cart.";
+  } finally {
+    this.loading = false;
+  }
+};
 const tgt = document.querySelector("#tgt");
-  tgt.addEventListener("click", () => {
-    console.log("Hello, on client");
-  });
+tgt.addEventListener("click", () => {
+  console.log("Hello, on client");
+});
 </script>
