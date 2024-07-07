@@ -5,8 +5,13 @@ import styles from './OffcanvasMenu.module.css';
 export default function OffcanvasMenu() {
 	const $isCartOpen = useStore(isCartOpen);
 	const $cartItems = useStore(cartItems);
-return(
-    <div class="offcanvas-menu-wrapper">
+return(    
+        <div class="offcanvas offcanvas-end show" id="offcanvas-cart" aria-modal="true" role="dialog">
+       <div class="offcanvas-header">
+      <span class="h5 offcanvas-title">Cart</span>
+      <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body p-0">
     {Object.values($cartItems).length ? (
         <ul className={styles.list} role="list">
             {Object.values($cartItems).map((cartItem) => (
@@ -22,6 +27,6 @@ return(
     ) : (
         <p>Your cart is empty!</p>
     )}
-    </div>
+    </div> </div>
     )
 }

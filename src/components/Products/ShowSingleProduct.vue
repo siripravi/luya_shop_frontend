@@ -263,7 +263,7 @@ import gql from "graphql-tag";
 import client from "../../lib/apollo-client";
 //import  CartItemDisplayInfo from '../../stores/cartStore';
 
-import AddToCartForm from '../Cart/AddToCartForm';
+import {AddToCartForm} from '../Cart/AddToCartForm';
 import FigurineDescription from '../FigurineDescription.astro';
 const item = {
 	id: 'astronaut-figurine',
