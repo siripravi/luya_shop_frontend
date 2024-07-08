@@ -1,6 +1,6 @@
 <template>
   <div class="row product_item_inner">
-    <template v-for="product in allProducts" :key="product.id">
+    <template v-for="product in allProducts" :key="product.databaseId">    
       <div class="col-lg-4 col-md-4 col-6">
         <div class="cake_feature_item">
           <ProductImage :alt="product.name" :src="productImage(product)" :width="270"/>
@@ -11,11 +11,11 @@
               :shouldCenterPrice="true"
             />
             <h3>
-              <a class="" :href="`/products/${product.id}/${product.slug}`">
-                {{ product.name }} {{  product.id }}
+              <a class="" :href="`/products/${product.databaseId}/${product.slug}`">
+                {{ product.name }} 
               </a>
             </h3>
-            <button @click="handleClick" v-bind:data-product-id="product.id">Add to Cart</button>
+            <button @click="handleClick" v-bind:data-product-id="product.databaseId">Add to Cart</button>
           </div>
         </div>
       </div>

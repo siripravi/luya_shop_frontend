@@ -154,9 +154,9 @@
                 <a href="#" class="heart__btn"
                   ><span class="icon_heart_alt"></span
                 ></a>
-               <!-- <AddToCartForm item="{item}" client:load>
+                <AddToCartForm item="{item}">
                   <button type="submit">Add to cart</button>
-                </AddToCartForm>  -->
+                </AddToCartForm>
               </div>
             </div>
           </div>
@@ -287,7 +287,7 @@ import { useCart } from "../../stores/useCart";
 
 //const selectedVariation = ref(); // TODO Pass this value to addProductToCart()
 
-const props2 = Astro.props;
+//const props2 = Astro.props;
 /*defineProps({
   id: { type: String, required: true },
   slug: { type: String, required: true },
@@ -358,8 +358,8 @@ const variables = { id: props.databaseId, slug: props.slug };
     }
   `,
   variables,
-});*/
-console.log(props2);
+}); */
+//console.log(props2);
 const ADD_TO_CART_MUTATION = gql`
   mutation addToCart($productId: Int!, $quantity: Int = 1) {
     addToCart(productId: $productId, quantity: $quantity) {

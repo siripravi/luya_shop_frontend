@@ -12,9 +12,14 @@ export async function getStaticPaths() {
   const paths = [];
   for (const prd of products.nodes) {
     const product = await getSingleProduct(prd.slug);
-    paths.push({ params: { id: prd.id, slug: prd.slug }, props: { product } });
+    if (typeof prd.databaseId.toString() === 'string') {
+  paths.push({ params: { id: prd.databaseId.toString(), slug: prd.slug }, props: { product } });
+} else {
+  // Handle cases where id is not a string (e.g., log an error or skip the product)
+  console.error('Product ID is not a string:', prd.databaseId);
+}
+   // paths.push({ params: { id: prd.databaseId, slug: prd.slug }, props: { product } });
   }
-
   return paths;
 }
 const { product } = Astro.props;
