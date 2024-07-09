@@ -25,6 +25,10 @@ const { data, loading } = await client.query({
 console.log(data.productCategories);
 import { useQuery } from "@vue/apollo-composable";
 import ViewAllCategories from "../components/Category/ViewAllCategories.vue";
+import LocalButton from '../components/Common/Button.vue';
+import LibraryButton from 'primevue/button';
+
+import 'primevue/resources/themes/aura-light-blue/theme.css';
 ---
 
 <Layout title="Index">
@@ -34,6 +38,9 @@ import ViewAllCategories from "../components/Category/ViewAllCategories.vue";
   <HtmlBlockList client:load />
 
   <ViewAllCategories catData={data.productCategories} client:load />
+  <LocalButton link>Local button component</LocalButton>
+  
+
   <section id="banner">
     <h2>Up to <span>30% Off</span> on All Cakes &amp; Decoratives</h2>
     <button class="button-normal">EXPLORE MORE</button>
