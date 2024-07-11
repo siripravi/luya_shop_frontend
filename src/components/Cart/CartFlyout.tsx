@@ -1,5 +1,5 @@
 import { useStore } from '@nanostores/preact';
-import { cartItems, isCartOpen } from '../../stores/cartStore';
+import { cartItems, isCartOpen } from '../../stores/cartStore.ts';
 import styles from './CartFlyout.module.css';
 
 export default function CartFlyout() {

@@ -1,6 +1,6 @@
-<!-- Shop Details Section Begin -->
 <template>
   <div v-if="product">
+    <h4>{{ product.name }}</h4>
     <section class="product-details spad">
       <div class="container">
         <div class="row">
@@ -66,7 +66,7 @@
             <div class="product__details__text">
               <div class="product__label">Cupcake</div>
               <h4>{{ product.name }}</h4>
-              <!--<h5>$26.41</h5> -->
+             
               <div v-if="product.onSale" class="flex">
                 <h5 class="pt-1 mt-4 text-3xl text-gray-900">
                   <span v-if="product.variations"> {{ product.price }}</span>
@@ -123,21 +123,16 @@
                     <input type="text" value="1" />
                   </div>
                 </div>
-
-             <!--   <button hx-get="/partials/bakes/"
-    hx-trigger="click"
-    hx-target="#parent-div"
-    hx-swap="innerHTML"
-  >
-      Click Me!
-  </button>
-  <button id="tgt">Click Here</button> -->
-                <!--  <a href="#" class="primary-btn">Add to cart</a> -->
-                <button v-bind:id="product.databaseId" @click="addProductToCart(product)"class="primary-btn">Add to cart</button>
+              
                 <a href="#" class="heart__btn"
                   ><span class="icon_heart_alt"></span
                 ></a>
-               
+                <AddToCartButton
+                v-if="product.variations"
+                :product="selectedVariation"
+                client:visible
+              />
+              <AddToCartButton v-else :product="product" client:visible />
               </div>
             </div>
           </div>
@@ -226,3 +221,55 @@
     </section>
   </div>
 </template>
+
+<script setup>
+//import ADD_TO_CART_MUTATION from "../../apollo/mutations/ADD_TO_CART_MUTATION.gql";
+import { ref, onMounted } from "vue";
+
+import { filteredVariantPrice, stripHTML } from "../../utils/functions";
+
+import AddToCartButton from "../Cart/AddToCartButton.vue";
+/**
+ * Adds a product to the cart by calling the addToCart mutation with the given product.
+ *
+ * @param {object} product - The product to add to the cart.
+ * @return {Promise<void>} A Promise that resolves when the product has been successfully added to the cart.
+ */
+ const addProductToCart = async (product) => {
+  await cart.addToCart(product);
+
+  watchEffect(() => {
+    if (isLoading.value === false) {
+      window.location.reload();
+    }
+  });
+};
+import CommonButton from "../common/CommonButton.vue";
+const props = defineProps(["product"]);
+
+const selectedVariation = ref(18);
+
+onMounted(() => {
+  if (props.product.variations) {
+    const firstVariant = props.product.variations.nodes[0].databaseId;
+    selectedVariation.value = firstVariant;
+  }
+});
+
+const changeVariation = (event) => {
+  selectedVariation.value = event.target.value;
+};
+
+/*
+watch(
+  () => data.value,
+  (dataValue) => {
+    if (dataValue && dataValue.product?.variations?.nodes?.length > 0) {
+      selectedVariation.value =
+        dataValue.product?.variations?.nodes[0].databaseId;
+    }
+  },
+  { immediate: true }
+);  */
+
+</script>

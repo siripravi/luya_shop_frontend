@@ -1,7 +1,7 @@
 <template>
   <div>
     <button
-      class="pest_btn"
+      class="relative w-48 h-12 px-4 py-2 mt-4 font-bold text-white bg-blue-500 rounded hover:bg-blue-800"
       :class="{ disabled: state.loading }"
       @click="addProduct(props.product)"
     >
@@ -27,47 +27,49 @@
 </template>
 
 <script setup>
-import { reactive } from "vue";
+import { reactive } from "vue"
 
-import { addProductToCart } from "../../stores/cartStore.js";
-import { addToCart } from "../../graphql/mutations/addToCart.js";
+import { addProductToCart } from "../../stores/cartStore.js"
+import { addToCart } from "../../graphql/mutations/addToCart.js"
 
-const state = reactive({ loading: false });
+const state = reactive({ loading: false })
 
-const props = defineProps(["product"]);
+const props = defineProps(["product"])
 
 const hardcodedItemInfo = {
   id: "astronaut-figurine",
   name: "Astronaut Figurine",
-  imageSrc: "/images/astronaut-figurine.png",
-};
+  imageSrc: "/images/astronaut-figurine.png"
+}
 
-const addProduct = (product) => {
-  state.loading = true;
- console.log(product.id)
-  const productId = product.databaseId ? product.databaseId : product;
+const addProduct = product => {
+  state.loading = true
+
+  const productId = product.databaseId ? product.databaseId : product
   const productQueryInput = {
-    productId,
-  };
+    productId
+  }
 
   try {
-    addToCart(productQueryInput).then((result) => {
-      state.loading = false;
+    addToCart(productQueryInput).then(result => {
+      state.loading = false
+
+     
 
       if (!result) {
-        localStorage.clear();
+        localStorage.clear()
       }
 
-      window.location.reload();
-    });
-    addProductToCart(hardcodedItemInfo);
+      window.location.reload()
+    })
+    addProductToCart(hardcodedItemInfo)
   } catch (e) {
     if (import.meta.env.DEV) {
-      console.log("Error in dev: ", e);
+      console.log("Error in dev: ", e)
     }
-    state.loading = false;
+    state.loading = false
   }
-};
+}
 </script>
 
 <style scoped>
