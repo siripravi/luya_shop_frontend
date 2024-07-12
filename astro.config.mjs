@@ -24,9 +24,9 @@ export default defineConfig({
     plugins: [vanillaExtractPlugin()],
   },
   //site: "http://localhost:3030",
- // output: 'server',
-//  adapter: node({
-//    mode: 'standalone',
-//  }),
+  output: 'hybrid',
+  adapter: node({
+    mode: 'standalone',
+  }),
   
 });

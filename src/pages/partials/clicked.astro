@@ -1,5 +1,11 @@
 ---
 export const partial = true;
-
+//export const prerender = false;
+/*const params = new Proxy(new URLSearchParams(window.location.search), {
+  get: (searchParams, prop) => searchParams.get(prop),
+});
+let value = params.user_input;*/
+let value = 6;//Astro.url.searchParams.get('user_input')
+console.log(value);
 ---
-<div>I was clicked!</div>
+<div>I was clicked!:{value}</div>

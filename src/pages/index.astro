@@ -4,6 +4,7 @@ import gql from "graphql-tag";
 import client from "../lib/apollo-client";
 import HomeSlider from "../components/Index/HomeCarousel.vue";
 //import HtmlBlockList from "../components/Index/LuyaHtmlBlockList.vue";
+import Button from "../components/Common/Button.vue";
 import type { CartItemDisplayInfo } from "../stores/cartStore";
 import ShowAllCategories from "../components/Category/ShowAllCategories.vue";
 import CartRow from "../components/CarRow.astro";
@@ -32,7 +33,7 @@ console.log(data.nodes);
 import { useQuery } from "@vue/apollo-composable";
 import ViewAllCategories from "../components/Category/ViewAllCategories.vue";
 //import LocalButton from '../components/Common/Button.vue';
-import LibraryButton from 'primevue/button';
+//import LibraryButton from 'primevue/button';
 
 import 'primevue/resources/themes/aura-light-blue/theme.css';
 ---
@@ -43,9 +44,17 @@ import 'primevue/resources/themes/aura-light-blue/theme.css';
   <h1 class="text-center text-3xl font-bold p-4">Categories</h1>
   <!--<HtmlBlockList client:load />   -->
   <ShowAllCategories categories={categories} client:load />  
+
   <section id="banner">
     <h2>Up to <span>30% Off</span> on All Cakes &amp; Decoratives</h2>
-    <button class="button-normal">EXPLORE MORE</button>
+    <Button client:load/>
+    <button hx-get="/partials/clicked" 
+    hx-vars='{"user_input": 5}' 
+    hx-target="#chat-container" 
+    hx-swap="beforeend">
+Click Me
+</button>
+    <div id="chat-container">CHAT CONTENT</div>
   </section>
   <table>
     <thead>

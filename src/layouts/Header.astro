@@ -2,93 +2,35 @@
 import { reactive } from "vue";
 import Navbar from "./Navbar.astro";
 ---
+
 <!-- Header Section Begin -->
-<header class="header">
-  <div class="header__top">
+<header class="main_header_three">
+  <div class="top_logo_header">
     <div class="container">
-      <div class="row">
-        <div class="col-lg-12">
-          <div class="header__top__inner">
-            <div class="header__top__left">
-              <ul>
-                <li>
-                  USD <span class="arrow_carrot-down"></span>
-                  <ul>
-                    <li>EUR</li>
-                    <li>USD</li>
-                  </ul>
-                </li>
-                <li>
-                  ENG <span class="arrow_carrot-down"></span>
-                  <ul>
-                    <li>Spanish</li>
-                    <li>ENG</li>
-                  </ul>
-                </li>
-                <li>
-                  <a href="#">Sign in</a>
-                  <span class="arrow_carrot-down"></span>
-                </li>
-              </ul>
+      <div class="header_logo_inner">
+        <div class="h_left_text">
+          <div class="media">
+            <div class="d-flex">
+              <i class="flaticon-auricular-phone-symbol-in-a-circle"></i>
             </div>
-            <div class="header__logo">
-              <a href="./index.html"><img src="/images/logo.png" alt="" /></a>
-            </div>
-            <div class="header__top__right">
-              <div class="header__top__right__links">
-                <a href="#" class="search-switch"
-                  ><img src="/images/icon/search.png" alt="" /></a
-                >
-                <a href="#"><img src="/images/icon/heart.png" alt="" /></a>
-              </div>
-              <div class="header__top__right__cart">
-                <a href="#"
-                  ><img src="/images/icon/cart.png" alt="" /> <span>0</span></a
-                >
-                <div class="cart__price">Cart: <span>$0.00</span></div>
-              </div>
+            <div class="media-body">
+              <a href="tel:18004567890">(1800) 456 7890</a>
+              <p>Toll Free</p>
             </div>
           </div>
         </div>
-      </div>
-      <div class="canvas__open"><i class="fa fa-bars"></i></div>
-    </div>
-  </div>
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-12">
-       <!--NAV -->
+        <div class="h_middle_text">
+          <a href="index.html"><img src="img/logo-3.png" alt="" /></a>
+        </div>
+        <div class="h_right_text">
+          <a class="pink_btn" href="#">Order online</a>
+        </div>
       </div>
     </div>
   </div>
-</header>
-<!-- Header Section End -->
-
-<header class="main_header_area">
-  <div class="top_header_area row m0">
+  <div class="middle_menu_three">
     <div class="container">
-      <div class="float-left">
-        <a href="tell:+18004567890"><i class="fa fa-phone" aria-hidden="true"></i> + (1800) 456 7890</a>
-        <a href="mainto:info@cakebakery.com"><i class="fa fa-envelope-o" aria-hidden="true"></i> info@cakebakery.com</a>
-      </div>
-      <div class="float-right">
-        <ul class="h_social list_style">
-          <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-          <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-          <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-          <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-        </ul>
-        <ul class="h_search list_style">
-          <li class="shop_cart"><a href="#"><i class="lnr lnr-cart"></i></a></li>
-          <li><a class="popup-with-zoom-anim" href="#test-search"><i class="fa fa-search"></i></a></li>
-        </ul>
-      </div>
-    </div>
-  </div>
-  <div class="main_menu_two">
-    <div class="container">    
-      <Navbar/>
-      </div>
+      <Navbar />
     </div>
   </div>
 </header>
