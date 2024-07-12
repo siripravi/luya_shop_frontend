@@ -1,4 +1,18 @@
 {
+  "extends": "astro/tsconfigs/strict",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@components/*": ["src/components/*"],
+      "@data/*": ["src/data/*"],
+      "@lib/*": ["src/lib/*"],
+      "@pages/*": ["src/pages/*"],
+      "@styles/*": ["src/assets/css/*"],
+    }
+  }
+}
+/*
+{
   "extends": "astro/tsconfigs/base",
   "compilerOptions": {
     //"target": "esnext",
@@ -6,4 +20,4 @@
     "jsx" : "react-jsx",
     "jsxImportSource": "preact"
   } 
-}
+}  */

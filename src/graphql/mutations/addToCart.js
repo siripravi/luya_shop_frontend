@@ -3,7 +3,7 @@ import client from "../../lib/apollo-client";
 import gql from "graphql-tag";
 //import useMutation from '@vue/apollo-composable';
 import {  useMutation } from "@vue/apollo-composable";
-provideApolloClient(client);
+//provideApolloClient(client);
 const ADD_TO_CART_MUTATION = gql`
 mutation ($input: AddToCartInput!) {
     addToCart(input: $input) {

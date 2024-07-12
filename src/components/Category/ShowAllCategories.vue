@@ -1,23 +1,33 @@
 ---
-
 ---
+
 <template>
-<div class="wrapper">
-  <section class="container category">
-    <h3 class="title">Experience Flavours</h3>
-    <ul class="category__list">
-      <li v-for="category in categories.extras.elements.categories" :key="category.id">
-        
-        <a class="category__item"   :href="`/category/${category.slug}`">
-         
-       <!--  <img class="category__item-image" :src="category.imageSrc.source" :alt="category.alt" /> --> 
-          <h6 class="category__item-name">{{ category.name }}</h6>
-          <p class="category__item-description">{{ category.text }}</p>
-        </a>
-      </li>
-    </ul>
-  </section>
-</div>
+  <div v-if="categories">
+    <div class="categories">
+      <div class="container">
+       
+        <div class="row">
+          <template v-for="category in categories.nodes" :key="category.id">
+            <div
+              class="categories__item"
+              v-if="category.slug !== undefined"
+              :key="category.id"
+            >
+              <a
+                class="text-black cursor-pointer hover:underline"
+                :href="`/category/${category.slug}`"
+              >
+                <div class="categories__item__icon">
+                  <span class="flaticon-030-cupcake-2"></span>
+                  <h5>{{ category.name }}</h5>
+                </div>
+              </a>
+            </div>
+          </template>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <!--
@@ -78,5 +88,5 @@ defineProps(["categories"]);
 </script>
 
 <style>
-@import '../../assets/scss/home.scss';
+@import "../../assets/scss/home.scss";
 </style>

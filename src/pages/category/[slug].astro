@@ -1,7 +1,7 @@
 ---
 import { defineAsyncComponent } from "vue";
 import { useRouter } from "vue-router";
-import Layout from "../../layouts/Layout.astro";
+import ShopLayout from "../../layouts/ShopLayout.astro";
 import ShowAllProducts from "../../components/Products/ShowAllProducts.vue";
 
 import ProductImage from "../../components/Products/ProductImage.vue";
@@ -70,9 +70,8 @@ const { catProducts } = Astro.props;
 console.log(catProducts.productCategory?.products?.nodes.length);
 
 const products =
-  catProducts.productCategory?.products?.nodes 
- // ||  allProducts.products?.nodes 
-  ||
+  catProducts.productCategory?.products?.nodes ||
+  // ||  allProducts.products?.nodes
   [];
 ---
 
@@ -81,9 +80,7 @@ const products =
     <ViewAllCategories catData={groups} client:load />
 </Layout>
  -->
-<Layout title="Products">
-  <main>
-    <h1 class="text-3xl text-center font-bold p-6">Products page</h1>
-    <ShowProductsInCategory allProducts={products} client:load />
-  </main>
-</Layout>
+<ShopLayout title="Products">
+  <h1 class="text-3xl text-center font-bold p-6">All {slug}</h1>
+  <ShowProductsInCategory allProducts={products} client:load />
+</ShopLayout>
