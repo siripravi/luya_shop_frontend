@@ -60,7 +60,7 @@ const addProduct = product => {
         localStorage.clear()
       }
 
-      window.location.reload()
+     // window.location.reload()
     })
     addProductToCart(hardcodedItemInfo)
   } catch (e) {

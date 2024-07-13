@@ -1,12 +1,26 @@
+
 <template>
-  <div id="app">
+  <Layout>
+    <div id="app">
     <router-view />
   </div>
+  </Layout>
 </template>
-
 <script>
-export default {
+/*export default {
   name: "App",
+};*/
+
+import Layout from "@layouts/Layout.astro";
+import { createRouter, createWebHistory } from 'vue-router';
+import router from './router/index.js'; // Assuming router configuration is in a separate file
+import { createApp } from 'vue';
+export default {
+  created() {
+    const app = createApp(this);
+    app.use(router);
+    app.mount('#app');
+  },
 };
 </script>
 

@@ -7,17 +7,17 @@ import valid_pokemon from "../data/valid-pokemon.json";
 
 const routes = [
   {
-    path: "/partials/bakes",
+    path: "/menu",
     name: "PokemonList",
     component: PokemonList,
   },
   {
-    path: "/bakes/:name",
+    path: "/pokemon/:name",
     name: "Pokemon",
     component: Pokemon,
   },
   {
-    path: "/bakes/:name/:specie_id/details",
+    path: "/pokemon/:name/:specie_id/details",
     name: "PokemonDetails",
     component: PokemonDetails,
   },

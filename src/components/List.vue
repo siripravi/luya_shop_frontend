@@ -1,4 +1,4 @@
-<template>
+<template client:only>
     <div v-if="items">
       <router-link
         :to="{ name: 'Pokemon', params: { name: row.name } }"

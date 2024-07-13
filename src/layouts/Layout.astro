@@ -4,8 +4,8 @@ import Navbar from "./Navbar.astro";
 import OffcanvasMenu from "./OffcanvasMenu"
 import Header from "./Header.astro";
 import { siteConfig } from "../config/siteConfig";
+import Router from "../router/router.js";
 import CartFlyout from "../components/Cart/CartFlyout";
-
 const { title } = Astro.props;
 
 import "bootstrap/dist/css/bootstrap.css";
@@ -41,6 +41,7 @@ import "../assets/css/nice-select.css";
    <!--  <OffcanvasMenu client:load/>  -->
     <Header />
     <slot />
+   
     <!--<CartFlyout client:load /> -->
     <div id="parent-div">Target here</div>
     <Footer2 />

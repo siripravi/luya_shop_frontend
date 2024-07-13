@@ -240,7 +240,7 @@ import AddToCartButton from "../Cart/AddToCartButton.vue";
 
   watchEffect(() => {
     if (isLoading.value === false) {
-      window.location.reload();
+   //   window.location.reload();
     }
   });
 };

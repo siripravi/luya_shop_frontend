@@ -62,7 +62,7 @@ const handleProductRemove = (product) => {
     quantity: 0,
   });
 
-  updateCart(updatedItems).then(() => window.location.reload());
+//updateCart(updatedItems).then(() => window.location.reload());
 };
 
 onBeforeMount(async () => {

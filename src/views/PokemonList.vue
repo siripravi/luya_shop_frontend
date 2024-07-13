@@ -1,4 +1,4 @@
-<template>
+<template client:only>
 	<List :items="items" />
 </template>
 <script>
