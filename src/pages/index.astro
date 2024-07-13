@@ -35,7 +35,7 @@ import ViewAllCategories from "../components/Category/ViewAllCategories.vue";
 //import LocalButton from '../components/Common/Button.vue';
 //import LibraryButton from 'primevue/button';
 
-import 'primevue/resources/themes/aura-light-blue/theme.css';
+import "primevue/resources/themes/aura-light-blue/theme.css";
 ---
 
 <Layout title="Index">
@@ -43,17 +43,12 @@ import 'primevue/resources/themes/aura-light-blue/theme.css';
   <HomeSlider client:load />
   <h1 class="text-center text-3xl font-bold p-4">Categories</h1>
   <!--<HtmlBlockList client:load />   -->
-  <ShowAllCategories categories={categories} client:load />  
+  <ShowAllCategories categories={categories} client:load />
 
   <section id="banner">
     <h2>Up to <span>30% Off</span> on All Cakes &amp; Decoratives</h2>
-    <Button client:load/>
-    <button hx-get="/partials/clicked" 
-    hx-vars='{"user_input": 5}' 
-    hx-target="#chat-container" 
-    hx-swap="beforeend">
-Click Me
-</button>
+    <Button client:load />
+    
     <div id="chat-container">CHAT CONTENT</div>
   </section>
   <table>

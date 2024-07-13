@@ -15,5 +15,19 @@ let value = params.some_key;*/
     <button class="button">
         <slot />
     </button>
-   
+    <input
+        name="post-input-2"
+        class="post-input rounded border border-black bg-slate-200 px-2"
+        id="post-input-2"
+        type="text"
+      />
+    <button
+      hx-get="/partials/clicked"
+     
+      hx-target="#chat-container"
+      hx-swap="beforeend"
+      hx-include=".post-input"
+    >
+      Click Me
+    </button>
 </template>

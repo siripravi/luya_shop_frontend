@@ -1,11 +1,11 @@
 ---
 export const partial = true;
-//export const prerender = false;
-/*const params = new Proxy(new URLSearchParams(window.location.search), {
-  get: (searchParams, prop) => searchParams.get(prop),
-});
-let value = params.user_input;*/
-let value = 6;//Astro.url.searchParams.get('user_input')
-console.log(value);
+
+let userInput = Astro.url.searchParams.get("user_input");
+
+//const formData = await Astro.request.formData;
+//const data1 = formData.get('post-input-1').toString();
+const data2 = "";//Astro.request.formData.get('post-input-2').toString();
+//console.log(userInput);
 ---
-<div>I was clicked!:{value}</div>
+<div>I was clicked! {data2 ? `User input: ${data2}` : 'No user input provided.'}</div>
