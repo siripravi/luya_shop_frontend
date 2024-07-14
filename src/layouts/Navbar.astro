@@ -1,6 +1,7 @@
 ---
 import MobileMenu from "../components/Header/MobileMenu.vue";
 import CartIcon from "../components/Header/CartIcon.vue";
+import { RouterLink, RouterView } from 'vue-router'
 import CartFlyoutToggle from "../components/Cart/CartFlyoutToggle";
 // demonstration data
 const siteTitle = "Astro site"; // pull this in from a config file
@@ -47,6 +48,7 @@ const siteTitle = "Astro site"; // pull this in from a config file
       <li><a href="cake.html">Our Cakes</a></li>
       <li><a href="/pokemons" router-link>VUE</a></li>
       <li><a href="menu.html">Menu</a></li>
+     
       <li class="dropdown submenu">
         <a
           class="dropdown-toggle"

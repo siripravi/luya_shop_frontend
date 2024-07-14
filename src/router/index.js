@@ -12,6 +12,11 @@ const routes = [
     component: PokemonList,
   },
   {
+    path: '/about',
+    name: 'About',
+    component: () => import('../views/About.vue')
+  },
+  {
     path: "/pokemon/:name",
     name: "Pokemon",
     component: Pokemon,

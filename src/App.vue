@@ -1,10 +1,9 @@
 
 <template>
-  <Layout>
-    <div id="app">
-    <router-view />
+  <div class="about">
+    <h1>Profile info</h1>
+   <RouterView/>
   </div>
-  </Layout>
 </template>
 <script>
 /*export default {

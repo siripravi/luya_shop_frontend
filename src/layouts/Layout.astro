@@ -7,7 +7,7 @@ import { siteConfig } from "../config/siteConfig";
 import Router from "../router/router.js";
 import CartFlyout from "../components/Cart/CartFlyout";
 const { title } = Astro.props;
-
+import { RouterLink, RouterView } from 'vue-router'
 import "bootstrap/dist/css/bootstrap.css";
 import "../assets/css/flaticon.css";
 import "../assets/css/owl.carousel.min.css";
@@ -41,7 +41,7 @@ import "../assets/css/nice-select.css";
    <!--  <OffcanvasMenu client:load/>  -->
     <Header />
     <slot />
-   
+<RouterView/>
     <!--<CartFlyout client:load /> -->
     <div id="parent-div">Target here</div>
     <Footer2 />
@@ -128,3 +128,14 @@ import "../assets/css/nice-select.css";
     /*Set to match the Tailwind colour you want the active one to be */
   }
 </style>
+<script >
+
+ import { createApp } from 'vue';
+  import App from '../App.vue'
+  import router from '../router/index.js';
+    export default {
+      name: "App",
+    };
+    createApp(App).use(router).mount('#app')
+
+</script>
