@@ -3,8 +3,7 @@
     <button
       class="relative w-48 h-12 px-4 py-2 mt-4 font-bold text-white bg-blue-500 rounded hover:bg-blue-800"
       :class="{ disabled: state.loading }"
-      @click="addProduct(props.product)"
-      hx-get="/api/v1/hello-world" hx-swap="outerHTML"
+      @click="addProduct(props.product)"      
     >
       ADD TO CART
       <svg
