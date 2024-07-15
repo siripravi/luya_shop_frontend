@@ -12,6 +12,11 @@ const routes = [
     component: PokemonList,
   },
   {
+    path: "/api/cart",
+    name: "ShopCart",
+    component: () => import('../views/ShopCart.vue')
+  },
+  {
     path: '/about',
     name: 'About',
     component: () => import('../views/About.vue')

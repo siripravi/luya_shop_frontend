@@ -133,6 +133,7 @@
                 client:visible
               />
               <AddToCartButton v-else :product="product" client:visible />
+              <a hx-get="http://yiiwp.local/checkout?add-to-cart=17" hx-headers={Access-Control-Allow-Origin: *} hx-swap="outerHTML">Click Me</a>
               </div>
             </div>
           </div>

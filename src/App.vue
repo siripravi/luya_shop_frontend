@@ -1,8 +1,7 @@
-
 <template>
   <div class="about">
-    <h1>Profile info</h1>
-   <RouterView/>
+    <h1>App Vue</h1>
+    <RouterView />
   </div>
 </template>
 <script>
@@ -11,14 +10,14 @@
 };*/
 
 import Layout from "@layouts/Layout.astro";
-import { createRouter, createWebHistory } from 'vue-router';
-import router from './router/index.js'; // Assuming router configuration is in a separate file
-import { createApp } from 'vue';
+import { createRouter, createWebHistory } from "vue-router";
+import router from "./router/index.js"; // Assuming router configuration is in a separate file
+import { createApp } from "vue";
 export default {
   created() {
     const app = createApp(this);
     app.use(router);
-    app.mount('#app');
+    app.mount("#app");
   },
 };
 </script>
