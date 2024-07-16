@@ -28,5 +28,5 @@ export default defineConfig({
   adapter: node({
     mode: 'standalone',
   }),*/
- outDir: "C:\\gitrepos\\yii-wordpress-integration\\data\\web"
+ outDir: "C:/gitrepos/yii-wordpress-integration/data/web"
 });

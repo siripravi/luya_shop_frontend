@@ -127,13 +127,13 @@
                 <a href="#" class="heart__btn"
                   ><span class="icon_heart_alt"></span
                 ></a>
-                <AddToCartButton
+             <!--   <AddToCartButton
                 v-if="product.variations"
                 :product="selectedVariation"
                 client:visible
               />
-              <AddToCartButton v-else :product="product" client:visible />
-              <a hx-get="http://yiiwp.local/wordpress/cart/?add-to-cart=17" hx-swap="outerHTML">Click Me</a>
+              <AddToCartButton v-else :product="product" client:visible />  -->
+             <!-- <a hx-get="http://yiiwp.local/wordpress/cart/?add-to-cart=17" hx-swap="outerHTML">Click Me</a>  -->
               </div>
             </div>
           </div>
@@ -224,53 +224,77 @@
 </template>
 
 <script setup>
-//import ADD_TO_CART_MUTATION from "../../apollo/mutations/ADD_TO_CART_MUTATION.gql";
-import { ref, onMounted } from "vue";
 
+import { ref, onMounted } from "vue";
+import gql from "graphql-tag";
 import { filteredVariantPrice, stripHTML } from "../../utils/functions";
 
 import AddToCartButton from "../Cart/AddToCartButton.vue";
-/**
- * Adds a product to the cart by calling the addToCart mutation with the given product.
- *
- * @param {object} product - The product to add to the cart.
- * @return {Promise<void>} A Promise that resolves when the product has been successfully added to the cart.
- */
- const addProductToCart = async (product) => {
-  await cart.addToCart(product);
-
-  watchEffect(() => {
+const ADD_TO_CART_MUTATION = gql`
+  mutation addToCart($productId: Int!, $quantity: Int = 1) {
+    addToCart(productId: $productId, quantity: $quantity) {
+      cart {
+        items {
+          key
+          product {
+            name
+            image {
+              url
+            }
+          }
+        }
+        totalItems
+      }
+    }
+  }
+`;
+/*
+const addProductToCart = async (product) => {
+   await cart.addToCart(data);
+   watchEffect(() => {
     if (isLoading.value === false) {
-   //   window.location.reload();
+      window.location.reload();
     }
   });
-};
-import CommonButton from "../common/CommonButton.vue";
-const props = defineProps(["product"]);
 
-const selectedVariation = ref(18);
+  this.loading = true;
+  try {
+    const { mutate } = useMutation(ADD_TO_CART_MUTATION);
+    const response = await mutate({
+      input: {
+        productId: product.databaseId,
+        quantity: 1,
+      },
+    });
 
-onMounted(() => {
-  if (props.product.variations) {
-    const firstVariant = props.product.variations.nodes[0].databaseId;
-    selectedVariation.value = firstVariant;
-  }
-});
+    if (response.data && response.data.addToCart) {
+      this.loading = false;
+      const newCartItem = response.data.addToCart.cartItem;
+      const foundProductInCartIndex = this.cart.findIndex(
+        (cartProduct) => newCartItem.product.node.slug === cartProduct.slug
+      );
 
-const changeVariation = (event) => {
-  selectedVariation.value = event.target.value;
-};
+      if (foundProductInCartIndex > -1) {
+        this.cart[foundProductInCartIndex].quantity += 1;
+      } else {
+        // We need to construct a cart item that matches the expected structure in `this.cart`
+        const productCopy = {
+          ...newCartItem.product.node,
+          quantity: newCartItem.quantity,
+          price: newCartItem.total, // Assuming 'total' is the price for one item
+          slug: newCartItem.product.node.slug,
+        };
 
-/*
-watch(
-  () => data.value,
-  (dataValue) => {
-    if (dataValue && dataValue.product?.variations?.nodes?.length > 0) {
-      selectedVariation.value =
-        dataValue.product?.variations?.nodes[0].databaseId;
+        this.cart.push(productCopy);
+      }
+    } else {
+      // Handle the case where the mutation does not return the expected data
+      this.error = "Did not receive expected cart data from the server.";
     }
-  },
-  { immediate: true }
-);  */
-
+  } catch (error) {
+    this.error = error.message || "An error occurred while adding to cart.";
+  } finally {
+    this.loading = false;
+  }
+}; */
 </script>
