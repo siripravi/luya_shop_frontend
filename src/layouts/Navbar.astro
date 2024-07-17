@@ -1,9 +1,4 @@
 ---
-import MobileMenu from "../components/Header/MobileMenu.vue";
-import CartIcon from "../components/Header/CartIcon.vue";
-import { RouterLink, RouterView } from 'vue-router'
-import CartFlyoutToggle from "../components/Cart/CartFlyoutToggle";
-// demonstration data
 const siteTitle = "Astro site"; // pull this in from a config file
 ---
 
@@ -14,8 +9,8 @@ const siteTitle = "Astro site"; // pull this in from a config file
   <button
     class="navbar-toggler"
     type="button"
-    data-toggle="collapse"
-    data-target="#navbarSupportedContent"
+    data-bs-toggle="collapse"
+    data-bs-target="#navbarSupportedContent"
     aria-controls="navbarSupportedContent"
     aria-expanded="false"
     aria-label="Toggle navigation"
@@ -31,7 +26,7 @@ const siteTitle = "Astro site"; // pull this in from a config file
       <li class="dropdown submenu active">
         <a
           class="dropdown-toggle"
-          data-toggle="dropdown"
+          data-bs-toggle="dropdown"
           href="#"
           role="button"
           aria-haspopup="true"
@@ -48,11 +43,11 @@ const siteTitle = "Astro site"; // pull this in from a config file
       <li><a href="cake.html">Our Cakes</a></li>
       <li><a href="/pokemons" router-link>VUE</a></li>
       <li><a href="menu.html">Menu</a></li>
-     
+
       <li class="dropdown submenu">
         <a
           class="dropdown-toggle"
-          data-toggle="dropdown"
+          data-bs-toggle="dropdown"
           href="#"
           role="button"
           aria-haspopup="true"
@@ -67,7 +62,7 @@ const siteTitle = "Astro site"; // pull this in from a config file
       <li class="dropdown submenu">
         <a
           class="dropdown-toggle"
-          data-toggle="dropdown"
+          data-bs-toggle="dropdown"
           href="#"
           role="button"
           aria-haspopup="true"
@@ -78,7 +73,7 @@ const siteTitle = "Astro site"; // pull this in from a config file
           <li class="dropdown submenu">
             <a
               class="dropdown-toggle"
-              data-toggle="dropdown"
+              data-bs-toggle="dropdown"
               href="#"
               role="button"
               aria-haspopup="true"
@@ -101,7 +96,7 @@ const siteTitle = "Astro site"; // pull this in from a config file
       <li class="dropdown submenu">
         <a
           class="dropdown-toggle"
-          data-toggle="dropdown"
+          data-bs-toggle="dropdown"
           href="#"
           role="button"
           aria-haspopup="true"
@@ -116,7 +111,7 @@ const siteTitle = "Astro site"; // pull this in from a config file
       <li class="dropdown submenu">
         <a
           class="dropdown-toggle"
-          data-toggle="dropdown"
+          data-bs-toggle="dropdown"
           href="#"
           role="button"
           aria-haspopup="true"
@@ -132,5 +127,5 @@ const siteTitle = "Astro site"; // pull this in from a config file
       <li><a href="contact.html">Contact Us</a></li>
     </ul>
   </div>
-  <CartFlyoutToggle client:load />
+  <!--<CartFlyoutToggle client:load />  -->
 </nav>

@@ -66,7 +66,7 @@
             <div class="product__details__text">
               <div class="product__label">Cupcake</div>
               <h4>{{ product.name }}</h4>
-             
+
               <div v-if="product.onSale" class="flex">
                 <h5 class="pt-1 mt-4 text-3xl text-gray-900">
                   <span v-if="product.variations"> {{ product.price }}</span>
@@ -123,17 +123,17 @@
                     <input type="text" value="1" />
                   </div>
                 </div>
-              
+
                 <a href="#" class="heart__btn"
                   ><span class="icon_heart_alt"></span
                 ></a>
-             <!--   <AddToCartButton
+               <AddToCartButton
                 v-if="product.variations"
                 :product="selectedVariation"
                 client:visible
               />
-              <AddToCartButton v-else :product="product" client:visible />  -->
-             <!-- <a hx-get="http://yiiwp.local/wordpress/cart/?add-to-cart=17" hx-swap="outerHTML">Click Me</a>  -->
+              <AddToCartButton v-else :product="product" client:visible />  
+                <!-- <a hx-get="http://yiiwp.local/wordpress/cart/?add-to-cart=17" hx-swap="outerHTML">Click Me</a>  -->
               </div>
             </div>
           </div>
@@ -222,79 +222,3 @@
     </section>
   </div>
 </template>
-
-<script setup>
-
-import { ref, onMounted } from "vue";
-import gql from "graphql-tag";
-import { filteredVariantPrice, stripHTML } from "../../utils/functions";
-
-import AddToCartButton from "../Cart/AddToCartButton.vue";
-const ADD_TO_CART_MUTATION = gql`
-  mutation addToCart($productId: Int!, $quantity: Int = 1) {
-    addToCart(productId: $productId, quantity: $quantity) {
-      cart {
-        items {
-          key
-          product {
-            name
-            image {
-              url
-            }
-          }
-        }
-        totalItems
-      }
-    }
-  }
-`;
-/*
-const addProductToCart = async (product) => {
-   await cart.addToCart(data);
-   watchEffect(() => {
-    if (isLoading.value === false) {
-      window.location.reload();
-    }
-  });
-
-  this.loading = true;
-  try {
-    const { mutate } = useMutation(ADD_TO_CART_MUTATION);
-    const response = await mutate({
-      input: {
-        productId: product.databaseId,
-        quantity: 1,
-      },
-    });
-
-    if (response.data && response.data.addToCart) {
-      this.loading = false;
-      const newCartItem = response.data.addToCart.cartItem;
-      const foundProductInCartIndex = this.cart.findIndex(
-        (cartProduct) => newCartItem.product.node.slug === cartProduct.slug
-      );
-
-      if (foundProductInCartIndex > -1) {
-        this.cart[foundProductInCartIndex].quantity += 1;
-      } else {
-        // We need to construct a cart item that matches the expected structure in `this.cart`
-        const productCopy = {
-          ...newCartItem.product.node,
-          quantity: newCartItem.quantity,
-          price: newCartItem.total, // Assuming 'total' is the price for one item
-          slug: newCartItem.product.node.slug,
-        };
-
-        this.cart.push(productCopy);
-      }
-    } else {
-      // Handle the case where the mutation does not return the expected data
-      this.error = "Did not receive expected cart data from the server.";
-    }
-  } catch (error) {
-    this.error = error.message || "An error occurred while adding to cart.";
-  } finally {
-    this.loading = false;
-  }
-}; */
-</script>

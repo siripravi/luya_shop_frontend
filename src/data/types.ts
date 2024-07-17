@@ -11,3 +11,10 @@ export type CartItem = {
     make: string;
     model: string;
   };
+
+  export type ServiceItem = {
+    id: number;
+    icon:string;
+    title: string;
+    text: string;
+  };

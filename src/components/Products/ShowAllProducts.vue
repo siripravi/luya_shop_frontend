@@ -11,7 +11,10 @@
               :shouldCenterPrice="true"
             />
             <h3>
-              <a class="" :href="`/products/${product.databaseId}/${product.slug}`">
+              <!--<a class="" :href="`/products/${product.databaseId}/${product.slug}`">
+                {{ product.name }} 
+              </a>  -->
+              <a class="" :href="`/wordpress/product/${product.slug}`">
                 {{ product.name }} 
               </a>
             </h3>

@@ -1,0 +1,24 @@
+---
+import type { ServiceItem } from '@data/types';
+//import * as styles from "./Row.css";
+
+interface Props {
+  service: ServiceItem;
+}
+
+const { service } = Astro.props;
+const { size = "medium" } = Astro.props;
+---
+<div class="col-lg-4">
+    <div class="s_we_item gray_s_item">
+        <div class="media">
+            <div class="d-flex">
+                <i class="flaticon-food-5"></i>
+            </div>
+            <div class="media-body">
+                <a href="#"><h4>{service.title}</h4></a>
+                <p>{service.text}</p>
+            </div>
+        </div>
+    </div>
+</div>

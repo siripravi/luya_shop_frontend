@@ -4,7 +4,7 @@ import ShowSingleProduct from "../../../components/Products/ShowSingleProduct.vu
 
 import { getSingleProduct } from "../../../graphql/queries/getSingleProduct";
 import { getAllProducts } from "../../../graphql/queries/getAllProducts";
-import axios from "axios";
+
 const { id, slug } = Astro.params;
 
 export async function getStaticPaths() {

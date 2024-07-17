@@ -1,5 +1,3 @@
-import { fetchAxios } from "../../lib/axios";
-import client from "../../lib/apollo-client";
 import gql from "graphql-tag";
 //import useMutation from '@vue/apollo-composable';
 import {  useMutation } from "@vue/apollo-composable";

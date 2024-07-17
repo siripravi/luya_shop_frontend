@@ -3,15 +3,12 @@ import Layout from "../layouts/Layout.astro";
 import gql from "graphql-tag";
 import client from "../lib/apollo-client";
 import HomeSlider from "../components/Index/HomeCarousel.vue";
-//import HtmlBlockList from "../components/Index/LuyaHtmlBlockList.vue";
-import Button from "../components/Common/Button.vue";
-import type { CartItemDisplayInfo } from "../stores/cartStore";
+import OurServices from "../components/Index/OurServices.astro";
 import ShowAllCategories from "../components/Category/ShowAllCategories.vue";
 import CartRow from "../components/CarRow.astro";
-import { getAllCategories } from "../graphql/queries/getAllCategories";
-// import type { CarItem } from "../data/types";
+import ServiceRow from "../components/Index/ServiceRow.astro";
 import cars from "../data/cars";
-const categories = await getAllCategories();
+import services from "../data/services";
 const variables = { limit: 99 };
 const { data, loading } = await client.query({
   query: gql`
@@ -28,41 +25,25 @@ const { data, loading } = await client.query({
   `,
   variables,
 });
-
-console.log(data.nodes);
-import { useQuery } from "@vue/apollo-composable";
-import ViewAllCategories from "../components/Category/ViewAllCategories.vue";
-//import LocalButton from '../components/Common/Button.vue';
-//import LibraryButton from 'primevue/button';
-
-import "primevue/resources/themes/aura-light-blue/theme.css";
 ---
 
 <Layout title="Index">
-  <!-- <Hero />  -->
   <HomeSlider client:load />
   <h1 class="text-center text-3xl font-bold p-4">Categories</h1>
-  <!--<HtmlBlockList client:load />   -->
-  <ShowAllCategories categories={categories} client:load />
 
-  <section id="banner">
-    <h2>Up to <span>30% Off</span> on All Cakes &amp; Decoratives</h2>
-    <Button client:load />
-    
-    <div id="chat-container">CHAT CONTENT</div>
+  <ShowAllCategories categories={data.productCategories} client:load />
+
+ 
+  <section class="service_we_offer_area gray_service p_100">
+    <div class="container">
+      <div class="single_b_title">
+        <h2>Services We offer</h2>
+      </div>
+      <div class="row we_offer_inner">
+        {services.map((item) => <ServiceRow service={item} />)}
+      </div>
+    </div>
   </section>
-  <table>
-    <thead>
-      <tr>
-        <th>ID</th>
-        <th>Make</th>
-        <th>Model</th>
-      </tr>
-    </thead>
-    <tbody>
-      {cars.map((item) => <CartRow item={item} />)}
-    </tbody>
-  </table>
 </Layout>
 
 <style>

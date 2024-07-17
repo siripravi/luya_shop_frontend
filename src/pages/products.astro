@@ -1,11 +1,9 @@
 ---
 import ShopLayout from "../layouts/ShopLayout.astro";
 import ShowAllProducts from "../components/Products/ShowAllProducts.vue";
-
 import gql from "graphql-tag";
-
 import client from "../lib/apollo-client";
-const { PUBLIC_PLACEHOLDER_SMALL_IMAGE_URL } = import.meta.env;
+
 /*
 const {
   categoryId: { type: String, required: false },
@@ -52,71 +50,6 @@ const { data: allProducts } = await client.query({
   `,
   variables: productVariables,
 });
-
-//console.log(allProducts.products);
-const categoryVariables = { id: "dGVybToyMA==" };
-const { data: allCategoryProducts } = await client.query({
-  query: gql`
-    query ProductsFromCategory($id: ID!) {
-      productCategory(id: $id, idType: ID) {
-        id
-        name
-        products(first: 50) {
-          nodes {
-            id
-            databaseId
-            onSale
-            averageRating
-            slug
-            description
-            image {
-              id
-              uri
-              title
-              srcSet
-              sourceUrl
-            }
-            name
-            ... on SimpleProduct {
-              salePrice
-              regularPrice
-              onSale
-              price
-              id
-            }
-            ... on VariableProduct {
-              salePrice
-              regularPrice
-              onSale
-              price
-              id
-            }
-            ... on ExternalProduct {
-              price
-              id
-              externalUrl
-            }
-            ... on GroupProduct {
-              products {
-                nodes {
-                  ... on SimpleProduct {
-                    id
-                    price
-                  }
-                }
-              }
-              id
-            }
-          }
-        }
-      }
-    }
-  `,
-  variables: categoryVariables,
-});
-
-//console.log(allCategoryProducts.productCategory);
-
 const products =
   //  allCategoryProducts.productCategory?.products?.nodes ||
   allProducts.products?.nodes || [];

@@ -25,6 +25,7 @@ const routes = [
     path: "/pokemon/:name",
     name: "Pokemon",
     component: Pokemon,
+    prefetch: true,
   },
   {
     path: "/pokemon/:name/:specie_id/details",

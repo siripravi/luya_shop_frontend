@@ -1,4 +1,3 @@
-import { fetchAxios } from "../../lib/axios";
 import client from "../../lib/apollo-client";
 import gql from "graphql-tag";
 export async function getAllCategories() {

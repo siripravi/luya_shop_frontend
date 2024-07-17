@@ -1,25 +1,11 @@
 import { defineConfig } from 'astro/config';
-import node from '@astrojs/node';
-import tailwind from "@astrojs/tailwind";
+import { defineConfig } from "astro/config";
+import vue from "@astrojs/vue";
+import htmx from 'astro-htmx';
 import { vanillaExtractPlugin } from "@vanilla-extract/vite-plugin";
 
-// https://astro.build/config
-/*export default defineConfig({
-  output: 'static',
-  integrations: [tailwind()],
-  vite: {
-    plugins: [vanillaExtractPlugin()],
-  },
-});  */
-
-import { defineConfig } from "astro/config";
-import preact from '@astrojs/preact';
-import vue from "@astrojs/vue";
-import react from "@astrojs/react";
-import htmx from 'astro-htmx';
-
 export default defineConfig({
-  integrations: [vue(),htmx(),react(),preact()] ,
+  integrations: [vue(),htmx()] ,
   vite: {
     plugins: [vanillaExtractPlugin()],
   },
@@ -28,5 +14,5 @@ export default defineConfig({
   adapter: node({
     mode: 'standalone',
   }),*/
- outDir: "C:/gitrepos/yii-wordpress-integration/data/web"
+ //outDir: "C:/gitrepos/yii-wordpress-integration/data/web"
 });
