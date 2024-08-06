@@ -9,6 +9,11 @@ import CartRow from "../components/CarRow.astro";
 import ServiceRow from "../components/Index/ServiceRow.astro";
 import cars from "../data/cars";
 import services from "../data/services";
+import Facts from "../layouts/Facts.astro";
+import About from "../layouts/About.astro";
+import Team from "../layouts/Team.astro";
+import Product from "../layouts/Product.astro";
+import Testinomial from "../layouts/Testinomial.astro";
 const variables = { limit: 99 };
 const { data, loading } = await client.query({
   query: gql`
@@ -29,11 +34,14 @@ const { data, loading } = await client.query({
 
 <Layout title="Index">
   <HomeSlider client:load />
+  <Facts />
+  <Product />
+  <About />
+  <Team />
+  <Testinomial />
+  
   <h1 class="text-center text-3xl font-bold p-4">Categories</h1>
-
   <ShowAllCategories categories={data.productCategories} client:load />
-
- 
   <section class="service_we_offer_area gray_service p_100">
     <div class="container">
       <div class="single_b_title">
@@ -45,94 +53,3 @@ const { data, loading } = await client.query({
     </div>
   </section>
 </Layout>
-
-<style>
-  #app {
-    font-family: Avenir, Helvetica, Arial, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-align: center;
-    color: #2c3e50;
-    margin-top: 60px;
-  }
-  .loader {
-    width: 48px;
-    height: 48px;
-    border: 2px solid #fff;
-    border-radius: 50%;
-    display: inline-block;
-    position: relative;
-    box-sizing: border-box;
-    animation: rotation 1s linear infinite;
-  }
-  .loader::after {
-    content: "";
-    box-sizing: border-box;
-    position: absolute;
-    left: 50%;
-    top: 0;
-    background: #ff3d00;
-    width: 3px;
-    height: 24px;
-    transform: translateX(-50%);
-  }
-  .fadeIn {
-    animation: fadeIn 2.5s;
-  }
-
-  @keyframes fadeIn {
-    0% {
-      opacity: 0;
-    }
-    100% {
-      opacity: 1;
-    }
-  }
-  @keyframes bounce-in {
-    0% {
-      transform: scale(0.1);
-      opacity: 0;
-    }
-    60% {
-      transform: scale(1.2);
-      opacity: 1;
-    }
-    100% {
-      transform: scale(1);
-    }
-  }
-
-  @keyframes bounce-out {
-    0% {
-      transform: scale(1);
-    }
-    45% {
-      transform: scale(1.3);
-      opacity: 1;
-    }
-    100% {
-      transform: scale(0);
-      opacity: 0;
-    }
-  }
-
-  .bounce-it {
-    view-transition-name: bounce-it;
-  }
-
-  ::view-transition-old(bounce-it) {
-    animation: 600ms cubic-bezier(0.4, 0, 0.2, 1) both bounce-out;
-  }
-
-  ::view-transition-new(bounce-it) {
-    animation: 600ms cubic-bezier(0.4, 0, 0.2, 1) both bounce-in;
-  }
-  @keyframes rotation {
-    0% {
-      transform: rotate(0deg);
-    }
-    100% {
-      transform: rotate(360deg);
-    }
-  }
-</style>

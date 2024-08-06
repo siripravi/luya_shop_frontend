@@ -1,712 +1,101 @@
 ---
 import Footer2 from "./Footer2.astro";
-import Navbar from "./Navbar.astro";
+import TopBar from "./TopBar.astro";
+import NavBar4 from "./Navbar4.astro";
 import OffcanvasMenu from "./OffcanvasMenu";
 import Header2 from "./Header2.astro";
 import SubHeader from "./SubHeader.astro";
 import { siteConfig } from "../config/siteConfig";
 import Router from "../router/router.js";
-import CartFlyout from "../components/Cart/CartFlyout";
+//import CartFlyout from "../components/Cart/CartFlyout";
+
+//import 'bootstrap/dist/css/bootstrap.css'
+
 const { title } = Astro.props;
 import { RouterLink, RouterView } from "vue-router";
-//import "bootstrap/dist/css/bootstrap.css";
-import "../assets/css/flat-icon.css";
-//import "../assets/css/owl.carousel.min.css";
-//import "../assets/css/style.css";
-//import "../assets/css/header.css";
-import "../assets/css/services.css";
-//import "../assets/css/footer.css";
-//import "../assets/css/responsive.css";
-import "../assets/css/font-awesome.min.css";
-//import "../assets/css/nice-select.css";
-//import "../assets/css/app.css";
+
+import "../assets/lib/animate/animate.css";
+import "../assets/lib/owlcarousel/assets/owl.carousel.min.css";
+import "../assets/css/style.css";
+import "../assets/css/bootstrap.min.css";
 ---
 
-<!DOCTYPE html>
+<style is:global>
+ 
+
+</style>
+
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="description" content="Astro description" />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link
-      rel="preload"
-      href="https://cakeoncall.in/wooshop/wp-content/themes/peakshops/assets/fonts/paymentfont-webfont.woff?v=1.2.5"
-      as="font"
-      crossorigin="anonymous"
-    />
-    <link
-      rel="stylesheet"
-      id="dashicons-css"
-      href="https://cakeoncall.in/wooshop/wp-includes/css/dashicons.min.css?ver=6.6"
-      type="text/css"
-      media="all"
-    />
-    <style id="thb-app-inline-css" type="text/css">
-      .logo-holder .logolink .logoimg {
-        max-height: 62px;
-      }
-      .logo-holder .logolink .logoimg[src$=".svg"] {
-        max-height: 100%;
-        height: 62px;
-      }
-      @media screen and (max-width: 1067px) {
-        .header .logo-holder .logolink .logoimg {
-          max-height: 62px;
-        }
-        .header .logo-holder .logolink .logoimg[src$=".svg"] {
-          max-height: 100%;
-          height: 62px;
-        }
-      }
-      @media screen and (min-width: 1068px) {
-        .header.fixed .logo-holder .logolink .logoimg {
-          max-height: 62px;
-        }
-        .header.fixed .logo-holder .logolink .logoimg[src$=".svg"] {
-          max-height: 100%;
-          height: 62px;
-        }
-      }
-      h1,
-      h2,
-      h3,
-      h4,
-      h5,
-      h6,
-      .h1,
-      .h2,
-      .h3,
-      .h4,
-      .h5,
-      .h6 {
-        font-family: "Zilla Slab", "BlinkMacSystemFont", -apple-system, "Roboto",
-          "Lucida Sans";
-      }
-      body {
-        font-family: "Zilla Slab", "BlinkMacSystemFont", -apple-system, "Roboto",
-          "Lucida Sans";
-      }
-      .thb-full-menu {
-      }
-      .thb-mobile-menu,
-      .thb-secondary-menu {
-      }
-      em {
-        font-family: "KomikaAxis", "BlinkMacSystemFont", -apple-system, "Roboto",
-          "Lucida Sans";
-        font-style: normal;
-      }
-      label {
-      }
-      input[type="submit"],
-      submit,
-      .button,
-      .btn,
-      .btn-block,
-      .btn-text,
-      .vc_btn3 {
-      }
-      .widget .thb-widget-title {
-      }
-      .thb-full-menu > .menu-item > a {
-        font-weight: 600;
-      }
-      .thb-full-menu .menu-item .sub-menu .menu-item a {
-      }
-      .thb-secondary-area .thb-secondary-item,
-      .thb-cart-amount .amount {
-      }
-      .thb-mobile-menu > li > a {
-      }
-      .thb-mobile-menu .sub-menu a {
-      }
-      #mobile-menu .thb-secondary-menu a {
-      }
-      #mobile-menu .side-panel-inner .mobile-menu-bottom .menu-footer {
-      }
-      #mobile-menu
-        .side-panel-inner
-        .mobile-menu-bottom
-        .thb-social-links-container {
-      }
-      .widget .thb-widget-title {
-      }
-      .footer .widget .thb-widget-title {
-      }
-      .footer .widget,
-      .footer .widget p {
-      }
-      .subfooter .thb-full-menu > .menu-item > a {
-      }
-      .subfooter p {
-      }
-      .subfooter .thb-social-links-container {
-      }
-      #wrapper [role="main"] {
-        background-color: #f9f2e7 !important;
-      }
-      .subheader {
-        background-color: #cc4133 !important;
-      }
-      .header:not(.fixed) {
-        background-color: #f9f2e7 !important;
-      }
-      .header.fixed {
-        background-color: #f9f2e7 !important;
-      }
-      .footer {
-        background-color: #cc4133 !important;
-      }
-      .subfooter {
-        background-color: #cc4133 !important;
-      }
-      a:hover,
-      h1 small,
-      h2 small,
-      h3 small,
-      h4 small,
-      h5 small,
-      h6 small,
-      h1 small a,
-      h2 small a,
-      h3 small a,
-      h4 small a,
-      h5 small a,
-      h6 small a,
-      .thb-full-menu
-        .menu-item.menu-item-has-children.menu-item-mega-parent
-        > .sub-menu
-        > li.mega-menu-title
-        > a,
-      .thb-full-menu
-        .menu-item.menu-item-has-children.menu-item-mega-parent
-        > .sub-menu
-        > li.menu-item-has-children
-        > .sub-menu
-        > li.title-item
-        > a,
-      .thb-dropdown-color-dark .thb-full-menu .sub-menu li a:hover,
-      .thb-full-menu .sub-menu li.title-item > a,
-      .post .thb-read-more,
-      .post-detail .thb-article-nav .thb-article-nav-post:hover span,
-      .post-detail .thb-article-nav .thb-article-nav-post:hover strong,
-      .commentlist .comment .reply,
-      .commentlist .review .reply,
-      .star-rating > span:before,
-      .comment-form-rating p.stars > span:before,
-      .comment-form-rating p.stars:hover a,
-      .comment-form-rating p.stars.selected a,
-      .widget ul a:hover,
-      .widget.widget_nav_menu li.active > a,
-      .widget.widget_nav_menu li.active > .thb-arrow,
-      .widget.widget_nav_menu li.active > .count,
-      .widget.widget_pages li.active > a,
-      .widget.widget_pages li.active > .thb-arrow,
-      .widget.widget_pages li.active > .count,
-      .widget.widget_meta li.active > a,
-      .widget.widget_meta li.active > .thb-arrow,
-      .widget.widget_meta li.active > .count,
-      .widget.widget_product_categories li.active > a,
-      .widget.widget_product_categories li.active > .thb-arrow,
-      .widget.widget_product_categories li.active > .count,
-      .has-thb-accent-color,
-      .has-thb-accent-color p,
-      .wp-block-button .wp-block-button__link.has-thb-accent-color,
-      .wp-block-button .wp-block-button__link.has-thb-accent-color p,
-      input[type="submit"].white:hover,
-      .button.white:hover,
-      .btn.white:hover,
-      .thb-social-links-container.style3 .thb-social-link,
-      .thb_title .thb_title_link,
-      .thb-tabs.style3 .thb-tab-menu .vc_tta-panel-heading a.active,
-      .thb-page-menu li:hover a,
-      .thb-page-menu li.current_page_item a,
-      .thb-page-menu.style0 li:hover a,
-      .thb-page-menu.style0 li.current_page_item a,
-      .thb-testimonials.style7 .testimonial-author cite,
-      .thb-testimonials.style7 .testimonial-author span,
-      .thb-iconbox.top.type5 .iconbox-content .thb-read-more,
-      .thb-autotype .thb-autotype-entry,
-      .thb-pricing-table.style2 .pricing-container .thb_pricing_head .thb-price,
-      .thb-menu-item .thb-menu-item-parent .thb-menu-title h6,
-      .thb-filter-bar .thb-products-per-page a.active,
-      .products .product .woocommerce-loop-product__title a:hover,
-      .products .product .product-category,
-      .products .product .product-category a,
-      .products .product.thb-listing-button-style4 .thb_transform_price .button,
-      .products .product-category:hover h2,
-      .thb-product-detail
-        .product-information
-        .woocommerce-product-rating
-        .woocommerce-review-link,
-      .thb-product-detail .variations_form .reset_variations,
-      .thb-product-tabs.thb-product-tabs-style3 .wc-tabs li.active a,
-      .woocommerce-account .woocommerce-MyAccount-navigation .is-active a,
-      .thb-checkout-toggle a,
-      .woocommerce-terms-and-conditions-wrapper
-        .woocommerce-privacy-policy-text
-        a,
-      .woocommerce-terms-and-conditions-wrapper label a,
-      .subfooter.dark a:hover {
-        color: #cc4133;
-      }
-      .thb-secondary-area .thb-secondary-item .count,
-      .post.style4 h3:after,
-      .tag-cloud-link:hover,
-      .post-detail .thb-article-tags a:hover,
-      .has-thb-accent-background-color,
-      .wp-block-button .wp-block-button__link.has-thb-accent-background-color,
-      input[type="submit"]:not(.white):not(.style2):hover,
-      .button:not(.white):not(.style2):hover,
-      .btn:not(.white):not(.style2):hover,
-      input[type="submit"].grey:hover,
-      .button.grey:hover,
-      .btn.grey:hover,
-      input[type="submit"].accent:not(.style2),
-      input[type="submit"].alt:not(.style2),
-      .button.accent:not(.style2),
-      .button.alt:not(.style2),
-      .btn.accent:not(.style2),
-      .btn.alt:not(.style2),
-      .btn-text.style3 .circle-btn,
-      .thb-slider.thb-carousel.thb-slider-style3
-        .thb-slide
-        .thb-slide-content-inner,
-      .thb-slider.thb-carousel.thb-slider-style5
-        .thb-slide
-        .thb-slide-content-inner,
-      .thb-inner-buttons .btn-text-regular.style2.accent:after,
-      .thb-page-menu.style1 li:hover a,
-      .thb-page-menu.style1 li.current_page_item a,
-      .thb-client-row.thb-opacity.with-accent .thb-client:hover,
-      .thb-client-row .style4 .accent-color,
-      .thb-progressbar .thb-progress span,
-      .thb-product-icon:hover,
-      .thb-product-icon.exists,
-      .products .product-category.thb-category-style3 .thb-category-link:after,
-      .products
-        .product-category.thb-category-style4:hover
-        .woocommerce-loop-category__title:after,
-      .products
-        .product-category.thb-category-style6
-        .thb-category-link:hover
-        .woocommerce-loop-category__title,
-      .thb-product-nav .thb-product-nav-button:hover .product-nav-link,
-      #scroll_to_top:hover,
-      .products
-        .product.thb-listing-button-style5
-        .thb-addtocart-with-quantity
-        .button.accent,
-      .wc-block-grid__products
-        .wc-block-grid__product
-        .wc-block-grid__product-add-to-cart
-        .wp-block-button__link:hover {
-        background-color: #cc4133;
-      }
-      input[type="submit"].accent:not(.white):not(.style2):hover,
-      input[type="submit"].alt:not(.white):not(.style2):hover,
-      .button.accent:not(.white):not(.style2):hover,
-      .button.alt:not(.white):not(.style2):hover,
-      .btn.accent:not(.white):not(.style2):hover,
-      .btn.alt:not(.white):not(.style2):hover {
-        background-color: #b83b2e;
-      }
-      .thb-checkout-toggle {
-        background-color: rgba(204, 65, 51, 0.1);
-        border-color: rgba(204, 65, 51, 0.3);
-      }
-      input[type="submit"].style2.accent,
-      .button.style2.accent,
-      .btn.style2.accent,
-      .thb-social-links-container.style3 .thb-social-link,
-      .thb-inner-buttons .btn-text-regular.accent,
-      .thb-page-menu.style1 li:hover a,
-      .thb-page-menu.style1 li.current_page_item a,
-      .thb-client-row.has-border.thb-opacity.with-accent .thb-client:hover,
-      .thb-pricing-table.style1
-        .thb-pricing-column.highlight-true
-        .pricing-container,
-      .thb-hotspot-container .thb-hotspot.pin-accent,
-      .thb-product-nav .thb-product-nav-button:hover .product-nav-link,
-      #scroll_to_top:hover {
-        border-color: #cc4133;
-      }
-      .thb-tabs.style4 .thb-tab-menu .vc_tta-panel-heading a.active,
-      .thb-page-menu.style1 li:hover + li a,
-      .thb-page-menu.style1 li.current_page_item + li a,
-      .thb-iconbox.top.type5,
-      .thb-product-detail.thb-product-sticky,
-      .thb-product-tabs.thb-product-tabs-style4 .wc-tabs li.active {
-        border-top-color: #cc4133;
-      }
-      .post .thb-read-more svg,
-      .post .thb-read-more svg .bar,
-      .commentlist .comment .reply svg path,
-      .commentlist .review .reply svg path,
-      .btn-text.style4 .arrow svg:first-child,
-      .thb_title .thb_title_link svg,
-      .thb_title .thb_title_link svg .bar,
-      .thb-iconbox.top.type5 .iconbox-content .thb-read-more svg,
-      .thb-iconbox.top.type5 .iconbox-content .thb-read-more svg .bar {
-        fill: #cc4133;
-      }
-      .thb_title.style10 .thb_title_icon svg path,
-      .thb_title.style10 .thb_title_icon svg circle,
-      .thb_title.style10 .thb_title_icon svg rect,
-      .thb_title.style10 .thb_title_icon svg ellipse,
-      .products
-        .product.thb-listing-button-style3
-        .product-thumbnail
-        .button.black:hover
-        svg,
-      .products
-        .product.thb-listing-button-style3
-        .product-thumbnail
-        .button.accent
-        svg,
-      .thb-testimonials.style10 .slick-dots li .text_bullet svg path {
-        stroke: #cc4133;
-      }
-      .thb-tabs.style1 .vc_tta-panel-heading a.active,
-      .thb-tabs.style2 .vc_tta-panel-heading a.active,
-      .thb-product-tabs.thb-product-tabs-style1 .wc-tabs li.active a,
-      .thb-product-tabs.thb-product-tabs-style2 .wc-tabs li.active a {
-        color: #cc4133;
-        -moz-box-shadow: inset 0 -3px 0 0 #cc4133;
-        -webkit-box-shadow: inset 0 -3px 0 0 #cc4133;
-        box-shadow: inset 0 -3px 0 0 #cc4133;
-      }
-      .price ins,
-      .price .amount,
-      .thb-cart-amount .amount,
-      .product_list_widget .amount {
-        color: #404040;
-      }
-      .thb-woocommerce-header.style1 .thb-shop-title,
-      .thb-woocommerce-header.style2 .thb-shop-title,
-      .thb-woocommerce-header.style3 .thb-shop-title {
-        font-size: 40px;
-      }
-      .products .product .woocommerce-loop-product__title,
-      .wc-block-grid__products
-        .wc-block-grid__product
-        .woocommerce-loop-product__title
-        .wc-block-grid__product-title {
-        font-weight: 500;
-        font-size: 16px;
-      }
-      .products .product .amount {
-        font-size: 14px;
-      }
-      .products .product .product-category {
-        font-weight: 700;
-        font-size: 11px;
-      }
-      .products .product .product-excerpt {
-      }
-      .products .product .button {
-        font-weight: 700;
-        text-transform: uppercase !important;
-        letter-spacing: 0.02em !important;
-      }
-      .thb-product-detail .product-information h1 {
-        font-size: 28px;
-      }
-      .thb-product-detail .product-information .price .amount {
-      }
-      .thb-product-detail
-        .product-information
-        .entry-summary
-        .woocommerce-product-details__short-description {
-      }
-      @media screen and (min-width: 768px) {
-        .thb-secondary-area .thb-secondary-item svg {
-          height: 20px;
-        }
-      }
-      .footer {
-        margin-top: 0px;
-      }
-      .footer {
-        padding-top: 25px;
-        padding-bottom: 0px;
-      }
-      .subfooter {
-        padding-top: 0px;
-      }
-      @media screen and (min-width: 1068px) {
-        h1,
-        .h1 {
-          line-height: 1.3em !important;
-        }
-      }
-      h1,
-      .h1 {
-      }
-      @media screen and (min-width: 1068px) {
-        h2 {
-        }
-      }
-      h2 {
-      }
-      @media screen and (min-width: 1068px) {
-        h3 {
-        }
-      }
-      h3 {
-      }
-      @media screen and (min-width: 1068px) {
-        h4 {
-        }
-      }
-      h4 {
-      }
-      @media screen and (min-width: 1068px) {
-        h5 {
-        }
-      }
-      h5 {
-      }
-      h6 {
-      }
-      .page-id-806 #wrapper div[role="main"],
-      .postid-806 #wrapper div[role="main"] {
-      }
-      .thb-temp-message,
-      .woocommerce-message,
-      .woocommerce-error,
-      .woocommerce-info:not(.cart-empty) {
-        animation-delay: 0.5s, 5s;
-      }
-      .footer.dark + .subfooter.dark:after {
-        background: transparent;
-      }
-      .thb_title.style10 h2 {
-        margin-top: 2px;
-      }
-      .thb-product-detail .product-information h1 {
-        margin-top: -8px;
-      }
-      .thb-iconbox.top.type3 figure {
-        padding-bottom: 20px;
-      }
-      .thb-iconbox p {
-        font-size: 14px;
-      }
-      .footer.dark .thb-newsletter-form .newsletter-form .btn {
-        background: #131313 !important;
-      }
-      body {
-        color: #131313;
-      }
-      .thb-woocommerce-header .term-description {
-        display: flex !important;
-        font-size: 20px;
-        margin-top: 0;
-        max-width: 60%;
-      }
-      .thb-slider-subtitle.h6 {
-        margin-bottom: 1.5rem;
-      }
-    </style>
-    <link rel="stylesheet" id="thb-app-css" href="https://cakeoncall.in/wooshop/wp-content/themes/peakshops/assets/css/app.css?ver=1.4.6" type="text/css" media="all">
-    <style id='thb-app-inline-css' type='text/css'>
-      .logo-holder .logolink .logoimg {max-height:62px;}.logo-holder .logolink .logoimg[src$=".svg"] {max-height:100%;height:62px;}@media screen and (max-width:1067px) {.header .logo-holder .logolink .logoimg {max-height:62px;}.header .logo-holder .logolink .logoimg[src$=".svg"] {max-height:100%;height:62px;}}@media screen and (min-width:1068px) {.header.fixed .logo-holder .logolink .logoimg {max-height:62px;}.header.fixed .logo-holder .logolink .logoimg[src$=".svg"] {max-height:100%;height:62px;}}h1, h2, h3, h4, h5, h6,.h1, .h2, .h3, .h4, .h5, .h6 {font-family:'Zilla Slab', 'BlinkMacSystemFont', -apple-system, 'Roboto', 'Lucida Sans';}body {font-family:'Zilla Slab', 'BlinkMacSystemFont', -apple-system, 'Roboto', 'Lucida Sans';}.thb-full-menu {}.thb-mobile-menu,.thb-secondary-menu {}em {font-family:'KomikaAxis', 'BlinkMacSystemFont', -apple-system, 'Roboto', 'Lucida Sans';font-style:normal;}label {}input[type="submit"],submit,.button,.btn,.btn-block,.btn-text,.vc_btn3 {}.widget .thb-widget-title {}.thb-full-menu>.menu-item>a {font-weight:600;}.thb-full-menu .menu-item .sub-menu .menu-item a {}.thb-secondary-area .thb-secondary-item,.thb-cart-amount .amount {}.thb-mobile-menu>li>a {}.thb-mobile-menu .sub-menu a {}#mobile-menu .thb-secondary-menu a {}#mobile-menu .side-panel-inner .mobile-menu-bottom .menu-footer {}#mobile-menu .side-panel-inner .mobile-menu-bottom .thb-social-links-container {}.widget .thb-widget-title {}.footer .widget .thb-widget-title {}.footer .widget,.footer .widget p {}.subfooter .thb-full-menu>.menu-item>a {}.subfooter p {}.subfooter .thb-social-links-container {}#wrapper [role=main] {background-color:#f9f2e7 !important;}.subheader {background-color:#cc4133 !important;}.header:not(.fixed) {background-color:#f9f2e7 !important;}.header.fixed {background-color:#f9f2e7 !important;}.footer {background-color:#cc4133 !important;}.subfooter {background-color:#cc4133 !important;}a:hover,h1 small, h2 small, h3 small, h4 small, h5 small, h6 small,h1 small a, h2 small a, h3 small a, h4 small a, h5 small a, h6 small a,.thb-full-menu .menu-item.menu-item-has-children.menu-item-mega-parent > .sub-menu > li.mega-menu-title > a,.thb-full-menu .menu-item.menu-item-has-children.menu-item-mega-parent > .sub-menu > li.menu-item-has-children > .sub-menu > li.title-item > a,.thb-dropdown-color-dark .thb-full-menu .sub-menu li a:hover,.thb-full-menu .sub-menu li.title-item > a,.post .thb-read-more,.post-detail .thb-article-nav .thb-article-nav-post:hover span,.post-detail .thb-article-nav .thb-article-nav-post:hover strong,.commentlist .comment .reply,.commentlist .review .reply,.star-rating > span:before, .comment-form-rating p.stars > span:before,.comment-form-rating p.stars:hover a, .comment-form-rating p.stars.selected a,.widget ul a:hover,.widget.widget_nav_menu li.active > a,.widget.widget_nav_menu li.active > .thb-arrow,.widget.widget_nav_menu li.active > .count, .widget.widget_pages li.active > a,.widget.widget_pages li.active > .thb-arrow,.widget.widget_pages li.active > .count, .widget.widget_meta li.active > a,.widget.widget_meta li.active > .thb-arrow,.widget.widget_meta li.active > .count, .widget.widget_product_categories li.active > a,.widget.widget_product_categories li.active > .thb-arrow,.widget.widget_product_categories li.active > .count,.has-thb-accent-color,.has-thb-accent-color p,.wp-block-button .wp-block-button__link.has-thb-accent-color,.wp-block-button .wp-block-button__link.has-thb-accent-color p,input[type="submit"].white:hover,.button.white:hover,.btn.white:hover,.thb-social-links-container.style3 .thb-social-link,.thb_title .thb_title_link,.thb-tabs.style3 .thb-tab-menu .vc_tta-panel-heading a.active,.thb-page-menu li:hover a, .thb-page-menu li.current_page_item a,.thb-page-menu.style0 li:hover a, .thb-page-menu.style0 li.current_page_item a,.thb-testimonials.style7 .testimonial-author cite,.thb-testimonials.style7 .testimonial-author span,.thb-iconbox.top.type5 .iconbox-content .thb-read-more,.thb-autotype .thb-autotype-entry,.thb-pricing-table.style2 .pricing-container .thb_pricing_head .thb-price,.thb-menu-item .thb-menu-item-parent .thb-menu-title h6,.thb-filter-bar .thb-products-per-page a.active,.products .product .woocommerce-loop-product__title a:hover,.products .product .product-category,.products .product .product-category a,.products .product.thb-listing-button-style4 .thb_transform_price .button,.products .product-category:hover h2,.thb-product-detail .product-information .woocommerce-product-rating .woocommerce-review-link,.thb-product-detail .variations_form .reset_variations,.thb-product-tabs.thb-product-tabs-style3 .wc-tabs li.active a,.woocommerce-account .woocommerce-MyAccount-navigation .is-active a,.thb-checkout-toggle a,.woocommerce-terms-and-conditions-wrapper .woocommerce-privacy-policy-text a,.woocommerce-terms-and-conditions-wrapper label a,.subfooter.dark a:hover{color:#cc4133;}.thb-secondary-area .thb-secondary-item .count,.post.style4 h3:after,.tag-cloud-link:hover, .post-detail .thb-article-tags a:hover,.has-thb-accent-background-color,.wp-block-button .wp-block-button__link.has-thb-accent-background-color,input[type="submit"]:not(.white):not(.style2):hover,.button:not(.white):not(.style2):hover,.btn:not(.white):not(.style2):hover,input[type="submit"].grey:hover,.button.grey:hover,.btn.grey:hover,input[type="submit"].accent:not(.style2), input[type="submit"].alt:not(.style2),.button.accent:not(.style2),.button.alt:not(.style2),.btn.accent:not(.style2),.btn.alt:not(.style2),.btn-text.style3 .circle-btn,.thb-slider.thb-carousel.thb-slider-style3 .thb-slide .thb-slide-content-inner, .thb-slider.thb-carousel.thb-slider-style5 .thb-slide .thb-slide-content-inner,.thb-inner-buttons .btn-text-regular.style2.accent:after,.thb-page-menu.style1 li:hover a, .thb-page-menu.style1 li.current_page_item a,.thb-client-row.thb-opacity.with-accent .thb-client:hover,.thb-client-row .style4 .accent-color,.thb-progressbar .thb-progress span,.thb-product-icon:hover, .thb-product-icon.exists,.products .product-category.thb-category-style3 .thb-category-link:after,.products .product-category.thb-category-style4:hover .woocommerce-loop-category__title:after,.products .product-category.thb-category-style6 .thb-category-link:hover .woocommerce-loop-category__title,.thb-product-nav .thb-product-nav-button:hover .product-nav-link,#scroll_to_top:hover,.products .product.thb-listing-button-style5 .thb-addtocart-with-quantity .button.accent,.wc-block-grid__products .wc-block-grid__product .wc-block-grid__product-add-to-cart .wp-block-button__link:hover {background-color:#cc4133;}input[type="submit"].accent:not(.white):not(.style2):hover, input[type="submit"].alt:not(.white):not(.style2):hover,.button.accent:not(.white):not(.style2):hover,.button.alt:not(.white):not(.style2):hover,.btn.accent:not(.white):not(.style2):hover,.btn.alt:not(.white):not(.style2):hover {background-color:#b83b2e;}.thb-checkout-toggle {background-color:rgba(204,65,51, 0.1);border-color:rgba(204,65,51, 0.3);}input[type="submit"].style2.accent,.button.style2.accent,.btn.style2.accent,.thb-social-links-container.style3 .thb-social-link,.thb-inner-buttons .btn-text-regular.accent,.thb-page-menu.style1 li:hover a, .thb-page-menu.style1 li.current_page_item a,.thb-client-row.has-border.thb-opacity.with-accent .thb-client:hover,.thb-pricing-table.style1 .thb-pricing-column.highlight-true .pricing-container,.thb-hotspot-container .thb-hotspot.pin-accent,.thb-product-nav .thb-product-nav-button:hover .product-nav-link,#scroll_to_top:hover {border-color:#cc4133;}.thb-tabs.style4 .thb-tab-menu .vc_tta-panel-heading a.active,.thb-page-menu.style1 li:hover + li a, .thb-page-menu.style1 li.current_page_item + li a,.thb-iconbox.top.type5,.thb-product-detail.thb-product-sticky,.thb-product-tabs.thb-product-tabs-style4 .wc-tabs li.active {border-top-color:#cc4133;}.post .thb-read-more svg,.post .thb-read-more svg .bar,.commentlist .comment .reply svg path,.commentlist .review .reply svg path,.btn-text.style4 .arrow svg:first-child,.thb_title .thb_title_link svg,.thb_title .thb_title_link svg .bar,.thb-iconbox.top.type5 .iconbox-content .thb-read-more svg,.thb-iconbox.top.type5 .iconbox-content .thb-read-more svg .bar {fill:#cc4133;}.thb_title.style10 .thb_title_icon svg path,.thb_title.style10 .thb_title_icon svg circle,.thb_title.style10 .thb_title_icon svg rect,.thb_title.style10 .thb_title_icon svg ellipse,.products .product.thb-listing-button-style3 .product-thumbnail .button.black:hover svg,.products .product.thb-listing-button-style3 .product-thumbnail .button.accent svg,.thb-testimonials.style10 .slick-dots li .text_bullet svg path {stroke:#cc4133;}.thb-tabs.style1 .vc_tta-panel-heading a.active, .thb-tabs.style2 .vc_tta-panel-heading a.active,.thb-product-tabs.thb-product-tabs-style1 .wc-tabs li.active a, .thb-product-tabs.thb-product-tabs-style2 .wc-tabs li.active a {color:#cc4133;-moz-box-shadow:inset 0 -3px 0 0 #cc4133;-webkit-box-shadow:inset 0 -3px 0 0 #cc4133;box-shadow:inset 0 -3px 0 0 #cc4133;}.price ins, .price .amount,.thb-cart-amount .amount,.product_list_widget .amount {color:#404040;}.thb-woocommerce-header.style1 .thb-shop-title,.thb-woocommerce-header.style2 .thb-shop-title,.thb-woocommerce-header.style3 .thb-shop-title {font-size:40px;}.products .product .woocommerce-loop-product__title,.wc-block-grid__products .wc-block-grid__product .woocommerce-loop-product__title .wc-block-grid__product-title {font-weight:500;font-size:16px;}.products .product .amount {font-size:14px;}.products .product .product-category {font-weight:700;font-size:11px;}.products .product .product-excerpt {}.products .product .button {font-weight:700;text-transform:uppercase !important;letter-spacing:0.02em !important;}.thb-product-detail .product-information h1 {font-size:28px;}.thb-product-detail .product-information .price .amount {}.thb-product-detail .product-information .entry-summary .woocommerce-product-details__short-description {}@media screen and (min-width:768px) {.thb-secondary-area .thb-secondary-item svg {height:20px;}}.footer {margin-top:0px;}.footer {padding-top:25px;padding-bottom:0px;}.subfooter {padding-top:0px;}@media screen and (min-width:1068px) {h1,.h1 {line-height:1.3em !important;}}h1,.h1 {}@media screen and (min-width:1068px) {h2 {}}h2 {}@media screen and (min-width:1068px) {h3 {}}h3 {}@media screen and (min-width:1068px) {h4 {}}h4 {}@media screen and (min-width:1068px) {h5 {}}h5 {}h6 {}.page-id-806 #wrapper div[role="main"],.postid-806 #wrapper div[role="main"] {}.thb-temp-message, .woocommerce-message, .woocommerce-error, .woocommerce-info:not(.cart-empty) {animation-delay:0.5s, 5s;}.footer.dark+.subfooter.dark:after { background:transparent; }.thb_title.style10 h2 {margin-top:2px;}.thb-product-detail .product-information h1 {margin-top:-8px;}.thb-iconbox.top.type3 figure {padding-bottom:20px;}.thb-iconbox p {font-size:14px;}.footer.dark .thb-newsletter-form .newsletter-form .btn {background:#131313 !important;}body { color:#131313;}.thb-woocommerce-header .term-description {display:flex !important;font-size:20px;margin-top:0;max-width:60%;}.thb-slider-subtitle.h6 { margin-bottom:1.5rem;}
-      </style>
-    <link
-      rel="stylesheet"
-      id="thb-style-css"
-      href="https://cakeoncall.in/wooshop/wp-content/themes/peakshops-child/style.css?ver=1.4.6"
-      type="text/css"
-      media="all"
-    />
-    <link
-      rel="stylesheet"
-      id="thb-self-hosted-1-css"
-      href="https://peakshops.fuelthemes.net/peakshops-bakery/wp-content/uploads/sites/13/2020/12/komikax-css.css?ver=1.4.6"
-      type="text/css"
-      media="all"
-    />
-    <style id="wp-fonts-local" type="text/css">
-      @font-face {
-        font-family: Inter;
-        font-style: normal;
-        font-weight: 300 900;
-        font-display: fallback;
-        src: url("https://cakeoncall.in/wooshop/wp-content/plugins/woocommerce/assets/fonts/Inter-VariableFont_slnt,wght.woff2")
-          format("woff2");
-        font-stretch: normal;
-      }
-      @font-face {
-        font-family: Cardo;
-        font-style: normal;
-        font-weight: 400;
-        font-display: fallback;
-        src: url("https://cakeoncall.in/wooshop/wp-content/plugins/woocommerce/assets/fonts/cardo_normal_400.woff2")
-          format("woff2");
-      }
-    </style>
-    <style type="text/css" data-type="vc_custom-css">
-      .thb-header-border-on .header:not(.fixed) .header-menu-row:after {
-        display: none;
-      }
-    </style>
-    <style type="text/css" data-type="vc_shortcodes-custom-css">
-      .vc_custom_1607344406520 {
-        border-bottom-width: 1px !important;
-        border-bottom-color: #e1d6c9 !important;
-        border-bottom-style: solid !important;
-      }
-      .vc_custom_1607591833643 {
-        padding-top: 65px !important;
-        padding-bottom: 35px !important;
-        background-color: #f3e7d4 !important;
-      }
-      .vc_custom_1607591805072 {
-        padding-bottom: 35px !important;
-      }
-      .vc_custom_1607438859985 {
-        padding-top: 65px !important;
-        padding-bottom: 25px !important;
-        background-color: #f3e7d4 !important;
-      }
-      .vc_custom_1607440687221 {
-        padding-top: 10px !important;
-        padding-bottom: 10px !important;
-      }
-      .vc_custom_1607440681190 {
-        padding-top: 10px !important;
-        padding-bottom: 10px !important;
-      }
-      .vc_custom_1607440674371 {
-        padding-top: 10px !important;
-        padding-bottom: 10px !important;
-      }
-      .vc_custom_1607440667236 {
-        padding-top: 10px !important;
-        padding-bottom: 10px !important;
-      }
-      .vc_custom_1607419715250 {
-        padding-right: 5% !important;
-        padding-left: 5% !important;
-      }
-      .vc_custom_1607344353693 {
-        padding-right: 5% !important;
-        padding-left: 5% !important;
-      }
-      .vc_custom_1607420999085 {
-        padding-right: 5% !important;
-      }
-    </style>
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
     <script
       src="https://unpkg.com/htmx.org@1.9.11"
       integrity="sha384-0gxUXCCR8yv9FM2b+U3FDbsKthCI66oH5IA9fHppQq9DDMHuMauqq1ZHBpJxQ0J0"
       crossorigin="anonymous"></script>
+    <!-- Icon Font Stylesheet -->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      id="flaticon-panpie-css"
+      href="fonts/flaticon/flaticon.css?ver=3.1.4"
+      type="text/css"
+      media="all"
+    />
+    <link
+      rel="stylesheet"
+      id="panpie-gfonts-css"
+      href="http://fonts.googleapis.com/css?family=Roboto%3A500%2C700%2C400%7CBarlow%3A600%2C700%2C600&subset=latin&display=fallback&ver=3.1.4"
+      type="text/css"
+      media="all"
+    />
   </head>
   <body
     class="home page-template page-template-page-default page-template-page-default-php page page-id-806 logged-in admin-bar theme-peakshops woocommerce-js subheader-full-width-off fixed-header-on fixed-header-scroll-on thb-header-search-style1 thb-dropdown-style1 right-click-off thb-quantity-style1 thb-borders-off thb-boxed-off thb-header-border-on thb-single-product-ajax-on wpb-js-composer js-comp-ver-6.5.0 vc_responsive customize-support"
-  >   <!-- Page Preloder -->
-    <div id="preloder">
-      <div class="loader"></div>
+  >
+    <!-- Spinner Start -->
+    <!-- <div
+      id="spinner"
+      class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center"
+    >
+      <div class="spinner-grow text-primary" role="status"></div>
     </div>
-    <div id="wrapper">
+         -->
+    <TopBar />
+    <NavBar4 />
+    <slot />
+    <!-- Spinner End -->
+    <!--
       <SubHeader />
-      <Header2 />
-      <div role="main">
-        <slot />
-      </div>
+      <Header2 />     
       <Footer2 />
-
       <div class="offcanvas-menu-overlay"></div>
-    </div>
-    <!--  <OffcanvasMenu client:load/>  -->
+  
+     <OffcanvasMenu client:load/>  -->
     <!--<CartFlyout client:load /> -->
 
-    <script is:inline src="https://code.jquery.com/jquery-3.7.0.min.js"
-    ></script>
-
-    <!-- <CartFlyout client:load />   -->
-
-    <script src="../assets/js/popper.min.js"></script>
-    <script
-      is:inline
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
-    ></script>
-    <script src="../assets/js/popper.min.js"></script>
-    <script src="../assets/js/jquery.nice-select.min.js"></script>
-    <script src="../assets/js/owl.carousel.min.js"></script>
-    <script src="../assets/js/jquery.slicknav.js"></script>
-    <script src="../assets/js/main.js"></script>
+    <!-- <CartFlyout client:load />  -->
+   <Footer2/>
   </body>
 </html>
-<style>
-  .work-sans {
-    font-family: "Work Sans", sans-serif;
-  }
 
-  #menu-toggle:checked + #menu {
-    display: block;
-  }
+<script>
+  // Astro will bundle and process this automatically
+  import "bootstrap/dist/js/bootstrap.bundle.min.js";
+</script>
 
-  .hover\:grow {
-    transition: all 0.3s;
-    transform: scale(1);
-  }
-
-  .hover\:grow:hover {
-    transform: scale(1.02);
-  }
-
-  .carousel-open:checked + .carousel-item {
-    position: static;
-    opacity: 100;
-  }
-
-  .carousel-item {
-    -webkit-transition: opacity 0.6s ease-out;
-    transition: opacity 0.6s ease-out;
-  }
-
-  #carousel-1:checked ~ .control-1,
-  #carousel-2:checked ~ .control-2,
-  #carousel-3:checked ~ .control-3 {
-    display: block;
-  }
-
-  .carousel-indicators {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    position: absolute;
-    bottom: 2%;
-    left: 0;
-    right: 0;
-    text-align: center;
-    z-index: 10;
-  }
-
-  #carousel-1:checked
-    ~ .control-1
-    ~ .carousel-indicators
-    li:nth-child(1)
-    .carousel-bullet,
-  #carousel-2:checked
-    ~ .control-2
-    ~ .carousel-indicators
-    li:nth-child(2)
-    .carousel-bullet,
-  #carousel-3:checked
-    ~ .control-3
-    ~ .carousel-indicators
-    li:nth-child(3)
-    .carousel-bullet {
-    color: #000;
-    /*Set to match the Tailwind colour you want the active one to be */
-  }
-</style>
+<!--
 <script>
   import { createApp } from "vue";
   import App from "../App.vue";
@@ -716,3 +105,4 @@ import "../assets/css/font-awesome.min.css";
   };
   createApp(App).use(router).mount("#app");
 </script>
+ -->
