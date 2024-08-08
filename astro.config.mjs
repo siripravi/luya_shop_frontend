@@ -9,10 +9,10 @@ export default defineConfig({
   vite: {
     plugins: [vanillaExtractPlugin()],
   },
-  //site: "http://localhost:3030",
+  site: "http://luyacore.local/frontend",
 /*  output: 'hybrid',
   adapter: node({
     mode: 'standalone',
   }),*/
- //outDir: "C:/gitrepos/yii-wordpress-integration/data/web"
+ outDir: "C:/gitrepos/luya-woocommerce/public_html/frontend"
 });
